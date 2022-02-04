@@ -1,0 +1,77 @@
+
+<div class="main-card mb-3 card">
+    <div class="card-body">
+<!--        <h5 class="card-title">Grid Rows</h5>-->
+        <form #form="ngForm">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="position-relative mb-3">
+                        <label for="firstName" class="form-label">First Name</label>
+                        <input name="firstName" [(ngModel)]="model.firstName" id="firstName" placeholder="First Name" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="position-relative mb-3">
+                        <label for="middleName" class="form-label">Middle Name</label>
+                        <input name="middleName" [(ngModel)]="model.middleName" id="middleName" placeholder="middle Name" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="position-relative mb-3">
+                        <label for="lastName" class="form-label">Last Name</label>
+                        <input name="lastName" id="lastName" [(ngModel)]="model.lastName" placeholder="last Name" type="text" class="form-control">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="position-relative mb-3">
+                        <label for="emailAddress" class="form-label">emailAddress</label>
+                        <input name="emailAddress" id="emailAddress" placeholder="Email"  [(ngModel)]="model.emailAddress" type="email" class="form-control">
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="position-relative mb-3">
+                        <label for="mobileNumber" class="form-label">Mobile Number</label>
+                        <input name="mobileNumber" id="mobileNumber" placeholder="Email"  [(ngModel)]="model.mobileNumber" type="text" class="form-control">
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="position-relative mb-3">
+                        <label for="userId" class="form-label">UserId</label>
+                        <input name="userId" id="userId" placeholder="userId"  [(ngModel)]="model.userId" type="text" class="form-control">
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="position-relative mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input name="password" id="password" placeholder="userId"  [(ngModel)]="model.password" type="password" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="position-relative mb-3">
+                        <label for="rePassword" class="form-label">Confirm Password</label>
+                        <input name="rePassword" id="rePassword" placeholder="Confirm Password"  [(ngModel)]="model.rePassword" type="password" class="form-control">
+                    </div>
+                </div>
+            </div>
+<!--            <div class="position-relative form-check">-->
+<!--                <input name="check" id="exampleCheck" type="checkbox" class="form-check-input">-->
+<!--                <label for="exampleCheck" class="form-label form-check-label">Check me out</label>-->
+<!--            </div>-->
+            <button (click)="onSubmit()" class="mt-2  btn btn-primary">Submit</button>
+            <button routerLink="/user/list" class="mt-2  btn btn-danger">Cancel</button>
+        </form>
+    </div>
+</div>

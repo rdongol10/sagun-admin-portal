@@ -1,0 +1,9 @@
+{
+  "/public":
+  {
+    "target": "https://sagun-baakas-admin.herokuapp.com",
+    "secure": false,
+    "pathRewrite": {"^/" : ""},
+    "changeOrigin": true
+  }
+}
