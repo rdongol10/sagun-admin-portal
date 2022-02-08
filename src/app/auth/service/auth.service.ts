@@ -37,4 +37,9 @@ export class AuthService extends GenericService<any>{
             ));
     }
 
+    logout(){
+        sessionStorage.clear();
+        this.router.navigate(['/auth/login']);
+    }
+
 }

@@ -1,1 +1,18 @@
-<router-outlet></router-outlet>
+<div class="my-container">
+    <ng-template #customLoadingTemplate>
+        <div class="custom-class">
+            <h2>threeBounce</h2>
+        </div>
+    </ng-template>
+
+    <ngx-loading [show]="loading"  [config]="{
+        primaryColour: 'red',
+        secondaryColour: 'green',
+        tertiaryColour: 'white',
+        backdropBorderRadius: '3px'
+      }" ></ngx-loading>
+
+</div>
+<router-outlet>
+
+</router-outlet>
