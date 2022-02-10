@@ -1,0 +1,78 @@
+<div>
+    <form #genericFormSearch="ngForm">
+        <div class="row">
+            <label class="label col-sm-1">Search</label>
+            <div class="col-sm-9">
+
+                <div class="row m-b-25" *ngFor="let data of searchModel; let i= index;">
+
+                    <label class="col-sm-3">
+                        <select class="form-control" [(ngModel)]="data.fieldName" name="fieldName{{i}}"
+                                   required
+                                   (ngModelChange)="changeField($event, i)"
+                                   placeHolder="Select a Field">
+                            <option *ngFor="let dat of searchField" [ngValue]="dat" >{{dat.displayName}}</option>
+
+                        </select>
+                    </label>
+                    <label class="col-sm-3">
+                        <select class="form-control" name="fieldCondition{{i}}"
+                                   required
+                                   [(ngModel)]="data.fieldCondition"
+                                   (ngModelChange)="changeCondition($event,i)"
+                                   placeholder="Select a Condition">
+                            <option *ngFor="let dat of data.searchFieldCondition" [ngValue]="dat.code" > {{dat.title}} </option>
+                        </select>
+                    </label>
+                    <label class="col-sm-4" *ngIf="data.searchFieldValues.length > 0 && testCondition[i] != ('Date') && testCondition[i] != ('time') ">
+                        <select class="form-control" name="fieldCondition{{i}}"
+                                   required
+                                   [(ngModel)]="data.fieldValue"
+                                   placeholder="Select a Value">
+                            <option *ngFor="let dat of data.searchFieldValues" [ngValue]="dat.code" >{{dat.title}}</option>
+                        </select>
+                    </label>
+                    <label class="col-sm-4" *ngIf="data.searchFieldValues.length === 0 && testCondition[i] != ('Date') && testCondition[i] != ('time')">
+                        <input class="form-control"
+                               autocomplete="off"
+                               placeholder=""
+                               required
+                               *ngIf="testValue[i] != ('numberBetween')"
+                               [(ngModel)]="data.fieldValue" name="fieldValue{{i}}"/>
+                        <div *ngIf="testValue[i] === ('numberBetween')">
+                            <div>
+                                <input  class="form-control"
+                                       autocomplete="off"
+                                       placeholder="From"
+                                       required
+                                       [(ngModel)]="data.fieldValue" name="fieldValue{{i}}"/>
+                            </div>
+                            <br>
+                            <div>
+                                <input class="form-control"
+                                       autocomplete="off"
+                                       placeholder="To"
+                                       required
+                                       [(ngModel)]="data.dateValue" name="dateValue{{i}}"/>
+                            </div>
+                        </div>
+                    </label>
+                    
+                    <label class="col-sm-1">
+                        <button type="button" *ngIf="(searchModel.length-1) === (i) && (i)!= (0)" tabIndex="-1" (click)="removeRow(i)"
+                                 >Remove</button>
+                    </label>
+
+                </div>
+
+
+            </div>
+            <div class="col-sm-2">
+                <button   type="button" tabIndex="-1"  (click)="addNewRow()"  >Add new
+                </button>
+                <button (click)="searchByField()" >Search</button>
+                <button  *ngIf="showReset"  type="button" tabIndex="-1" style="background: #f64242; color: white" (click)="resetField()"  >Reset</button>
+            </div>
+        </div>
+    </form>
+</div>

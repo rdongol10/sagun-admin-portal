@@ -16,6 +16,8 @@ import {LoadingBarRouterModule} from '@ngx-loading-bar/router';
 import {PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {SearchGenericComponent} from './component/search-generic/search-generic.component';
+import {ngxLoadingAnimationTypes, NgxLoadingModule} from 'ngx-loading';
 
 
 @NgModule({
@@ -31,10 +33,14 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
         // FOOTER
 
-        FooterComponent,],
+        FooterComponent,
+        SearchGenericComponent],
     imports: [
         CommonModule,
         ToastrModule.forRoot(),
+        NgxLoadingModule.forRoot({
+        }),
+        FormsModule,
         PerfectScrollbarModule,
         NgbModule,
 
@@ -43,7 +49,9 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
     ],
     exports: [
         CommonModule,
+        FormsModule,
         ToastrModule,
+        NgxLoadingModule,
         PerfectScrollbarModule,
         NgbModule,
         LoadingBarRouterModule,
@@ -62,6 +70,7 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
         // FOOTER
 
         FooterComponent,
+        SearchGenericComponent
     ]
 })
 export class SharedModule {

@@ -4,25 +4,23 @@ import {Observable} from 'rxjs';
 import {windowCount} from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  type = 'admin';
-
-  constructor(private router: Router) {
-  }
-
-  canActivate(next: ActivatedRouteSnapshot,
-              state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    var auth = sessionStorage.getItem("auth");
-    if (auth) {
-      return true;
-    } else {
-      sessionStorage.clear();
-      this.router.navigate(['/auth/login']);
-      return false;
+    constructor(private router: Router) {
     }
 
-  }
+    canActivate(next: ActivatedRouteSnapshot,
+                state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+        var auth = sessionStorage.getItem('token');
+        if (auth) {
+            return true;
+        } else {
+            sessionStorage.clear();
+            this.router.navigate(['/auth/login']);
+            return false;
+        }
+
+    }
 }
 
