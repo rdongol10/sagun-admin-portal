@@ -19,12 +19,15 @@ export class LoginComponent implements OnInit {
     }
 
     submit() {
+        this.service.display(true);
         this.service.login(this.model)
             .subscribe(data => {
                 console.log(data);
+                this.service.display(false);
                 this.notify.success('User Login Success', 'Success');
                 this.router.navigate(['/user/list']);
             }, error => {
+                this.service.display(false);
                 this.notify.error(error.error.message, 'Error');
             });
     }
