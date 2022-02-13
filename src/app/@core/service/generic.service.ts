@@ -16,7 +16,7 @@ export class GenericService<T> {
     }
 
     public save(data: T): Observable<T> {
-        return this.http.post(this.baseUrl + 'create', data).pipe(
+        return this.http.post(this.baseUrl, data).pipe(
             map((res: T) => {
                 return res;
             }),
