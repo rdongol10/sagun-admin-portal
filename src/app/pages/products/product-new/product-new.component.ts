@@ -27,4 +27,22 @@ export class ProductNewComponent implements OnInit {
       });
   }
 
+  fileLoad(event) {
+    const file = event.target.files[0];
+    if (file.type == "image/jpeg" || file.type == "image/png") {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        console.log(reader.result);
+        this.model.image=reader.result.toString();
+      };
+    } else {
+      console.log("Only images are allowed");
+    }
+  }
+
+  removeImage(){
+    this.model.image=null;
+  }
+
 }
