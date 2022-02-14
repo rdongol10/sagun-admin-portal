@@ -12,23 +12,10 @@
             </div>
 
             <div class="row">
-                <div class="col-md-3 imageColumn">
-                    <label for="image" class="form-label">Image</label>
-                    <div [hidden]="model.image" class="dropzone-wrapper ">
-                        <div class="dropzone-desc">
-                            <i class="vsm-icon pe-7s-download"></i>
-                            <p>Choose an image file or drag it here.</p>
-                        </div>
-                        <input type="file" name="image" id="image" (change)="fileLoad($event)" class="dropzone"
-                               #imageFile>
-                    </div>
-
-                    <div [hidden]="!model.image" class="imageholder">
-                        <img src="{{model.image}}" class="displayImage"/>
-                        <i class="vsm-icon pe-7s-pen btn imageEdit" (click)="imageFile.click()"></i>
-                        <i class="vsm-icon pe-7s-trash btn imageDelete" (click)="removeImage()"></i>
-                    </div>
-
+                <div class="col-md-3">
+                    <label class="form-label">Image</label>
+                    <app-generic-image-uploader [imageFile]="model.image"
+                                                (imageEmit)="model.image=$event"></app-generic-image-uploader>
 
                 </div>
             </div>
