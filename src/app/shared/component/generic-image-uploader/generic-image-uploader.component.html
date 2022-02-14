@@ -1,0 +1,14 @@
+<div [hidden]="imageFile" class="dropzone-wrapper ">
+    <div class="dropzone-desc">
+        <i class="vsm-icon pe-7s-download"></i>
+        <p>Choose an image file or drag it here.</p>
+    </div>
+    <input type="file" name="image" id="image" (change)="fileLoad($event)" class="dropzone"
+           #imageFileEvent>
+</div>
+
+<div [hidden]="!imageFile" class="imageholder">
+    <img src="{{imageFile}}" class="displayImage"/>
+    <i class="vsm-icon pe-7s-pen btn imageEdit" (click)="imageFileEvent.click()"></i>
+    <i class="vsm-icon pe-7s-trash btn imageDelete" (click)="removeImage()"></i>
+</div>

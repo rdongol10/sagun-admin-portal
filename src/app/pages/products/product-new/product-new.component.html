@@ -1,0 +1,26 @@
+<div class="main-card mb-3 card">
+    <div class="card-body">
+        <form #form="ngForm">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="position-relative mb-3">
+                        <label for="name" class="form-label">Product Name</label>
+                        <input name="name" [(ngModel)]="model.name" id="name" placeholder="Image Name" type="text"
+                               class="form-control">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <label class="form-label">Image</label>
+                    <app-generic-image-uploader [imageFile]="model.image"
+                                                (imageEmit)="model.image=$event"></app-generic-image-uploader>
+
+                </div>
+            </div>
+            <button (click)="onSubmit()" class="mt-2  btn btn-primary">Submit</button>
+            <button type="button" routerLink="/product/list" class="mt-2  btn btn-danger">Cancel</button>
+        </form>
+    </div>
+</div>

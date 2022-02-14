@@ -24,6 +24,21 @@ const routes: Routes = [
     },
     {
         path: '',
+        component: BaseLayoutComponent,
+        canActivate: [AuthGuard],
+        children: [
+            {
+                path: 'product',
+                data: {extraParameter: 'productMenu'},
+                loadChildren: () => import('./pages/products/product.module').then(m => m.ProductModule)
+
+            }
+
+        ]
+
+    },
+    {
+        path: '',
         component: PagesLayoutComponent,
         children: [
             {
@@ -33,6 +48,7 @@ const routes: Routes = [
             },
         ]
     },
+    
     {path: '**', redirectTo: ''}
 ];
 
