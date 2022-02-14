@@ -1,13 +1,13 @@
-<div>
+<div style="padding: 15px">
     <form #genericFormSearch="ngForm">
-        <div class="row">
+        <div class="row mt-3">
             <label class="label col-sm-1">Search</label>
             <div class="col-sm-9">
 
-                <div class="row m-b-25" *ngFor="let data of searchModel; let i= index;">
+                <div class="row mb-2" *ngFor="let data of searchModel; let i= index;">
 
                     <label class="col-sm-3">
-                        <select class="form-control" [(ngModel)]="data.fieldName" name="fieldName{{i}}"
+                        <select class="form-select" [(ngModel)]="data.fieldName" name="fieldName{{i}}"
                                    required
                                    (ngModelChange)="changeField($event, i)"
                                    placeHolder="Select a Field">
@@ -16,7 +16,7 @@
                         </select>
                     </label>
                     <label class="col-sm-3">
-                        <select class="form-control" name="fieldCondition{{i}}"
+                        <select class="form-select" name="fieldCondition{{i}}"
                                    required
                                    [(ngModel)]="data.fieldCondition"
                                    (ngModelChange)="changeCondition($event,i)"
@@ -25,7 +25,7 @@
                         </select>
                     </label>
                     <label class="col-sm-4" *ngIf="data.searchFieldValues.length > 0 && testCondition[i] != ('Date') && testCondition[i] != ('time') ">
-                        <select class="form-control" name="fieldCondition{{i}}"
+                        <select class="form-select" name="fieldCondition{{i}}"
                                    required
                                    [(ngModel)]="data.fieldValue"
                                    placeholder="Select a Value">
@@ -68,10 +68,10 @@
 
             </div>
             <div class="col-sm-2">
-                <button   type="button" tabIndex="-1"  (click)="addNewRow()"  >Add new
+                <button  class=" btn-transition btn btn-outline-primary" type="button" tabIndex="-1"  (click)="addNewRow()"  >Add new
                 </button>
-                <button (click)="searchByField()" >Search</button>
-                <button  *ngIf="showReset"  type="button" tabIndex="-1" style="background: #f64242; color: white" (click)="resetField()"  >Reset</button>
+                <button class=" btn-transition btn btn-outline-primary" (click)="searchByField()" >Search</button>
+                <button  class=" btn-transition btn btn-outline-secondary" *ngIf="showReset"  type="button" tabIndex="-1" style="background: #f64242; color: white" (click)="resetField()"  >Reset</button>
             </div>
         </div>
     </form>

@@ -24,8 +24,8 @@ export class GenericService<T> {
         );
     }
 
-    public get(id: number): Observable<T> {
-        return this.http.get(this.baseUrl + id).pipe(
+    public getById(id: number): Observable<T> {
+        return this.http.get(this.baseUrl + '/' + id).pipe(
             map((res: T) => {
                 return res;
             }),
@@ -52,7 +52,7 @@ export class GenericService<T> {
     }
 
     public update(id: number, data: T): Observable<T> {
-        return this.http.put(this.baseUrl + 'update/' + id, data).pipe(
+        return this.http.put(this.baseUrl + '/' + id, data).pipe(
             map((data: T) => {
                 return data;
             }),
@@ -79,9 +79,11 @@ export class GenericService<T> {
         // }
         return headers;
     }
+
     public display(value: boolean) {
         GenericService.status.next(value);
     }
+
     formattedDate(date: Date): string {
         if (date) {
             const datePart = date.getDate();
@@ -92,6 +94,7 @@ export class GenericService<T> {
 
         }
     }
+
     protected handleError(error: any) {
         console.log('err=>', error);
         return throwError(error);

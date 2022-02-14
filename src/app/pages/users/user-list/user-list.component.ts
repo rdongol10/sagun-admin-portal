@@ -67,7 +67,7 @@ export class UserListComponent implements OnInit {
     changeField(val) {
         this.fieldCondition = 'sw';
         this.searchFieldCondition = val.conditions;
-        this.searchFieldValues = val.values;
+        this.searchFieldValues = val.selectValues;
     }
 
     changeIndex(event) {
