@@ -5,7 +5,8 @@
                 <div class="col-md-3">
                     <div class="position-relative mb-3">
                         <label for="name" class="form-label">Product Name</label>
-                        <input name="name" [(ngModel)]="model.name" id="name" placeholder="Image Name" type="text" class="form-control">
+                        <input name="name" [(ngModel)]="model.name" id="name" placeholder="Image Name" type="text"
+                               class="form-control">
                     </div>
                 </div>
             </div>
@@ -13,20 +14,21 @@
             <div class="row">
                 <div class="col-md-3 imageColumn">
                     <label for="image" class="form-label">Image</label>
-                    <div  *ngIf="!model.image;" class="dropzone-wrapper ">
+                    <div [hidden]="model.image" class="dropzone-wrapper ">
                         <div class="dropzone-desc">
                             <i class="vsm-icon pe-7s-download"></i>
                             <p>Choose an image file or drag it here.</p>
                         </div>
-                        <input type="file" (change)="fileLoad($event)"class="dropzone" >
+                        <input type="file" name="image" id="image" (change)="fileLoad($event)" class="dropzone"
+                               #imageFile>
                     </div>
 
-                    <div *ngIf="model.image;" class="imageholder">
-                        <img src="{{model.image}}" class="displayImage" />
-                        <i class="vsm-icon pe-7s-pen btn imageEdit"></i>
+                    <div [hidden]="!model.image" class="imageholder">
+                        <img src="{{model.image}}" class="displayImage"/>
+                        <i class="vsm-icon pe-7s-pen btn imageEdit" (click)="imageFile.click()"></i>
                         <i class="vsm-icon pe-7s-trash btn imageDelete" (click)="removeImage()"></i>
                     </div>
-                  
+
 
                 </div>
             </div>

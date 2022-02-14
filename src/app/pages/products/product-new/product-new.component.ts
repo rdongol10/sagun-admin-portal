@@ -28,6 +28,7 @@ export class ProductNewComponent implements OnInit {
   }
 
   fileLoad(event) {
+    this.removeImage();
     const file = event.target.files[0];
     if (file.type == "image/jpeg" || file.type == "image/png") {
       const reader = new FileReader();
