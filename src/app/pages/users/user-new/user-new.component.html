@@ -52,7 +52,7 @@
                 </div>
 
             </div>
-            <div class="row">
+            <div class="row" *ngIf="!routeId">
                 <div class="col-md-4">
                     <div class="position-relative mb-3">
                         <label for="password" class="form-label">Password</label>
@@ -70,8 +70,11 @@
 <!--                <input name="check" id="exampleCheck" type="checkbox" class="form-check-input">-->
 <!--                <label for="exampleCheck" class="form-label form-check-label">Check me out</label>-->
 <!--            </div>-->
-            <button (click)="onSubmit()" class="mt-2  btn btn-primary">Submit</button>
-            <button routerLink="/user/list" class="mt-2  btn btn-danger">Cancel</button>
+            <button (click)="onSubmit()" class="mt-2  btn btn-primary">
+               <span *ngIf="routeId">Update</span>
+               <span *ngIf="!routeId">Submit</span>
+                </button>
+            <button type="button" [routerLink]="'/user/list'"  class="mt-2  btn btn-danger">Cancel</button>
         </form>
     </div>
 </div>

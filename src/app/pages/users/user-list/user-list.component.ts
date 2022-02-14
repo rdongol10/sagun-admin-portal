@@ -25,7 +25,8 @@ export class UserListComponent implements OnInit {
     ngOnInit(): void {
         this.service.getSearchField()
             .subscribe((data: any) => {
-                this.searchField = data;
+
+                this.searchField = data.data;
                 this.fieldName = this.searchField[0];
                 this.changeField(this.searchField[0]);
                 this.service.display(false);
@@ -45,7 +46,7 @@ export class UserListComponent implements OnInit {
         this.service.display(true);
         this.service.getAll(this.searchModel)
             .subscribe((data: any) => {
-                this.list = data.data;
+                this.list = data.data.data;
                 this.service.display(false);
             }, error => {
                 this.notify.error(error.error, 'Error');
@@ -67,7 +68,7 @@ export class UserListComponent implements OnInit {
     changeField(val) {
         this.fieldCondition = 'sw';
         this.searchFieldCondition = val.conditions;
-        this.searchFieldValues = val.values;
+        this.searchFieldValues = val.selectValues;
     }
 
     changeIndex(event) {
