@@ -42,9 +42,9 @@ export class SearchGenericComponent extends GenericService<any> implements OnIni
 
                 for (let i = 0; i < this.searchModel.length; i++) {
                     reportModel.push({
-                        field: this.searchModel[i].fieldName.code, condition: this.searchModel[i].fieldCondition,
+                        field: this.searchModel[i].fieldName.code, operator: this.searchModel[i].fieldCondition,
                         value: this.searchModel[i].fieldValue,
-                        dateValue: this.searchModel[i].dateValue
+                        toValue: this.searchModel[i].dateValue
                     });
                 }
                 this.emitDataModel.emit(reportModel);
@@ -84,6 +84,8 @@ export class SearchGenericComponent extends GenericService<any> implements OnIni
         dtl.searchFieldCondition = this.searchFieldCondition;
         dtl.searchFieldValues = this.searchFieldValues;
         dtl.fieldCondition = 'sw';
+        console.log(dtl);
+
         this.searchModel.push(dtl);
 
     }
@@ -137,11 +139,9 @@ export class SearchGenericComponent extends GenericService<any> implements OnIni
     }
 
     ngOnChanges() {
-
         if (this.searchField) {
             if (this.searchField.length > 0) {
                 this.searchField = this.searchField;
-                console.log(this.searchField);
             }
         }
 
