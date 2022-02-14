@@ -25,7 +25,6 @@ export class UserListComponent implements OnInit {
     ngOnInit(): void {
         this.service.getSearchField()
             .subscribe((data: any) => {
-
                 this.searchField = data.data;
                 this.fieldName = this.searchField[0];
                 this.changeField(this.searchField[0]);
