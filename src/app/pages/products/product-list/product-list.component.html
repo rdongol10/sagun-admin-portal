@@ -25,7 +25,7 @@
                 <td class="text-center">
                     <div role="group" class="btn-group-sm btn-group">
                         <button routerLink="/product/edit/{{data?.id}}" class="btn-shadow btn btn-primary">Edit</button>
-                        <button class="btn-shadow btn btn-danger">Delete</button>
+                        <button class="btn-shadow btn btn-secondary" routerLink="/lotHistory/list/productId/{{data?.id}}">Lot History</button>
                     </div>
                 </td>
             </tr>
