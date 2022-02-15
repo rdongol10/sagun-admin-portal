@@ -16,6 +16,8 @@
                 <th class="text-center">Product Name</th>
                 <th class="text-center">Cost Price</th>
                 <th class="text-center">Quantity</th>
+                <th class="text-center">Purpose</th>
+                <th class="text-center">Created By</th>
                 <th class="text-center">Created on</th>
                 <th class="text-center">Actions</th>
             </tr>
@@ -27,12 +29,12 @@
                 <td class="text-center">{{data.productName}}</td>
                 <td class="text-center">{{data.costPrice}}</td>
                 <td class="text-center">{{data.quantity}}</td>
+                <td class="text-center">{{data.purpose}}</td>
+                <td class="text-center">{{data.createdBy}}</td>
                 <td class="text-center">{{data.creationDate}}</td>
                 <td class="text-center">
                     <div role="group" class="btn-group-sm btn-group">
-                        <button class="btn-shadow btn btn-primary" routerLink="/lot/addStock/{{data?.id}}">Add Stock
-                        </button>
-                        <button class="btn-shadow btn btn-secondary" routerLink="/lotHistory/list/lotId/{{data?.id}}">Lot History</button>
+                        <button class="btn-shadow btn btn-danger">Delete</button>
                     </div>
                 </td>
             </tr>
