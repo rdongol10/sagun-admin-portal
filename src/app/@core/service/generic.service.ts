@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {catchError, map} from 'rxjs/operators';
 import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {Router} from '@angular/router';
+import {SelectSearchRequest} from '../class/select-search-request';
 
 export class GenericService<T> {
     protected http: HttpClient;
@@ -53,6 +54,15 @@ export class GenericService<T> {
 
     public update(id: number, data: T): Observable<T> {
         return this.http.put(this.baseUrl + '/' + id, data).pipe(
+            map((res: T) => {
+                return res;
+            }),
+            catchError((error) => this.handleError(error))
+        );
+    }
+
+    public search(query: SelectSearchRequest) {
+        return this.http.post(this.baseUrl + '/search', query).pipe(
             map((data: T) => {
                 return data;
             }),
@@ -99,4 +109,6 @@ export class GenericService<T> {
         console.log('err=>', error);
         return throwError(error);
     }
+
+
 }

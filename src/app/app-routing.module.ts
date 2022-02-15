@@ -39,6 +39,36 @@ const routes: Routes = [
     },
     {
         path: '',
+        component: BaseLayoutComponent,
+        canActivate: [AuthGuard],
+        children: [
+            {
+                path: 'lot',
+                data: {extraParameter: 'lotMenu'},
+                loadChildren: () => import('./pages/lots/lot.module').then(m => m.LotModule)
+
+            }
+
+        ]
+
+    },
+    {
+        path: '',
+        component: BaseLayoutComponent,
+        canActivate: [AuthGuard],
+        children: [
+            {
+                path: 'lotHistory',
+                data: {extraParameter: 'lotHistoryMenu'},
+                loadChildren: () => import('./pages/lotHistory/lot-history.module').then(m => m.LotHistoryModule)
+
+            }
+
+        ]
+
+    },
+    {
+        path: '',
         component: PagesLayoutComponent,
         children: [
             {
@@ -48,7 +78,7 @@ const routes: Routes = [
             },
         ]
     },
-    
+
     {path: '**', redirectTo: ''}
 ];
 

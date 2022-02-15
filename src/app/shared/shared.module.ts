@@ -18,7 +18,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {SearchGenericComponent} from './component/search-generic/search-generic.component';
 import {NgxLoadingModule} from 'ngx-loading';
-import { GenericImageUploaderComponent } from './component/generic-image-uploader/generic-image-uploader.component';
+import {GenericImageUploaderComponent} from './component/generic-image-uploader/generic-image-uploader.component';
+import {NgSelectModule} from '@ng-select/ng-select';
 
 
 @NgModule({
@@ -37,18 +38,18 @@ import { GenericImageUploaderComponent } from './component/generic-image-uploade
         FooterComponent,
         SearchGenericComponent,
         GenericImageUploaderComponent,
-        ],
+    ],
     imports: [
         CommonModule,
         ToastrModule.forRoot(),
-        NgxLoadingModule.forRoot({
-        }),
+        NgxLoadingModule.forRoot({}),
         FormsModule,
         PerfectScrollbarModule,
         NgbModule,
 
         FontAwesomeModule,
         LoadingBarRouterModule,
+        NgSelectModule
     ],
     exports: [
         CommonModule,
@@ -73,7 +74,8 @@ import { GenericImageUploaderComponent } from './component/generic-image-uploade
         // FOOTER
 
         FooterComponent,
-        SearchGenericComponent, GenericImageUploaderComponent
+        SearchGenericComponent, GenericImageUploaderComponent,
+        NgSelectModule
     ]
 })
 export class SharedModule {

@@ -1,14 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from '../service/user.service';
-import {ToastrService} from 'ngx-toastr';
 import {SearchCriteriaModel} from '../../../@core/class/search-criteria-model';
+import {ToastrService} from 'ngx-toastr';
+import {LotHistoryService} from '../service/lot-history.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
-    selector: 'app-user-list',
-    templateUrl: './user-list.component.html',
-    styleUrls: ['./user-list.component.sass']
+    selector: 'app-lot-history-list',
+    templateUrl: './lot-history-list.component.html',
+    styleUrls: ['./lot-history-list.component.sass']
 })
-export class UserListComponent implements OnInit {
+export class LotHistoryListComponent implements OnInit {
     list = [];
     searchModel = new SearchCriteriaModel();
     searchField = [];
@@ -16,12 +17,23 @@ export class UserListComponent implements OnInit {
     searchFieldValues = [];
     fieldName;
     fieldCondition;
-    fieldValue;
+    productId;
+    lotId;
 
-    constructor(private service: UserService, private notify: ToastrService) {
+    constructor(private service: LotHistoryService,
+                private router: Router, private notify: ToastrService, private route: ActivatedRoute) {
     }
 
+
     ngOnInit(): void {
+        this.route.params.subscribe(params => {
+            this.productId = (params['productId']);
+        });
+
+        this.route.params.subscribe(params => {
+            this.lotId = (params['lotId']);
+        });
+
         this.service.getSearchField()
             .subscribe((data: any) => {
                 this.searchField = data.data;
@@ -34,6 +46,7 @@ export class UserListComponent implements OnInit {
         this.getList();
     }
 
+
     getList(reset: boolean = false, value?) {
         if (reset) {
             this.searchModel.pageNumber = 1;
@@ -42,14 +55,40 @@ export class UserListComponent implements OnInit {
             this.searchModel.searchCriteria = value;
         }
         this.service.display(true);
-        this.service.getAll(this.searchModel)
-            .subscribe((data: any) => {
-                this.list = data.data.data;
-                this.service.display(false);
-            }, error => {
-                this.notify.error(error.error, 'Error');
-                this.service.display(false);
-            });
+        if (this.lotId) {
+            this.service.getAllByEntity(this.searchModel, 'lotId', this.lotId)
+                .subscribe((data: any) => {
+                    this.onSuccess(data);
+                }, error => {
+                    this.onError(error);
+                });
+        } else if (this.productId) {
+            this.service.getAllByEntity(this.searchModel, 'productId', this.productId)
+                .subscribe((data: any) => {
+                    this.onSuccess(data);
+                }, error => {
+                    this.onError(error);
+                });
+        } else {
+            this.service.getAll(this.searchModel)
+                .subscribe((data: any) => {
+                    this.onSuccess(data);
+                }, error => {
+                    this.onError(error);
+                });
+        }
+
+    }
+
+    onSuccess(data) {
+        this.list = data.data.data;
+        this.service.display(false);
+    }
+
+    onError(error) {
+        this.notify.error(error.error, 'Error');
+        this.service.display(false);
+        console.log(error);
     }
 
     sort(sort: { key: string; value: string }): void {
@@ -85,5 +124,4 @@ export class UserListComponent implements OnInit {
         this.searchModel.pageNumber = 1;
         this.getList(false, data);
     }
-
 }
