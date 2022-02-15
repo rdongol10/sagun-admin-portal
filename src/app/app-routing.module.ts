@@ -39,6 +39,21 @@ const routes: Routes = [
     },
     {
         path: '',
+        component: BaseLayoutComponent,
+        canActivate: [AuthGuard],
+        children: [
+            {
+                path: 'lot',
+                data: {extraParameter: 'lotMenu'},
+                loadChildren: () => import('./pages/lots/lot.module').then(m => m.LotModule)
+
+            }
+
+        ]
+
+    },
+    {
+        path: '',
         component: PagesLayoutComponent,
         children: [
             {
@@ -48,7 +63,7 @@ const routes: Routes = [
             },
         ]
     },
-    
+
     {path: '**', redirectTo: ''}
 ];
 
