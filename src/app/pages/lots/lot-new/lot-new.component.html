@@ -1,0 +1,44 @@
+<div class="main-card mb-3 card">
+    <div class="card-body">
+        <form #form="ngForm">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="position-relative mb-3">
+                        <label class="form-label">Product</label>
+                        <ng-select *ngIf="!routeId" [items]="products"
+                                   bindLabel="title"
+                                   bindValue="code"
+                                   [(ngModel)]="model.productId"
+                                   (search)="searchProduct($event)"
+                        ></ng-select>
+
+                        <input *ngIf="routeId" [disabled]="routeId" value="{{model.productName}}" type="text"
+                               class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="position-relative mb-3">
+                        <label for="costPrice" class="form-label">Cost price</label>
+                        <input [disabled]="routeId" name="costPrice" value={{model.costPrice}} id="costPrice"
+                               placeholder="Cost Price"
+                               type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="position-relative mb-3">
+                        <label for="quantity" class="form-label">Quantity</label>
+                        <input name="quantity" id="quantity" [(ngModel)]="model.quantity" placeholder="Quantity"
+                               type="text" class="form-control">
+                    </div>
+                </div>
+            </div>
+
+
+            <button (click)="onSubmit()" class="mt-2  btn btn-primary">
+                <span *ngIf="routeId">Add Stock</span>
+                <span *ngIf="!routeId">Submit</span>
+            </button>
+            <button type="button" [routerLink]="'/lot/list'" class="mt-2  btn btn-danger">Cancel</button>
+        </form>
+    </div>
+</div>

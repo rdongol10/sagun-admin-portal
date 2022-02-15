@@ -1,14 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from '../service/user.service';
-import {ToastrService} from 'ngx-toastr';
 import {SearchCriteriaModel} from '../../../@core/class/search-criteria-model';
+import {ToastrService} from 'ngx-toastr';
+import {LotService} from '../service/lot.service';
 
 @Component({
-    selector: 'app-user-list',
-    templateUrl: './user-list.component.html',
-    styleUrls: ['./user-list.component.sass']
+    selector: 'app-lot-list',
+    templateUrl: './lot-list.component.html',
+    styleUrls: ['./lot-list.component.sass']
 })
-export class UserListComponent implements OnInit {
+export class LotListComponent implements OnInit {
+
     list = [];
     searchModel = new SearchCriteriaModel();
     searchField = [];
@@ -16,9 +17,8 @@ export class UserListComponent implements OnInit {
     searchFieldValues = [];
     fieldName;
     fieldCondition;
-    fieldValue;
 
-    constructor(private service: UserService, private notify: ToastrService) {
+    constructor(private service: LotService, private notify: ToastrService) {
     }
 
     ngOnInit(): void {
@@ -33,6 +33,7 @@ export class UserListComponent implements OnInit {
             });
         this.getList();
     }
+
 
     getList(reset: boolean = false, value?) {
         if (reset) {
