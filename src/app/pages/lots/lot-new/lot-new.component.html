@@ -10,6 +10,8 @@
                                    bindValue="code"
                                    [(ngModel)]="model.productId"
                                    (search)="searchProduct($event)"
+                                   (change)="changeProduct($event)"
+
                         ></ng-select>
 
                         <input *ngIf="routeId" [disabled]="routeId" value="{{model.productName}}" type="text"
@@ -19,7 +21,7 @@
                 <div class="col-md-3">
                     <div class="position-relative mb-3">
                         <label for="costPrice" class="form-label">Cost price</label>
-                        <input [disabled]="routeId" name="costPrice" value={{model.costPrice}} id="costPrice"
+                        <input [disabled]="routeId" name="costPrice" [(ngModel)]="model.costPrice" id="costPrice"
                                placeholder="Cost Price"
                                type="text" class="form-control">
                     </div>
