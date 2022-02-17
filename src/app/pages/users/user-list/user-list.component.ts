@@ -16,7 +16,7 @@ export class UserListComponent implements OnInit {
     searchFieldValues = [];
     fieldName;
     fieldCondition;
-    fieldValue;
+    totalCount;
 
     constructor(private service: UserService, private notify: ToastrService) {
     }
@@ -45,6 +45,7 @@ export class UserListComponent implements OnInit {
         this.service.getAll(this.searchModel)
             .subscribe((data: any) => {
                 this.list = data.data.data;
+                this.totalCount = data.data.totalCount;
                 this.service.display(false);
             }, error => {
                 this.notify.error(error.error, 'Error');
@@ -53,11 +54,12 @@ export class UserListComponent implements OnInit {
     }
 
     sort(sort: { key: string; value: string }): void {
+        console.log(sort);
         this.searchModel.sortField = sort.key;
-        if (sort.value == 'ascend') {
+        if (sort.value == 'asc') {
             this.searchModel.sortOrder = 'asc';
         }
-        if (sort.value == 'descend') {
+        if (sort.value == 'desc') {
             this.searchModel.sortOrder = 'desc';
         }
         this.getList();
@@ -70,8 +72,10 @@ export class UserListComponent implements OnInit {
     }
 
     changeIndex(event) {
-        this.searchModel.pageNumber = Number(event) + 1;
-        if (event > this.searchModel.pageNumber) {
+        const numb = event.pageNumber;
+        this.searchModel.pageSize = event.pageSize;
+        this.searchModel.pageNumber = Number(numb) + 1;
+        if (numb > this.searchModel.pageNumber) {
             this.searchModel.pageNumber++;
             this.getList();
         } else {

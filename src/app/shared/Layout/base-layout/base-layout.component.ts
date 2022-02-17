@@ -21,10 +21,10 @@ import {animate, query, style, transition, trigger} from '@angular/animations';
             flexDirection: 'column'
 
           }),
-        ]),
+        ], ),
         query(':enter', [
           animate('200ms ease', style({opacity: 1, transform: 'translateY(0)'})),
-        ]),
+        ], { optional: true }),
 
         query(':leave', [
           animate('200ms ease', style({opacity: 0, transform: 'translateY(-20px)'})),
@@ -45,6 +45,10 @@ export class BaseLayoutComponent {
 
   toggleSidebarMobile() {
     this.globals.toggleSidebarMobile = !this.globals.toggleSidebarMobile;
+  }
+
+  getState(outlet) {
+    return outlet.activatedRouteData.extraParameter;
   }
 }
 

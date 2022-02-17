@@ -141,6 +141,46 @@
           }
         }
       }
+    },
+    "generic-table": {
+      "projectType": "library",
+      "root": "projects/generic-table",
+      "sourceRoot": "projects/generic-table/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/generic-table/tsconfig.lib.json",
+            "project": "projects/generic-table/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/generic-table/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/generic-table/src/test.ts",
+            "tsConfig": "projects/generic-table/tsconfig.spec.json",
+            "karmaConfig": "projects/generic-table/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/generic-table/tsconfig.lib.json",
+              "projects/generic-table/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "architectui-angular-free"
