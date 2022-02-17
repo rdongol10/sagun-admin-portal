@@ -17,7 +17,8 @@ import {PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {SearchGenericComponent} from './component/search-generic/search-generic.component';
-import {NgxLoadingModule} from 'ngx-loading';
+import {ngxLoadingAnimationTypes, NgxLoadingModule} from 'ngx-loading';
+import {GenericTableModule} from '../../../projects/generic-table/src/lib/generic-table.module';
 import {GenericImageUploaderComponent} from './component/generic-image-uploader/generic-image-uploader.component';
 import {NgSelectModule} from '@ng-select/ng-select';
 
@@ -46,7 +47,7 @@ import {NgSelectModule} from '@ng-select/ng-select';
         FormsModule,
         PerfectScrollbarModule,
         NgbModule,
-
+        GenericTableModule,
         FontAwesomeModule,
         LoadingBarRouterModule,
         NgSelectModule
@@ -59,7 +60,7 @@ import {NgSelectModule} from '@ng-select/ng-select';
         PerfectScrollbarModule,
         NgbModule,
         LoadingBarRouterModule,
-
+        GenericTableModule,
         FontAwesomeModule,
         BaseLayoutComponent,
         PagesLayoutComponent, PageTitleComponent,

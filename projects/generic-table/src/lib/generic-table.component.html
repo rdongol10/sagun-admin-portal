@@ -1,0 +1,26 @@
+<table class="table table-hover" [ngClass]="defaultClass">
+    <thead>
+    <tr>
+        <th class="text-center" *ngFor="let header of headers" [sort]="dataList"
+            (sortOrderChange)="sort($event)"
+            [colValue]="header.colValue" [style.width]="header?.width" >
+            {{ header.title }}
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <ng-content></ng-content>
+
+    </tbody>
+</table>
+<div class="d-flex justify-content-between p-2">
+    <lib-generic-pagination [totalRecords]="totalCount" [recordsPerPage]="pageSize" (onPageChange)="pageNumberChange($event)" ></lib-generic-pagination>
+    <div class="col-2">
+        <select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="pageSizeChange($event)">
+            <option *ngFor="let item of pageSizeOptions" [ngValue]="item">{{item}} items per page</option>
+        </select>
+    </div>
+
+</div>
+

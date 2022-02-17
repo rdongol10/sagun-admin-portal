@@ -6,6 +6,12 @@
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
+    "paths": {
+      "generic-table": [
+        "dist/generic-table/generic-table",
+        "dist/generic-table"
+      ]
+    },
     "module": "es2020",
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
