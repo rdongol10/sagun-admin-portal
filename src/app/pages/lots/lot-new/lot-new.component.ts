@@ -60,6 +60,11 @@ export class LotNewComponent implements OnInit {
         }
     }
 
+    changeProduct(event) {
+        this.model.productId = event.code;
+        this.model.productName = event.title;
+    }
+
     searchProduct(event) {
         if (event.term.trim() === '') {
             this.products = [];
