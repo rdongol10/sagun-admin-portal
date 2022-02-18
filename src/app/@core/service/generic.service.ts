@@ -94,11 +94,11 @@ export class GenericService<T> {
         GenericService.status.next(value);
     }
 
-    formattedDate(date: Date): string {
+    formattedDate(date): string {
         if (date) {
-            const datePart = date.getDate();
-            const monthPart = date.getMonth() + 1;
-            const yearPart = date.getFullYear();
+            const datePart = date.day;
+            const monthPart = date.month;
+            const yearPart = date.year;
 
             return (yearPart) + '-' + (monthPart < 10 ? '0' + monthPart : monthPart) + '-' + (datePart < 10 ? '0' + datePart : datePart);
 
