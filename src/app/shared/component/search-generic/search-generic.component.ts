@@ -129,12 +129,13 @@ export class SearchGenericComponent extends GenericService<any> implements OnIni
         }
     }
 
-    editValue(i) {
+    formatDate(i) {
+
         if (this.searchModel[i].fieldValue) {
-            this.searchModel[i].fieldValue = super.formattedDate(new Date(this.searchModel[i].fieldValue));
+            this.searchModel[i].fieldValue = super.formattedDate(this.searchModel[i].fieldValue);
         }
         if (this.searchModel[i].dateValue) {
-            this.searchModel[i].dateValue = super.formattedDate(new Date(this.searchModel[i].dateValue));
+            this.searchModel[i].dateValue = super.formattedDate(this.searchModel[i].dateValue);
         }
     }
 
