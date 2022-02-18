@@ -41,6 +41,9 @@ export class SearchGenericComponent extends GenericService<any> implements OnIni
             if (a.length >= this.searchModel.length) {
 
                 for (let i = 0; i < this.searchModel.length; i++) {
+                    if(this.searchModel[i].fieldName.dataType.toUpperCase() === 'DATE'){
+
+                    }
                     reportModel.push({
                         field: this.searchModel[i].fieldName.code, operator: this.searchModel[i].fieldCondition,
                         value: this.searchModel[i].fieldValue,
@@ -131,12 +134,13 @@ export class SearchGenericComponent extends GenericService<any> implements OnIni
 
     formatDate(i) {
 
-        if (this.searchModel[i].fieldValue) {
-            this.searchModel[i].fieldValue = super.formattedDate(this.searchModel[i].fieldValue);
+        if (this.searchModel[i].fromValue) {
+            this.searchModel[i].fieldValue = super.formattedDate(this.searchModel[i].fromValue);
         }
-        if (this.searchModel[i].dateValue) {
-            this.searchModel[i].dateValue = super.formattedDate(this.searchModel[i].dateValue);
+        if (this.searchModel[i].toValue) {
+            this.searchModel[i].dateValue = super.formattedDate(this.searchModel[i].toValue);
         }
+
     }
 
     ngOnChanges() {
@@ -157,6 +161,8 @@ export class SearchGenericModel {
     fieldName;
     fieldCondition;
     fieldValue;
+    fromValue;
+    toValue;
     dateValue;
 }
 
