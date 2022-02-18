@@ -63,7 +63,7 @@ export class GenericService<T> {
 
     public search(query: SelectSearchRequest) {
         return this.http.post(this.baseUrl + '/search', query).pipe(
-            map((data: T) => {
+            map((data: any) => {
                 return data;
             }),
             catchError((error) => this.handleError(error))

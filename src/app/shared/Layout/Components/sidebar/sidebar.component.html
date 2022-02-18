@@ -126,6 +126,32 @@
                                     </div>
                                 </ng-template>
                             </ngb-panel>
+                            <ngb-panel id="salesMenu">
+                                <ng-template ngbPanelHeader>
+                                    <button ngbPanelToggle class="vsm-link">
+                                        <i class="vsm-icon pe-7s-user"></i>
+                                        <span class="vsm-title">Sales</span>
+                                        <i class="vsm-arrow"></i>
+                                    </button>
+                                </ng-template>
+                                <ng-template ngbPanelContent>
+                                    <div class="vsm-dropdown">
+                                        <div class="vsm-list">
+                                            <div class="vsm-item">
+                                                <a routerLinkActive="active-item" routerLink="/sales/new"
+                                                   class="vsm-link"> <span
+                                                        class="vsm-title">New</span></a>
+                                            </div>
+<!--                                            <div class="vsm-item">-->
+<!--                                                <a routerLinkActive="active-item" routerLink="/sales/list"-->
+<!--                                                   class="vsm-link"> <span-->
+<!--                                                        class="vsm-title">List</span></a>-->
+<!--                                            </div>-->
+
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </ngb-panel>
                         </ngb-accordion>
                     </div>
                 </div>
