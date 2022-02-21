@@ -7,6 +7,8 @@ import {SalesDetailModel} from '../model/sales-detail-model';
 import {SelectSearchRequest} from '../../../@core/class/select-search-request';
 import {LotService} from '../../lots/service/lot.service';
 import {LotSelectableValue} from '../../lots/model/lot-selectable-value';
+import {SelectableValue} from '../../../@core/class/selectable-value';
+import {UserService} from '../../users/service/user.service';
 
 @Component({
     selector: 'app-sales-new',
@@ -17,13 +19,43 @@ export class SalesNewComponent implements OnInit {
 
     model: SalesModel = new SalesModel();
     lots: LotSelectableValue[] = [];
+    users: SelectableValue[] = [];
+    orderStatus: SelectableValue[] = [{code: 0, title: 'Booked'}, {code: 1, title: 'Delivered'}];
+    paymentStatus: SelectableValue[] = [
+        {code: 0, title: 'Unpaid'}, {code: 1, title: 'Partial payment'}, {code: 2, title: 'Paid'}
+    ];
 
-    constructor(private service: SalesService, private lotService: LotService,
+    constructor(private userService: UserService, private service: SalesService, private lotService: LotService,
                 private router: Router, private notify: ToastrService) {
     }
 
     ngOnInit(): void {
         this.model.salesDetails.push(new SalesDetailModel());
+    }
+
+    searchUser(event) {
+        if (event.term.trim() === '') {
+            this.users = [];
+            return;
+        }
+
+        const query: SelectSearchRequest = new SelectSearchRequest();
+        query.searchQuery = event.term;
+        this.userService.search(query).subscribe(
+            (data: any) => {
+                this.users = data.data;
+            }, error => {
+                this.notify.error(error.error.message, 'Error');
+            }
+        );
+    }
+
+    changeUser(event) {
+        if (event === undefined) {
+            this.model.deliveredBy = null;
+        } else {
+            this.model.deliveredBy = event.code;
+        }
     }
 
     searchLot(event) {
@@ -110,5 +142,36 @@ export class SalesNewComponent implements OnInit {
     changeAdditionalCharge() {
         this.calculateTotalCostPrice();
     }
+
+    calculateNetSellingPrice() {
+        if (!this.model.sellingPrice) {
+            this.model.netSellingPrice = 0;
+            return;
+        }
+
+        this.model.netSellingPrice = this.model.sellingPrice - (this.model.discount ? this.model.discount : 0);
+    }
+
+    onSubmit() {
+
+        this.service.save(this.model)
+            .subscribe((data: any) => {
+                this.onSuccess(data);
+            }, error => {
+                this.onError(error);
+            });
+    }
+
+    onSuccess(data: any) {
+        this.service.display(false);
+        this.notify.success(data.message, 'Success');
+        this.router.navigate(['/product/list']);
+    }
+
+    onError(error) {
+        this.service.display(false);
+        this.notify.error(error.error.message, 'Error');
+    }
+
 
 }

@@ -1,4 +1,4 @@
 export class SelectableValue {
-    code: string;
+    code: any;
     title: string;
 }

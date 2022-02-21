@@ -2,14 +2,18 @@ import {SalesDetailModel} from './sales-detail-model';
 
 export class SalesModel {
     id;
+    orderStatus = 0;
+    deliveredBy: string;
+    deliveredTo: string;
+
+    salesDetails: SalesDetailModel[] = [];
     costPrice: number;
-    totalCostPrice: number;
     additionalCharges: number;
+    totalCostPrice: number;
     sellingPrice: number;
-    status: string;
+    discount: number;
+    netSellingPrice: number;
+    paymentStatus = 0;
     paidAmount: number;
     remainingAmount: number;
-    deliverBy: string;
-    deliveredTo: string;
-    salesDetails: SalesDetailModel[] = [];
 }

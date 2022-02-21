@@ -4,6 +4,40 @@
 
             <div class="row">
                 <div class="col-md-2">
+                    <div class="position-relative mb-3">
+                        <label for="deliveredTo" class="form-label">Delivered to</label>
+                        <input name="deliveredTo" [(ngModel)]="model.deliveredTo" id="deliveredTo"
+                               placeholder="Delivered to"
+                               type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="position-relative mb-3">
+                        <label for="orderStatus" class="form-label">Order Status</label>
+                        <select class="form-select" name="orderStatus" id="orderStatus" [(ngModel)]="model.orderStatus" >
+                            <option *ngFor="let status of orderStatus"
+                                    value="{{status.code}}"> {{status.title}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2" *ngIf="model.orderStatus==1">
+                    <div class="position-relative mb-3">
+                        <label for="deliveredBy" class="form-label">Delivered By</label>
+                        <ng-select placeholder="Delivered By" [items]="users"
+                                   bindLabel="title"
+                                   bindValue="code"
+                                   [(ngModel)]="model.deliveredBy"
+                                   name="deliveredBy"
+                                   id="deliveredBy"
+                                   (search)="searchUser($event)"
+                                   (change)="changeUser($event)"
+                        ></ng-select>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-2">
                     Lot
                 </div>
                 <div class="col-md-2">
@@ -40,7 +74,9 @@
                 </div>
                 <div class="col-md-2">
                     <input [(ngModel)]="salesDetail.quantity" name="quantity{{i}}" class="form-control" type="number"
-                           (change)="quantityChanged($event,i)">
+                           (change)="quantityChanged($event,i)"
+                           (keyup)="quantityChanged($event,i)"
+                    >
                 </div>
                 <div class="col-md-2">
                     <input [(ngModel)]="salesDetail.totalCostPrice" name="totalCostPrice{{i}}" class="form-control"
@@ -85,7 +121,8 @@
                 <div class="col-md-2">
                     <input [(ngModel)]="model.additionalCharges" name="additionalCharges" class="form-control"
                            type="number"
-                            (change)="changeAdditionalCharge()"
+                           (change)="changeAdditionalCharge()"
+                           (keyup)="changeAdditionalCharge()"
                     >
                 </div>
             </div>
@@ -101,9 +138,110 @@
                 </div>
                 <div class="col-md-2">
                     <input [(ngModel)]="model.totalCostPrice" name="totalCostPrice" class="form-control"
+                           type="number" disabled>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-2">
+                    Selling Price
+                </div>
+                <div class="col-md-2">
+                    <input [(ngModel)]="model.sellingPrice" name="sellingPrice" class="form-control"
+                           type="number"
+                           (change)="calculateNetSellingPrice()"
+                           (keyup)="calculateNetSellingPrice()">
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-2">
+                    Discount
+                </div>
+                <div class="col-md-2">
+                    <input [(ngModel)]="model.discount" name="discount" class="form-control"
+                           type="number"
+                           (change)="calculateNetSellingPrice()"
+                           (keyup)="calculateNetSellingPrice()">
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-2">
+                    Net Selling Price
+                </div>
+                <div class="col-md-2">
+                    <input [(ngModel)]="model.netSellingPrice" name="netSellingPrice" class="form-control"
+                           type="number" disabled>
+                </div>
+            </div>
+            <hr>
+            <div class="row mt-2">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-2">
+                    Payment Status
+                </div>
+                <div class="col-md-2">
+                    <select class="form-select" name="paymentStatus" id="paymentStatus"
+                            [(ngModel)]="model.paymentStatus">
+                        <option *ngFor="let status of paymentStatus"
+                                value="{{status.code}}"> {{status.title}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-2">
+                    Paid Amount
+                </div>
+                <div class="col-md-2">
+                    <input [(ngModel)]="model.paidAmount" name="paidAmount" class="form-control"
                            type="number">
                 </div>
             </div>
+            <div class="row mt-2">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-2">
+                    Remaining Amount
+                </div>
+                <div class="col-md-2">
+                    <input [(ngModel)]="model.remainingAmount" name="remainingAmount" class="form-control"
+                           type="number" disabled>
+                </div>
+            </div>
+            <button (click)="onSubmit()" class="mt-2  btn btn-primary">Submit</button>
+            <button type="button" class="mt-2  btn btn-danger">Cancel</button>
         </form>
     </div>
 </div>
