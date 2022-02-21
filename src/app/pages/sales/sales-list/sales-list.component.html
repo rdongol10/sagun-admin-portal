@@ -1,0 +1,51 @@
+<div class="main-card mb-3 card">
+    <div class="card-header">
+        <div class="card-header-title font-size-lg text-capitalize fw-normal">Company Agents Status</div>
+    </div>
+    <app-search-generic (emitDataModel)="search($event)"
+                        [searchField]="searchField"
+                        [searchFieldCondition]="searchFieldCondition"
+                        [searchFieldValues]="searchFieldValues"></app-search-generic>
+    <div class="table-responsive">
+        <lib-generic-table
+                (sortOrderChange)="sort($event)"
+                [dataList]="list"
+                [headers]="[
+                {title: '#', width: '', sort: '', colValue : ''},
+                {title: 'Booked Date', width: '', sort: '', colValue : ''},
+                {title: 'Delivered to', width: '', sort: '', colValue : ''},
+                {title: 'Order status', width: '', sort: '', colValue : ''},
+                {title: 'Delivered by', width: '', sort: '', colValue : ''},
+                {title: 'Payment Status', width: '', sort: '', colValue : ''},
+                {title: 'Total Cost Price', width: '', sort: '', colValue : ''},
+                {title: 'Net Selling Price', width: '', sort: '', colValue : ''},
+                {title: 'Paid Amount', width: '', sort: '', colValue : ''},
+                {title: 'Remaining Amount', width: '', sort: '', colValue : ''},
+                {title: 'Action', width: '', sort: '', colValue : ''},
+                ]"
+                [totalCount]="totalCount"
+                [pageNumber]="searchModel.pageNumber"
+                [pageSize]="searchModel.pageSize"
+                (paginationChange)="changeIndex($event)"
+        >
+            <tr *ngFor="let data of list; let i = index;">
+                <td class="text-center text-muted" style="width: 80px;">{{i + 1}}</td>
+                <td class="text-center">{{data.bookedDate}}</td>
+                <td class="text-center">{{data.deliveredTo}}</td>
+                <td class="text-center">{{data.orderStatus}}</td>
+                <td class="text-center">{{data.deliveredBy}}</td>
+                <td class="text-center">{{data.paymentStatus}}</td>
+                <td class="text-center">{{data.totalCostPrice}}</td>
+                <td class="text-center">{{data.netSellingPrice}}</td>
+                <td class="text-center">{{data.paidAmount}}</td>
+                <td class="text-center">{{data.remainingAmount}}</td>
+                <td class="text-center">
+                    <div role="group" class="btn-group-sm btn-group">
+                        <button  class="btn-shadow btn btn-primary">Edit</button>
+                        <button class="btn-shadow btn btn-danger">Delete</button>
+                    </div>
+                </td>
+            </tr>
+        </lib-generic-table>
+    </div>
+</div>

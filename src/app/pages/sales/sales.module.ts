@@ -5,11 +5,13 @@ import {SalesRoutingModule} from './sales-routing.module';
 import {FormsModule} from '@angular/forms';
 import {SharedModule} from '../../shared/shared.module';
 import { SalesNewComponent } from './sales-new/sales-new.component';
+import { SalesListComponent } from './sales-list/sales-list.component';
 
 
 @NgModule({
     declarations: [
-    SalesNewComponent
+    SalesNewComponent,
+    SalesListComponent
   ],
     imports: [
         CommonModule,

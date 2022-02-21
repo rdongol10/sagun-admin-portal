@@ -16,4 +16,6 @@ export class SalesModel {
     paymentStatus = 0;
     paidAmount: number;
     remainingAmount: number;
+    bookedDate: number;
+
 }

@@ -9,6 +9,7 @@ import {LotService} from '../../lots/service/lot.service';
 import {LotSelectableValue} from '../../lots/model/lot-selectable-value';
 import {SelectableValue} from '../../../@core/class/selectable-value';
 import {UserService} from '../../users/service/user.service';
+import {ORDER_STATUS, PAYMENT_STATUS} from '../../../app-config';
 
 @Component({
     selector: 'app-sales-new',
@@ -20,10 +21,8 @@ export class SalesNewComponent implements OnInit {
     model: SalesModel = new SalesModel();
     lots: LotSelectableValue[] = [];
     users: SelectableValue[] = [];
-    orderStatus: SelectableValue[] = [{code: 0, title: 'Booked'}, {code: 1, title: 'Delivered'}];
-    paymentStatus: SelectableValue[] = [
-        {code: 0, title: 'Unpaid'}, {code: 1, title: 'Partial payment'}, {code: 2, title: 'Paid'}
-    ];
+    orderStatus: SelectableValue[] = ORDER_STATUS;
+    paymentStatus: SelectableValue[] = PAYMENT_STATUS;
 
     constructor(private userService: UserService, private service: SalesService, private lotService: LotService,
                 private router: Router, private notify: ToastrService) {
@@ -165,7 +164,7 @@ export class SalesNewComponent implements OnInit {
     onSuccess(data: any) {
         this.service.display(false);
         this.notify.success(data.message, 'Success');
-        this.router.navigate(['/product/list']);
+        this.router.navigate(['/sales/list']);
     }
 
     onError(error) {
