@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {SalesModel} from '../model/sales-model';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {SalesService} from '../service/sales.service';
 import {SalesDetailModel} from '../model/sales-detail-model';
@@ -9,7 +9,7 @@ import {LotService} from '../../lots/service/lot.service';
 import {LotSelectableValue} from '../../lots/model/lot-selectable-value';
 import {SelectableValue} from '../../../@core/class/selectable-value';
 import {UserService} from '../../users/service/user.service';
-import {ORDER_STATUS, PAYMENT_STATUS} from '../../../app-config';
+import {ORDER_STATUS, OrderStatusEnum, PAYMENT_STATUS, PaymentStatusEnum} from '../../../app-config';
 
 @Component({
     selector: 'app-sales-new',
@@ -23,13 +23,40 @@ export class SalesNewComponent implements OnInit {
     users: SelectableValue[] = [];
     orderStatus: SelectableValue[] = ORDER_STATUS;
     paymentStatus: SelectableValue[] = PAYMENT_STATUS;
+    routeId;
+    oldPaidAmount = 0;
+    orderEnum = OrderStatusEnum;
+    paymentStatusEnum = PaymentStatusEnum;
 
     constructor(private userService: UserService, private service: SalesService, private lotService: LotService,
-                private router: Router, private notify: ToastrService) {
+                private router: Router, private notify: ToastrService,
+                private route: ActivatedRoute) {
     }
 
     ngOnInit(): void {
-        this.model.salesDetails.push(new SalesDetailModel());
+        this.route.params.subscribe(params => {
+            this.routeId = (params['id']);
+        });
+
+        this.service.display(true);
+        if (this.routeId) {
+            this.service.getById(this.routeId)
+                .subscribe((data: any) => {
+                    this.model = data.data;
+                    this.oldPaidAmount = this.model.paidAmount;
+                    this.model.paidAmount = 0;
+                    if (this.model.orderStatus === 1) {
+                        this.users.push({code: this.model.deliveredBy, title: this.model.deliveredBy});
+                    }
+                    this.service.display(false);
+                }, error => {
+                    this.service.display(false);
+                    this.notify.error(error.error.message);
+                });
+        } else {
+            this.service.display(false);
+            this.model.salesDetails.push(new SalesDetailModel());
+        }
     }
 
     searchUser(event) {
@@ -142,23 +169,57 @@ export class SalesNewComponent implements OnInit {
         this.calculateTotalCostPrice();
     }
 
+    paidAmountChange(event) {
+        this.calculateRemainingAmount();
+    }
+
+    calculateRemainingAmount() {
+        let sellingPrice: number;
+        let paidAmount: number;
+        if (!this.model.sellingPrice) {
+            this.model.remainingAmount = 0;
+            return;
+        }
+        if (!this.model.paidAmount) {
+            sellingPrice = this.model.netSellingPrice;
+            paidAmount = 0;
+        } else {
+            sellingPrice = this.model.netSellingPrice;
+            paidAmount = this.model.paidAmount;
+        }
+        console.log(sellingPrice);
+        console.log(paidAmount);
+
+        this.model.remainingAmount = sellingPrice - paidAmount - this.oldPaidAmount;
+
+    }
+
     calculateNetSellingPrice() {
         if (!this.model.sellingPrice) {
             this.model.netSellingPrice = 0;
-            return;
+        } else {
+            this.model.netSellingPrice = this.model.sellingPrice - (this.model.discount ? this.model.discount : 0);
         }
-
-        this.model.netSellingPrice = this.model.sellingPrice - (this.model.discount ? this.model.discount : 0);
+        this.calculateRemainingAmount();
     }
 
     onSubmit() {
-
-        this.service.save(this.model)
-            .subscribe((data: any) => {
-                this.onSuccess(data);
-            }, error => {
-                this.onError(error);
-            });
+        this.service.display(true);
+        if (!this.routeId) {
+            this.service.save(this.model)
+                .subscribe((data: any) => {
+                    this.onSuccess(data);
+                }, error => {
+                    this.onError(error);
+                });
+        } else {
+            this.service.updateSales(this.routeId, this.model)
+                .subscribe((data: any) => {
+                    this.onSuccess(data);
+                }, error => {
+                    this.onError(error);
+                });
+        }
     }
 
     onSuccess(data: any) {
