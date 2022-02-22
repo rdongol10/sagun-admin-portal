@@ -70,8 +70,8 @@
                                    required
                                    ngbDatepicker
                                    #dates="ngbDatepicker"
-                                   [(ngModel)]="data.fieldValue" name="fieldValue{{i}}"
-                                   (ngModelChange)="formatDate(i)"
+                                   [(ngModel)]="data.fromValue" name="fieldValue{{i}}"
+                                   (dateSelect)="formatDate(i)"
                             />
                             <button class="btn btn-outline-secondary calendar" (click)="dates.toggle()"
                                     type="button"></button>
@@ -85,8 +85,8 @@
                                        required
                                        ngbDatepicker
                                        #fromDate="ngbDatepicker"
-                                       [(ngModel)]="data.fieldValue" name="fieldValue{{i}}"
-                                       (ngModelChange)="formatDate(i)"
+                                       [(ngModel)]="data.fromValue" name="fieldValue{{i}}"
+                                       (dateSelect)="formatDate(i)"
                                 />
                                 <button class="btn btn-outline-secondary calendar" (click)="fromDate.toggle()"
                                         type="button"></button>
@@ -99,8 +99,8 @@
                                        required
                                        ngbDatepicker
                                        #toDate="ngbDatepicker"
-                                       [(ngModel)]="data.dateValue" name="formatDate{{i}}"
-                                       (ngModelChange)="formatDate(i)"
+                                       [(ngModel)]="data.toValue" name="dateValues{{i}}"
+                                       (dateSelect)="formatDate(i)"
                                 />
                                 <button class="btn btn-outline-secondary calendar" (click)="toDate.toggle()"
                                         type="button"></button>
