@@ -8,7 +8,8 @@
                         <label for="deliveredTo" class="form-label">Delivered to</label>
                         <input name="deliveredTo" [(ngModel)]="model.deliveredTo" id="deliveredTo"
                                placeholder="Delivered to"
-                               type="text" class="form-control">
+                               type="text" class="form-control"
+                               [disabled]="routeId">
                     </div>
                 </div>
                 <div class="col-md-2">
@@ -20,7 +21,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-2" *ngIf="model.orderStatus==1">
+                <div class="col-md-2" *ngIf="model.orderStatus==orderEnum.Booked">
                     <div class="position-relative mb-3">
                         <label for="deliveredBy" class="form-label">Delivered By</label>
                         <ng-select placeholder="Delivered By" [items]="users"
@@ -43,7 +44,7 @@
                 <div class="col-md-2">
                     Cost price
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2" [hidden]="routeId">
                     Remaining Quantity
                 </div>
                 <div class="col-md-2">
@@ -55,7 +56,7 @@
             </div>
             <div class="row mt-2" *ngFor="let salesDetail of this.model.salesDetails; let i=index">
                 <div class="col-md-2">
-                    <ng-select [items]="lots"
+                    <ng-select *ngIf="!routeId" [items]="lots"
                                bindLabel="title"
                                bindValue="code"
                                [(ngModel)]="salesDetail.lotId"
@@ -64,11 +65,13 @@
                                name="lot{{i}}"
 
                     ></ng-select>
+
+                    <input type="text" value="{{salesDetail.lotName}}" class="form-control" *ngIf="routeId" disabled>
                 </div>
                 <div class="col-md-2">
                     <input [(ngModel)]="salesDetail.costPrice" name="costPrice{{i}}" class="form-control" disabled>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2" [hidden]="routeId">
                     <input [(ngModel)]="salesDetail.remainingQuantity" name="remainingQuantity{{i}}"
                            class="form-control" disabled>
                 </div>
@@ -76,17 +79,17 @@
                     <input [(ngModel)]="salesDetail.quantity" name="quantity{{i}}" class="form-control" type="number"
                            (change)="quantityChanged($event,i)"
                            (keyup)="quantityChanged($event,i)"
-                    >
+                           [disabled]="routeId">
                 </div>
                 <div class="col-md-2">
                     <input [(ngModel)]="salesDetail.totalCostPrice" name="totalCostPrice{{i}}" class="form-control"
                            disabled>
                 </div>
 
-                <div *ngIf="i==0" class="col-md-2">
+                <div *ngIf="i==0 && !routeId" class="col-md-2">
                     <button class="btn btn-primary" (click)="addSalesDetails()">Add</button>
                 </div>
-                <div *ngIf="i>0" class="col-md-2">
+                <div *ngIf="i>0 && !routeId" class="col-md-2">
                     <button class="btn btn-danger" (click)="removeSaleDetails(i)">Remove</button>
                 </div>
             </div>
@@ -94,7 +97,7 @@
                 <hr>
             </div>
             <div class="row mt-2">
-                <div class="col-md-2">
+                <div class="col-md-2" [hidden]="routeId">
                 </div>
                 <div class="col-md-2">
                 </div>
@@ -109,7 +112,7 @@
                 </div>
             </div>
             <div class="row mt-2">
-                <div class="col-md-2">
+                <div class="col-md-2" [hidden]="routeId">
                 </div>
                 <div class="col-md-2">
                 </div>
@@ -123,11 +126,11 @@
                            type="number"
                            (change)="changeAdditionalCharge()"
                            (keyup)="changeAdditionalCharge()"
-                    >
+                           [disabled]="routeId">
                 </div>
             </div>
             <div class="row mt-2">
-                <div class="col-md-2">
+                <div class="col-md-2" [hidden]="routeId">
                 </div>
                 <div class="col-md-2">
                 </div>
@@ -143,7 +146,7 @@
             </div>
 
             <div class="row mt-2">
-                <div class="col-md-2">
+                <div class="col-md-2" [hidden]="routeId">
                 </div>
                 <div class="col-md-2">
                 </div>
@@ -156,11 +159,12 @@
                     <input [(ngModel)]="model.sellingPrice" name="sellingPrice" class="form-control"
                            type="number"
                            (change)="calculateNetSellingPrice()"
-                           (keyup)="calculateNetSellingPrice()">
+                           (keyup)="calculateNetSellingPrice()"
+                           [disabled]="routeId">
                 </div>
             </div>
             <div class="row mt-2">
-                <div class="col-md-2">
+                <div class="col-md-2" [hidden]="routeId">
                 </div>
                 <div class="col-md-2">
                 </div>
@@ -173,11 +177,12 @@
                     <input [(ngModel)]="model.discount" name="discount" class="form-control"
                            type="number"
                            (change)="calculateNetSellingPrice()"
-                           (keyup)="calculateNetSellingPrice()">
+                           (keyup)="calculateNetSellingPrice()"
+                           [disabled]="routeId">
                 </div>
             </div>
             <div class="row mt-2">
-                <div class="col-md-2">
+                <div class="col-md-2" [hidden]="routeId">
                 </div>
                 <div class="col-md-2">
                 </div>
@@ -193,7 +198,7 @@
             </div>
             <hr>
             <div class="row mt-2">
-                <div class="col-md-2">
+                <div class="col-md-2" [hidden]="routeId">
                 </div>
                 <div class="col-md-2">
                 </div>
@@ -210,8 +215,8 @@
                     </select>
                 </div>
             </div>
-            <div class="row mt-2">
-                <div class="col-md-2">
+            <div class="row mt-2" *ngIf="model.paymentStatus==paymentStatusEnum.Partial_Payment">
+                <div class="col-md-2" [hidden]="routeId">
                 </div>
                 <div class="col-md-2">
                 </div>
@@ -222,11 +227,13 @@
                 </div>
                 <div class="col-md-2">
                     <input [(ngModel)]="model.paidAmount" name="paidAmount" class="form-control"
-                           type="number">
+                           type="number"
+                           (change)="paidAmountChange($event)"
+                           (keyup)="paidAmountChange($event)">
                 </div>
             </div>
             <div class="row mt-2">
-                <div class="col-md-2">
+                <div class="col-md-2" [hidden]="routeId">
                 </div>
                 <div class="col-md-2">
                 </div>

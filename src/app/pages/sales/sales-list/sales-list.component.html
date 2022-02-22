@@ -32,16 +32,16 @@
                 <td class="text-center text-muted" style="width: 80px;">{{i + 1}}</td>
                 <td class="text-center">{{data.bookedDate}}</td>
                 <td class="text-center">{{data.deliveredTo}}</td>
-                <td class="text-center">{{data.orderStatus}}</td>
+                <td class="text-center">{{data.orderStatus | orderStatus}}</td>
                 <td class="text-center">{{data.deliveredBy}}</td>
-                <td class="text-center">{{data.paymentStatus}}</td>
+                <td class="text-center">{{data.paymentStatus | paymentStatus}}</td>
                 <td class="text-center">{{data.totalCostPrice}}</td>
                 <td class="text-center">{{data.netSellingPrice}}</td>
                 <td class="text-center">{{data.paidAmount}}</td>
                 <td class="text-center">{{data.remainingAmount}}</td>
                 <td class="text-center">
                     <div role="group" class="btn-group-sm btn-group">
-                        <button  class="btn-shadow btn btn-primary">Edit</button>
+                        <button class="btn-shadow btn btn-primary" routerLink="/sales/edit/{{data?.id}}">Edit</button>
                         <button class="btn-shadow btn btn-danger">Delete</button>
                     </div>
                 </td>

@@ -20,3 +20,14 @@ export const PAYMENT_STATUS: SelectableValue[] = [
     {code: 1, title: 'Partial payment'},
     {code: 2, title: 'Paid'}
 ];
+
+export enum OrderStatusEnum {
+    Booked,
+    Delivered,
+}
+
+export enum PaymentStatusEnum {
+    Unpaid,
+    Partial_Payment,
+    Paid
+}
