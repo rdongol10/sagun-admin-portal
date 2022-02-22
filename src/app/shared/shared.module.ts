@@ -21,6 +21,8 @@ import {ngxLoadingAnimationTypes, NgxLoadingModule} from 'ngx-loading';
 import {GenericTableModule} from '../../../projects/generic-table/src/lib/generic-table.module';
 import {GenericImageUploaderComponent} from './component/generic-image-uploader/generic-image-uploader.component';
 import {NgSelectModule} from '@ng-select/ng-select';
+import { OrderStatusPipe } from './pipe/order-status.pipe';
+import { PaymentStatusPipe } from './pipe/payment-status.pipe';
 
 
 @NgModule({
@@ -39,6 +41,8 @@ import {NgSelectModule} from '@ng-select/ng-select';
         FooterComponent,
         SearchGenericComponent,
         GenericImageUploaderComponent,
+        OrderStatusPipe,
+        PaymentStatusPipe,
     ],
     imports: [
         CommonModule,
@@ -76,7 +80,9 @@ import {NgSelectModule} from '@ng-select/ng-select';
 
         FooterComponent,
         SearchGenericComponent, GenericImageUploaderComponent,
-        NgSelectModule
+        NgSelectModule,
+        OrderStatusPipe,
+        PaymentStatusPipe
     ]
 })
 export class SharedModule {

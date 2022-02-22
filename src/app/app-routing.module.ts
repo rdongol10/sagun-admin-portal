@@ -69,6 +69,21 @@ const routes: Routes = [
     },
     {
         path: '',
+        component: BaseLayoutComponent,
+        canActivate: [AuthGuard],
+        children: [
+            {
+                path: 'sales',
+                data: {extraParameter: 'salesMenu'},
+                loadChildren: () => import('./pages/sales/sales.module').then(m => m.SalesModule)
+
+            }
+
+        ]
+
+    },
+    {
+        path: '',
         component: PagesLayoutComponent,
         children: [
             {

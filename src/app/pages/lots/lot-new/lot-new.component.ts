@@ -79,7 +79,6 @@ export class LotNewComponent implements OnInit {
                 this.notify.error(error.error.message, 'Error');
             }
         );
-        console.log(event);
     }
 
     onSuccess(data: any) {
