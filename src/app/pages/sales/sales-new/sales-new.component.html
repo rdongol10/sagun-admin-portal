@@ -232,7 +232,7 @@
                            (keyup)="paidAmountChange($event)">
                 </div>
             </div>
-            <div class="row mt-2">
+            <div class="row mt-2" *ngIf="model.paymentStatus==paymentStatusEnum.Partial_Payment">
                 <div class="col-md-2" [hidden]="routeId">
                 </div>
                 <div class="col-md-2">
