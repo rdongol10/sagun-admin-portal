@@ -54,7 +54,6 @@ export class UserListComponent implements OnInit {
     }
 
     sort(sort: { key: string; value: string }): void {
-        console.log(sort);
         this.searchModel.sortField = sort.key;
         if (sort.value == 'asc') {
             this.searchModel.sortOrder = 'asc';
