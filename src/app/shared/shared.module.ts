@@ -21,8 +21,9 @@ import {ngxLoadingAnimationTypes, NgxLoadingModule} from 'ngx-loading';
 import {GenericTableModule} from '../../../projects/generic-table/src/lib/generic-table.module';
 import {GenericImageUploaderComponent} from './component/generic-image-uploader/generic-image-uploader.component';
 import {NgSelectModule} from '@ng-select/ng-select';
-import { OrderStatusPipe } from './pipe/order-status.pipe';
-import { PaymentStatusPipe } from './pipe/payment-status.pipe';
+import {OrderStatusPipe} from './pipe/order-status.pipe';
+import {PaymentStatusPipe} from './pipe/payment-status.pipe';
+import {MinMaxValidatorDirective} from './Directive/validator/min-max-validator.directive';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { PaymentStatusPipe } from './pipe/payment-status.pipe';
         GenericImageUploaderComponent,
         OrderStatusPipe,
         PaymentStatusPipe,
+        MinMaxValidatorDirective,
     ],
     imports: [
         CommonModule,
@@ -82,7 +84,8 @@ import { PaymentStatusPipe } from './pipe/payment-status.pipe';
         SearchGenericComponent, GenericImageUploaderComponent,
         NgSelectModule,
         OrderStatusPipe,
-        PaymentStatusPipe
+        PaymentStatusPipe,
+        MinMaxValidatorDirective
     ]
 })
 export class SharedModule {
