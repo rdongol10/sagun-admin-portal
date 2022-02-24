@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ToastrService} from 'ngx-toastr';
 import {NgxImageCompressService} from 'ngx-image-compress';
+import {faEdit, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'app-generic-image-uploader',
@@ -12,6 +13,8 @@ export class GenericImageUploaderComponent implements OnInit {
     @Input() imageFile;
     @Output() imageEmit = new EventEmitter<string>();
 
+    trashIcon = faTrashAlt;
+    editIcon = faEdit;
 
     constructor(private notify: ToastrService, private imageCompress: NgxImageCompressService) {
     }
