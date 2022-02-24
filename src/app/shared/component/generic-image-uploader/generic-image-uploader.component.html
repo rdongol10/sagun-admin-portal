@@ -9,6 +9,10 @@
 
 <div [hidden]="!imageFile" class="imageholder">
     <img src="{{imageFile}}" class="displayImage"/>
-    <i class="vsm-icon pe-7s-pen btn imageEdit" (click)="imageFileEvent.click()"></i>
-    <i class="vsm-icon pe-7s-trash btn imageDelete" (click)="removeImage()"></i>
+    <button type="button" class="btn-shadow btn btn-outline-success imageEdit">
+        <fa-icon [icon]="editIcon" (click)="imageFileEvent.click()"></fa-icon>
+    </button>
+    <button type="button" class="btn-shadow btn btn-outline-danger imageDelete">
+        <fa-icon [icon]="trashIcon"  (click)="removeImage()"></fa-icon>
+    </button>
 </div>

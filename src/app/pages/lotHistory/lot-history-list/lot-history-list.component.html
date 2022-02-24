@@ -8,21 +8,25 @@
                         [searchFieldCondition]="searchFieldCondition"
                         [searchFieldValues]="searchFieldValues"></app-search-generic>
     <div class="table-responsive">
-        <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
-            <thead>
-            <tr>
-                <th class="text-center">#</th>
-                <th class="text-center">Lot Name</th>
-                <th class="text-center">Product Name</th>
-                <th class="text-center">Cost Price</th>
-                <th class="text-center">Quantity</th>
-                <th class="text-center">Purpose</th>
-                <th class="text-center">Created By</th>
-                <th class="text-center">Created on</th>
-                <th class="text-center">Actions</th>
-            </tr>
-            </thead>
-            <tbody>
+        <lib-generic-table
+                (sortOrderChange)="sort($event)"
+                [dataList]="list"
+                [headers]="[
+                {title: '#', width: '', sort: '', colValue : ''},
+                {title: 'Lot Name', width: '', sort: 'lotName', colValue : 'lotName'},
+                {title: 'Product Name', width: '', sort: 'productName', colValue : 'productName'},
+                {title: 'Cost Price', width: '', sort: 'costPrice', colValue : 'costPrice'},
+                {title: 'Quantity', width: '', sort: 'quantity', colValue : 'quantity'},
+                {title: 'Purpose', width: '', sort: 'purpose', colValue : 'purpose'},
+                {title: 'Created By', width: '', sort: 'createdBy', colValue : 'createdBy'},
+                {title: 'Created on', width: '', sort: 'creationDate', colValue : 'creationDate'},
+                {title: 'Action', width: '', sort: '', colValue : ''},
+                ]"
+                [totalCount]="totalCount"
+                [pageNumber]="searchModel.pageNumber"
+                [pageSize]="searchModel.pageSize"
+                (paginationChange)="changeIndex($event)"
+        >
             <tr *ngFor="let data of list; let i = index;">
                 <td class="text-center text-muted" style="width: 80px;">{{i + 1}}</td>
                 <td class="text-center">{{data.lotName}}</td>
@@ -38,7 +42,6 @@
                     </div>
                 </td>
             </tr>
-            </tbody>
-        </table>
+        </lib-generic-table>
     </div>
 </div>
