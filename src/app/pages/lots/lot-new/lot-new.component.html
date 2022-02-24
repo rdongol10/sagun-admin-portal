@@ -1,21 +1,28 @@
 <div class="main-card mb-3 card">
     <div class="card-body">
-        <form #form="ngForm">
+        <form #form="ngForm" (ngSubmit)="form.form.valid && onSubmit()">
             <div class="row">
                 <div class="col-md-3">
-                    <div class="position-relative mb-3">
+                    <div class="position-relative mb-3" *ngIf="!routeId">
                         <label class="form-label">Product</label>
-                        <ng-select *ngIf="!routeId" [items]="products"
+                        <ng-select [items]="products"
                                    bindLabel="title"
                                    bindValue="code"
                                    [(ngModel)]="model.productId"
                                    (search)="searchProduct($event)"
                                    (change)="changeProduct($event)"
                                    name="product"
-
+                                   #productId="ngModel" required
+                                   [ngClass]="{ 'is-invalid': form.submitted && productId.invalid }"
                         ></ng-select>
+                        <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
+                            <div *ngIf="productId.errors?.required">Product is required</div>
 
-                        <input *ngIf="routeId" [disabled]="routeId" value="{{model.productName}}" type="text"
+                        </div>
+                    </div>
+                    <div class="position-relative mb-3" *ngIf="routeId">
+                        <label class="form-label">Product</label>
+                        <input [disabled]="routeId" value="{{model.productName}}" type="text"
                                class="form-control">
                     </div>
                 </div>
@@ -24,20 +31,37 @@
                         <label for="costPrice" class="form-label">Cost price</label>
                         <input [disabled]="routeId" name="costPrice" [(ngModel)]="model.costPrice" id="costPrice"
                                placeholder="Cost Price"
-                               type="text" class="form-control">
+                               type="number" class="form-control"
+                               #costPrice="ngModel" required
+                               [ngClass]="{ 'is-invalid': form.submitted && costPrice.invalid }"
+                               appMinMaxValidator
+                               min="1"
+                        >
+                        <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
+                            <div *ngIf="costPrice.errors?.required">Cost price is required</div>
+                            <div *ngIf="costPrice.errors?.min">Cost price can not be less than 1</div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="position-relative mb-3">
                         <label for="quantity" class="form-label">Quantity</label>
                         <input name="quantity" id="quantity" [(ngModel)]="model.quantity" placeholder="Quantity"
-                               type="text" class="form-control">
+                               type="number" class="form-control"
+                               #quantity="ngModel" required
+                               [ngClass]="{ 'is-invalid': form.submitted && quantity.invalid }"
+                               appMinMaxValidator
+                               min="1">
+                        <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
+                            <div *ngIf="quantity.errors?.required">Quantity is required</div>
+                            <div *ngIf="quantity.errors?.min">Quantity can not be less than 1</div>
+                        </div>
                     </div>
                 </div>
             </div>
 
 
-            <button (click)="onSubmit()" class="mt-2  btn btn-primary">
+            <button class="mt-2  btn btn-primary">
                 <span *ngIf="routeId">Add Stock</span>
                 <span *ngIf="!routeId">Submit</span>
             </button>

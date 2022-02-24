@@ -1,6 +1,5 @@
 <div class="main-card mb-3 card">
     <div class="card-body">
-        <!--        <h5 class="card-title">Grid Rows</h5>-->
         <form #form="ngForm" (ngSubmit)="form.form.valid && onSubmit()">
             <div class="row">
                 <div class="col-md-3">
@@ -8,7 +7,8 @@
                         <label for="firstName" class="form-label">First Name</label>
                         <input name="firstName" [(ngModel)]="model.firstName"
                                id="firstName" placeholder="First Name" type="text" class="form-control"
-                               #firstName="ngModel" required [ngClass]="{ 'is-invalid': form.submitted && firstName.invalid }">
+                               #firstName="ngModel" required
+                               [ngClass]="{ 'is-invalid': form.submitted && firstName.invalid }">
                         <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
                             <div *ngIf="firstName.errors?.required">First Name is required</div>
 
@@ -27,7 +27,8 @@
                         <label for="lastName" class="form-label">Last Name</label>
                         <input name="lastName" id="lastName" [(ngModel)]="model.lastName" placeholder="last Name"
                                type="text" class="form-control"
-                                #lastName="ngModel"  required [ngClass]="{ 'is-invalid': form.submitted && lastName.invalid }">
+                               #lastName="ngModel" required
+                               [ngClass]="{ 'is-invalid': form.submitted && lastName.invalid }">
                         <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
                             <div *ngIf="lastName.errors?.required">Last Name is required</div>
 
@@ -43,7 +44,8 @@
                         <label for="emailAddress" class="form-label">emailAddress</label>
                         <input name="emailAddress" id="emailAddress" placeholder="Email"
                                [(ngModel)]="model.emailAddress" type="email" class="form-control"
-                                #emailAddress="ngModel"  required [ngClass]="{ 'is-invalid': form.submitted && emailAddress.invalid }">
+                               #emailAddress="ngModel" required
+                               [ngClass]="{ 'is-invalid': form.submitted && emailAddress.invalid }">
                         <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
                             <div *ngIf="emailAddress.errors?.required">Email Address is required</div>
 
@@ -58,7 +60,8 @@
                         <label for="mobileNumber" class="form-label">Mobile Number</label>
                         <input name="mobileNumber" id="mobileNumber" placeholder="Mobile Number"
                                [(ngModel)]="model.mobileNumber" type="text" class="form-control"
-                                #mobileNumber="ngModel"  required [ngClass]="{ 'is-invalid': form.submitted && mobileNumber.invalid }">
+                               #mobileNumber="ngModel" required
+                               [ngClass]="{ 'is-invalid': form.submitted && mobileNumber.invalid }">
                         <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
                             <div *ngIf="mobileNumber.errors?.required">Mobile Number is required</div>
 
@@ -73,7 +76,8 @@
                         <label for="userId" class="form-label">UserId</label>
                         <input name="userId" id="userId" placeholder="userId" [(ngModel)]="model.userId" type="text"
                                class="form-control"
-                                #userIds="ngModel"  required [ngClass]="{ 'is-invalid': form.submitted && userIds.invalid }">
+                               #userIds="ngModel" required
+                               [ngClass]="{ 'is-invalid': form.submitted && userIds.invalid }">
                         <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
                             <div *ngIf="userIds.errors?.required">User Id is required</div>
 
@@ -88,7 +92,8 @@
                         <label for="password" class="form-label">Password</label>
                         <input name="password" id="password" placeholder="userId" [(ngModel)]="model.password"
                                type="password" class="form-control"
-                                #password="ngModel"  required [ngClass]="{ 'is-invalid': form.submitted && password.invalid }">
+                               #password="ngModel" required
+                               [ngClass]="{ 'is-invalid': form.submitted && password.invalid }">
                         <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
                             <div *ngIf="password.errors?.required">Password is required</div>
 
@@ -100,7 +105,8 @@
                         <label for="rePassword" class="form-label">Confirm Password</label>
                         <input name="rePassword" id="rePassword" placeholder="Confirm Password"
                                [(ngModel)]="model.rePassword" type="password" class="form-control"
-                                #rePassword="ngModel"  required [ngClass]="{ 'is-invalid': form.submitted && rePassword.invalid }">
+                               #rePassword="ngModel" required
+                               [ngClass]="{ 'is-invalid': form.submitted && rePassword.invalid }">
                         <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
                             <div *ngIf="rePassword.errors?.required">Conform Password is required</div>
 
@@ -108,7 +114,7 @@
                     </div>
                 </div>
             </div>
-      
+
             <button class="mt-2  btn btn-primary">
                 <span *ngIf="routeId">Update</span>
                 <span *ngIf="!routeId">Submit</span>

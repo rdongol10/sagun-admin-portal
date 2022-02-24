@@ -1,6 +1,6 @@
 <div class="main-card mb-3 card">
     <div class="card-body">
-        <form #form="ngForm">
+        <form #form="ngForm" (ngSubmit)="form.form.valid && onSubmit()">
 
             <div class="row">
                 <div class="col-md-2">
@@ -9,8 +9,14 @@
                         <input name="deliveredTo" [(ngModel)]="model.deliveredTo" id="deliveredTo"
                                placeholder="Delivered to"
                                type="text" class="form-control"
-                               [disabled]="routeId">
+                               [disabled]="routeId"
+                               #deliveredTo="ngModel" required
+                               [ngClass]="{ 'is-invalid': form.submitted && deliveredTo.invalid }">
+                        <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
+                            <div *ngIf="deliveredTo.errors?.required">Delivered to is required</div>
+                        </div>
                     </div>
+
                 </div>
                 <div class="col-md-2">
                     <div class="position-relative mb-3">
@@ -21,7 +27,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-2" *ngIf="model.orderStatus==orderEnum.Booked">
+                <div class="col-md-2" *ngIf="model.orderStatus==orderEnum.Delivered">
                     <div class="position-relative mb-3">
                         <label for="deliveredBy" class="form-label">Delivered By</label>
                         <ng-select placeholder="Delivered By" [items]="users"
@@ -32,7 +38,12 @@
                                    id="deliveredBy"
                                    (search)="searchUser($event)"
                                    (change)="changeUser($event)"
+                                   #deliveredBy="ngModel" required
+                                   [ngClass]="{ 'is-invalid': form.submitted && deliveredBy.invalid }"
                         ></ng-select>
+                        <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
+                            <div *ngIf="deliveredBy.errors?.required">Delivered By is required</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -55,21 +66,29 @@
                 </div>
             </div>
             <div class="row mt-2" *ngFor="let salesDetail of this.model.salesDetails; let i=index">
-                <div class="col-md-2">
-                    <ng-select *ngIf="!routeId" [items]="lots"
+                <div class="col-md-2" *ngIf="!routeId">
+                    <ng-select [items]="lots"
                                bindLabel="title"
                                bindValue="code"
                                [(ngModel)]="salesDetail.lotId"
                                (search)="searchLot($event)"
                                (change)="changeLot($event,i)"
                                name="lot{{i}}"
-
+                               #lotName="ngModel" required
+                               [ngClass]="{ 'is-invalid': form.submitted && lotName.invalid }"
                     ></ng-select>
-
-                    <input type="text" value="{{salesDetail.lotName}}" class="form-control" *ngIf="routeId" disabled>
+                    <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
+                        <div *ngIf="lotName.errors?.required">Lot Name is required</div>
+                    </div>
                 </div>
+
+                <div class="col-md-2" *ngIf="routeId">
+                    <input type="text" value="{{salesDetail.lotName}}" class="form-control" disabled>
+                </div>
+
                 <div class="col-md-2">
-                    <input [(ngModel)]="salesDetail.costPrice" name="costPrice{{i}}" class="form-control" disabled>
+                    <input [(ngModel)]="salesDetail.costPrice"
+                           name="costPrice{{i}}" class="form-control" disabled>
                 </div>
                 <div class="col-md-2" [hidden]="routeId">
                     <input [(ngModel)]="salesDetail.remainingQuantity" name="remainingQuantity{{i}}"
@@ -79,7 +98,17 @@
                     <input [(ngModel)]="salesDetail.quantity" name="quantity{{i}}" class="form-control" type="number"
                            (change)="quantityChanged($event,i)"
                            (keyup)="quantityChanged($event,i)"
-                           [disabled]="routeId">
+                           [disabled]="routeId"
+                           #quantity="ngModel" required
+                           appMinMaxValidator
+                           min="1"
+                           [ngClass]="{ 'is-invalid': form.submitted && quantity.invalid }"
+                    >
+                    <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
+                        <div *ngIf="quantity.errors?.required">Quantity is required</div>
+                        <div *ngIf="quantity.errors?.min">Quantity can not be less than 1</div>
+
+                    </div>
                 </div>
                 <div class="col-md-2">
                     <input [(ngModel)]="salesDetail.totalCostPrice" name="totalCostPrice{{i}}" class="form-control"
@@ -87,10 +116,10 @@
                 </div>
 
                 <div *ngIf="i==0 && !routeId" class="col-md-2">
-                    <button class="btn btn-primary" (click)="addSalesDetails()">Add</button>
+                    <button type="button" class="btn btn-primary" (click)="addSalesDetails()">Add</button>
                 </div>
                 <div *ngIf="i>0 && !routeId" class="col-md-2">
-                    <button class="btn btn-danger" (click)="removeSaleDetails(i)">Remove</button>
+                    <button type="button" class="btn btn-danger" (click)="removeSaleDetails(i)">Remove</button>
                 </div>
             </div>
             <div>
@@ -160,7 +189,15 @@
                            type="number"
                            (change)="calculateNetSellingPrice()"
                            (keyup)="calculateNetSellingPrice()"
-                           [disabled]="routeId">
+                           [disabled]="routeId"
+                           #sellingPrice="ngModel" required
+                           appMinMaxValidator
+                           min="1"
+                           [ngClass]="{ 'is-invalid': form.submitted && sellingPrice.invalid }">
+                    <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
+                        <div *ngIf="sellingPrice.errors?.required">Selling Price is required</div>
+                        <div *ngIf="sellingPrice.errors?.min">Selling Price is can not be less than 1</div>
+                    </div>
                 </div>
             </div>
             <div class="row mt-2">
@@ -229,7 +266,16 @@
                     <input [(ngModel)]="model.paidAmount" name="paidAmount" class="form-control"
                            type="number"
                            (change)="paidAmountChange($event)"
-                           (keyup)="paidAmountChange($event)">
+                           (keyup)="paidAmountChange($event)"
+                           #paidAmount="ngModel"
+                           required
+                           appMinMaxValidator
+                           min="1"
+                           [ngClass]="{ 'is-invalid': form.submitted && paidAmount.invalid }">
+                    <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
+                        <div *ngIf="paidAmount.errors?.required">Paid Amount is required</div>
+                        <div *ngIf="paidAmount.errors?.min">Paid Amount can not be less than 1</div>
+                    </div>
                 </div>
             </div>
             <div class="row mt-2" *ngIf="model.paymentStatus==paymentStatusEnum.Partial_Payment">
@@ -247,7 +293,7 @@
                            type="number" disabled>
                 </div>
             </div>
-            <button (click)="onSubmit()" class="mt-2  btn btn-primary">Submit</button>
+            <button class="mt-2  btn btn-primary">Submit</button>
             <button type="button" routerLink="/sales/list" class="mt-2  btn btn-danger">Cancel</button>
         </form>
     </div>

@@ -1,12 +1,18 @@
 <div class="main-card mb-3 card">
     <div class="card-body">
-        <form #form="ngForm">
+        <form #form="ngForm"  (ngSubmit)="form.form.valid && onSubmit()">
             <div class="row">
                 <div class="col-md-3">
                     <div class="position-relative mb-3">
                         <label for="name" class="form-label">Product Name</label>
-                        <input name="name" [(ngModel)]="model.name" id="name" placeholder="Image Name" type="text"
-                               class="form-control">
+                        <input name="name" [(ngModel)]="model.name" id="name" placeholder="Image Name"
+                               type="text" class="form-control"
+                               #name="ngModel" required [ngClass]="{ 'is-invalid': form.submitted && name.invalid }"
+                        >
+                        <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
+                            <div *ngIf="name.errors?.required">Product Name is required</div>
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -19,7 +25,7 @@
 
                 </div>
             </div>
-            <button (click)="onSubmit()" class="mt-2  btn btn-primary">Submit</button>
+            <button class="mt-2  btn btn-primary">Submit</button>
             <button type="button" routerLink="/product/list" class="mt-2  btn btn-danger">Cancel</button>
         </form>
     </div>
