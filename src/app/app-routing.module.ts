@@ -39,6 +39,11 @@ const routes: Routes = [
                 data: {extraParameter: 'sales'},
                 loadChildren: () => import('./pages/sales/sales.module').then(m => m.SalesModule)
 
+            },
+            {
+                path: '',
+                data: {extraParameter: 'user'},
+                loadChildren: () => import('./pages/users/users.module').then(m => m.UsersModule)
             }
         ]
     },
@@ -53,8 +58,7 @@ const routes: Routes = [
             },
         ]
     },
-
-    {path: '**', redirectTo: '/user/list'}
+    {path: '**', redirectTo: '/user/list'},
 ];
 
 @NgModule({
