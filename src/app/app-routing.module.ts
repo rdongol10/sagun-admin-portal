@@ -17,70 +17,30 @@ const routes: Routes = [
                 data: {extraParameter: 'user'},
                 loadChildren: () => import('./pages/users/users.module').then(m => m.UsersModule)
 
-            }
-
-        ]
-
-    },
-    {
-        path: '',
-        component: BaseLayoutComponent,
-        canActivate: [AuthGuard],
-        children: [
-            {
+            }, {
                 path: 'product',
                 data: {extraParameter: 'product'},
                 loadChildren: () => import('./pages/products/product.module').then(m => m.ProductModule)
-
-            }
-
-        ]
-
-    },
-    {
-        path: '',
-        component: BaseLayoutComponent,
-        canActivate: [AuthGuard],
-        children: [
+            },
             {
                 path: 'lot',
                 data: {extraParameter: 'lot'},
                 loadChildren: () => import('./pages/lots/lot.module').then(m => m.LotModule)
 
-            }
-
-        ]
-
-    },
-    {
-        path: '',
-        component: BaseLayoutComponent,
-        canActivate: [AuthGuard],
-        children: [
+            },
             {
                 path: 'lotHistory',
                 data: {extraParameter: 'lotHistory'},
                 loadChildren: () => import('./pages/lotHistory/lot-history.module').then(m => m.LotHistoryModule)
 
-            }
-
-        ]
-
-    },
-    {
-        path: '',
-        component: BaseLayoutComponent,
-        canActivate: [AuthGuard],
-        children: [
+            },
             {
                 path: 'sales',
                 data: {extraParameter: 'sales'},
                 loadChildren: () => import('./pages/sales/sales.module').then(m => m.SalesModule)
 
             }
-
         ]
-
     },
     {
         path: '',
@@ -94,7 +54,7 @@ const routes: Routes = [
         ]
     },
 
-    {path: '**', redirectTo: ''}
+    {path: '**', redirectTo: '/user/list'}
 ];
 
 @NgModule({
