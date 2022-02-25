@@ -60,17 +60,12 @@ export const sideMenuList: SideMenuInterface[] = [
         ],
     },
     {
-        id: 'lothistory',
+        id: 'lotHistory',
         label: 'Lot History',
         icon: 'news-paper',
         childMenu: [
             {
-                url: 'lothistory/new',
-                label: 'New',
-                childMenu: [],
-            },
-            {
-                url: 'lothistory/list',
+                url: 'lotHistory/list',
                 label: 'List',
                 childMenu: [],
             }

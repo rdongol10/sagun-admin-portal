@@ -5,9 +5,9 @@ import {ProductNewComponent} from './product-new/product-new.component';
 
 
 const routes: Routes = [
-    {path: 'new', component: ProductNewComponent, data: {extraParameter: 'Product New'}},
-    {path: 'list', component: ProductListComponent, data: {extraParameter: 'Product List'}},
-    {path: 'edit/:id', component: ProductNewComponent, data: {extraParameter: 'Product Edit'}}
+    {path: 'new', component: ProductNewComponent, data: {extraParameter: 'Product New', title: 'Product New'}},
+    {path: 'list', component: ProductListComponent, data: {extraParameter: 'Product List', title: 'Product List'}},
+    {path: 'edit/:id', component: ProductNewComponent, data: {extraParameter: 'Product Edit', title: 'Product Edit'}}
 
 ];
 
