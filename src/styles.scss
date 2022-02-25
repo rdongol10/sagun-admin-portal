@@ -1,2 +1,11 @@
 @import "assets/base";
 @import "~@ng-select/ng-select/themes/default.theme.css";
+
+.app-page-title {
+  padding: 0.5rem 1.5rem;
+  margin: -1.5rem -1.5rem 0.5rem;
+}
+
+.v-sidebar-menu .vsm-icon {
+  opacity: 0.8;
+}

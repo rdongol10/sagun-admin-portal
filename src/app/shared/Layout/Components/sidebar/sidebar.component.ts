@@ -2,7 +2,8 @@ import {Component, HostListener, OnInit} from '@angular/core';
 import {ThemeOptions} from '../../../../theme-options';
 import {select} from '@angular-redux/store';
 import {Observable} from 'rxjs';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {sideMenuList} from './sidebar-routes.config';
 
 @Component({
     selector: 'app-sidebar',
@@ -10,8 +11,9 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class SidebarComponent implements OnInit {
     public extraParameter: any;
+    menuList = sideMenuList;
 
-    constructor(public globals: ThemeOptions, private activatedRoute: ActivatedRoute) {
+    constructor(public globals: ThemeOptions, private router: Router, private activatedRoute: ActivatedRoute) {
 
     }
 
@@ -53,6 +55,14 @@ export class SidebarComponent implements OnInit {
 
     }
 
+    navigate(route) {
+        console.log(route);
+        if (route) {
+            this.router.navigate([route]);
+        }
+
+    }
 
 
 }
+

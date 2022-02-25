@@ -25,8 +25,8 @@ export class AuthService extends GenericService<any>{
                 const theBody = (response.body);
                 console.log(response.headers.get('Authorization'));
                 if (theBody) {
-                    sessionStorage.setItem('token', JSON.stringify(response.headers.get('Authorization')));
-                    sessionStorage.setItem('userDetails', JSON.stringify(theBody));
+                    localStorage.setItem('token', JSON.stringify(response.headers.get('Authorization')));
+                    localStorage.setItem('userDetails', JSON.stringify(theBody));
                     return true;
                 }else {
                     return false;
@@ -38,7 +38,7 @@ export class AuthService extends GenericService<any>{
     }
 
     logout(){
-        sessionStorage.clear();
+        localStorage.clear();
         this.router.navigate(['/auth/login']);
     }
 

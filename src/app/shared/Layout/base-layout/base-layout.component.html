@@ -9,8 +9,9 @@
   <app-sidebar></app-sidebar>
   <div class="app-main__outer">
     <div class="app-main__inner">
+      <app-page-title [list]="breadcrumbs$ | async" [heading]="heading" [subheading]="subheading" [icon]="icon"></app-page-title>
+
       <div [@architectUIAnimation]="getState(o)" >
-        <app-page-title [heading]="heading" [subheading]="subheading" [icon]="icon"></app-page-title>
 
         <router-outlet #o="outlet"></router-outlet>
       </div>
