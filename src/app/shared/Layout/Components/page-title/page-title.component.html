@@ -4,22 +4,24 @@
       <div class="page-title-icon">
         <i class="icon {{icon}}"></i>
       </div>
-      <div>
-        {{heading}}
-        <div
-          class="page-title-subheading">
-          {{subheading}}
-        </div>
-      </div>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+<!--          <li class="breadcrumb-item"><a routerLink="/dashboard">Dashboard</a></li>-->
+          <li class="breadcrumb-item active" aria-current="page" *ngFor="let item of list">{{item.label}}</li>
+        </ol>
+      </nav>
+      <br>
+
+
     </div>
     <div class="page-title-actions">
-      <button type="button" class="btn-shadow me-3 btn btn-dark">
-        <fa-icon [icon]="faStar"></fa-icon>
-      </button>
-      <button type="button" class="btn-shadow d-inline-flex align-items-center btn btn-success">
-        <fa-icon [icon]="faPlus" class="me-2"></fa-icon>
-        Create New
-      </button>
+<!--      <button type="button" class="btn-shadow me-3 btn btn-dark">-->
+<!--        <fa-icon [icon]="faStar"></fa-icon>-->
+<!--      </button>-->
+<!--      <button *ngIf="list[1]?.url" routerLink="{{list[1]?.url}}" type="button" class="btn-shadow d-inline-flex align-items-center btn btn-success">-->
+<!--        <fa-icon [icon]="faPlus" class="me-2"></fa-icon>-->
+<!--        Create New-->
+<!--      </button>-->
     </div>
   </div>
 </div>

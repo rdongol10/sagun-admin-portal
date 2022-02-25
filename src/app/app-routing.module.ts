@@ -14,7 +14,7 @@ const routes: Routes = [
         children: [
             {
                 path: 'user',
-                data: {extraParameter: 'userMenu'},
+                data: {extraParameter: 'user'},
                 loadChildren: () => import('./pages/users/users.module').then(m => m.UsersModule)
 
             }
@@ -29,7 +29,7 @@ const routes: Routes = [
         children: [
             {
                 path: 'product',
-                data: {extraParameter: 'productMenu'},
+                data: {extraParameter: 'product'},
                 loadChildren: () => import('./pages/products/product.module').then(m => m.ProductModule)
 
             }
@@ -44,7 +44,7 @@ const routes: Routes = [
         children: [
             {
                 path: 'lot',
-                data: {extraParameter: 'lotMenu'},
+                data: {extraParameter: 'lot'},
                 loadChildren: () => import('./pages/lots/lot.module').then(m => m.LotModule)
 
             }
@@ -59,7 +59,7 @@ const routes: Routes = [
         children: [
             {
                 path: 'lotHistory',
-                data: {extraParameter: 'lotHistoryMenu'},
+                data: {extraParameter: 'lotHistory'},
                 loadChildren: () => import('./pages/lotHistory/lot-history.module').then(m => m.LotHistoryModule)
 
             }
@@ -74,7 +74,7 @@ const routes: Routes = [
         children: [
             {
                 path: 'sales',
-                data: {extraParameter: 'salesMenu'},
+                data: {extraParameter: 'sales'},
                 loadChildren: () => import('./pages/sales/sales.module').then(m => m.SalesModule)
 
             }
