@@ -35,10 +35,21 @@ const routes: Routes = [
 
             },
             {
+                path: 'dashboard',
+                data: {extraParameter: 'dashboard'},
+                loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule)
+
+            },
+            {
                 path: 'sales',
                 data: {extraParameter: 'sales'},
                 loadChildren: () => import('./pages/sales/sales.module').then(m => m.SalesModule)
 
+            },
+            {
+                path: '',
+                data: {extraParameter: 'dashboard'},
+                loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule)
             }
         ]
     },
@@ -53,8 +64,7 @@ const routes: Routes = [
             },
         ]
     },
-
-    {path: '**', redirectTo: '/user/list'}
+    {path: '**', redirectTo: '/dashboard'},
 ];
 
 @NgModule({

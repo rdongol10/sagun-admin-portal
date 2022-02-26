@@ -1,11 +1,9 @@
 <div class="main-card mb-3 card">
-    <div class="card-header">
-        <div class="card-header-title font-size-lg text-capitalize fw-normal">Company Agents Status</div>
-    </div>
     <app-search-generic (emitDataModel)="search($event)"
                         [searchField]="searchField"
                         [searchFieldCondition]="searchFieldCondition"
                         [searchFieldValues]="searchFieldValues"></app-search-generic>
+
     <div class="table-responsive">
         <lib-generic-table
                 (sortOrderChange)="sort($event)"
@@ -32,7 +30,6 @@
                 <td class="text-center">
                     <div role="group" class="btn-group-sm btn-group">
                         <button routerLink="/user/edit/{{data?.id}}" class="btn-shadow btn btn-primary">Edit</button>
-                        <button class="btn-shadow btn btn-danger">Delete</button>
                     </div>
                 </td>
             </tr>
