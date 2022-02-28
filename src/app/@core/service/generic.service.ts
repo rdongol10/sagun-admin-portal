@@ -8,12 +8,14 @@ import {SelectSearchRequest} from '../class/select-search-request';
 export class GenericService<T> {
     protected http: HttpClient;
     protected baseUrl: string;
+    protected router: Router;
     static status: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
 
     public constructor(http: HttpClient, baseUrl: string, router: Router) {
         this.http = http;
         this.baseUrl = baseUrl;
+        this.router = router;
     }
 
     public save(data: T): Observable<T> {
@@ -106,8 +108,13 @@ export class GenericService<T> {
     }
 
     protected handleError(error: any) {
-        console.log('err=>', error);
-        return throwError(error);
+        if (error.status == 401) {
+            this.router.navigateByUrl('/auth/login').then(r => this.display(false));
+        }else{
+
+            console.log('err=>', error);
+            return throwError(error);
+        }
     }
 
 

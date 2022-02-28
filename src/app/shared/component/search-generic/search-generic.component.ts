@@ -4,10 +4,12 @@ import {NgForm} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {ToastrService} from 'ngx-toastr';
 import {Router} from '@angular/router';
+import {faPlus, faRedo, faSearch, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'app-search-generic',
     templateUrl: './search-generic.component.html',
+    styleUrls: ['./search-generic.component.scss']
 })
 
 export class SearchGenericComponent extends GenericService<any> implements OnInit {
@@ -25,6 +27,13 @@ export class SearchGenericComponent extends GenericService<any> implements OnIni
     testValue = [];
     testCondition = [];
 
+    plusIcon = faPlus;
+    searchIcon = faSearch;
+    resetIcon = faRedo;
+    trashIcon = faTrashAlt;
+
+
+
     constructor(private notification: ToastrService,
                 http: HttpClient, protected router: Router) {
         super(http, null, router);
@@ -41,7 +50,7 @@ export class SearchGenericComponent extends GenericService<any> implements OnIni
             if (a.length >= this.searchModel.length) {
 
                 for (let i = 0; i < this.searchModel.length; i++) {
-                    if(this.searchModel[i].fieldName.dataType.toUpperCase() === 'DATE'){
+                    if (this.searchModel[i].fieldName.dataType.toUpperCase() === 'DATE') {
 
                     }
                     reportModel.push({
