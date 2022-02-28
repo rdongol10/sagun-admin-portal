@@ -55,7 +55,7 @@ export class SalesNewComponent implements OnInit {
                 });
         } else {
             this.service.display(false);
-            this.model.salesDetails.push(new SalesDetailModel());
+            this.addSalesDetails();
         }
     }
 
@@ -115,14 +115,19 @@ export class SalesNewComponent implements OnInit {
     }
 
     addSalesDetails() {
-        this.model.salesDetails.push(new SalesDetailModel());
+        const dtl = new SalesDetailModel();
+        dtl.uniqueId = new Date().toString();
+        this.model.salesDetails.push(dtl);
+        setTimeout(() => {
+            this.model.salesDetails = [...this.model.salesDetails];
+        }, 0);
     }
 
     removeSaleDetails(index) {
         this.model.salesDetails.splice(index, 1);
         setTimeout(() => {
             this.model.salesDetails = [...this.model.salesDetails];
-        }, 100);
+        }, 0);
     }
 
     quantityChanged(event, index) {
@@ -233,5 +238,7 @@ export class SalesNewComponent implements OnInit {
         this.notify.error(error.error.message, 'Error');
     }
 
-
+    customTB(index, item) {
+        return `${index}-${item.uniqueId}`;
+    }
 }
