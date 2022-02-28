@@ -18,8 +18,6 @@ export class MinMaxValidatorDirective implements Validator {
 
     validate(c: FormControl): { [key: string]: any } {
         const value = c.value;
-        console.log(this.min);
-        console.log(value);
         return (value < this.min) ? {min: true} : (value > this.max) ? {max: true} : null;
     }
 

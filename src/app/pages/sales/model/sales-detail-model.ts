@@ -4,6 +4,7 @@ export class SalesDetailModel {
     lotName: string;
     remainingQuantity: number;
     costPrice: number;
-    quantity: number;
+    quantity = 0;
     totalCostPrice: number;
+    uniqueId;
 }

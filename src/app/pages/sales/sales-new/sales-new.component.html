@@ -65,7 +65,7 @@
                     Total
                 </div>
             </div>
-            <div class="row mt-2" *ngFor="let salesDetail of this.model.salesDetails; let i=index">
+            <div class="row mt-2" *ngFor="let salesDetail of model.salesDetails; let i=index; trackBy: customTB">
                 <div class="col-md-2" *ngIf="!routeId">
                     <ng-select [items]="lots"
                                bindLabel="title"
