@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {SearchCriteriaModel} from '../../../@core/class/search-criteria-model';
 import {ToastrService} from 'ngx-toastr';
 import {SalesService} from '../service/sales.service';
+import {faPen} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'app-sales-list',
@@ -18,6 +19,7 @@ export class SalesListComponent implements OnInit {
     fieldName;
     fieldCondition;
     totalCount;
+    editIcon = faPen;
 
     constructor(private service: SalesService, private notify: ToastrService) {
     }

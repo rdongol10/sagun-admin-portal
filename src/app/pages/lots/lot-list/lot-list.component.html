@@ -31,11 +31,28 @@
                 <td class="text-center">{{data.creationDate}}</td>
                 <td class="text-center">
                     <div role="group" class="btn-group-sm btn-group">
-                        <button class="btn-shadow btn btn-primary" routerLink="/lot/addStock/{{data?.id}}">Add Stock
-                        </button>
-                        <button class="btn-shadow btn btn-secondary" routerLink="/lotHistory/list/lotId/{{data?.id}}">
-                            Lot History
-                        </button>
+                        <fa-icon
+                                [icon]="plusIcon"
+                                routerLink="/lot/addStock/{{data?.id}}"
+                                class="buttonIcons mx-2"
+                                ngbTooltip="Add Stock"
+                                style="color:#005f73"
+                                size="lg"
+                        >
+
+                        </fa-icon>
+
+                        <fa-icon
+                            [icon]="fileArchive"
+                            size="lg"
+                            routerLink="/lotHistory/list/lotId/{{data?.id}}"
+                            class="buttonIcons mx-2"
+                            ngbTooltip="Lot history"
+                            style="color:#bb3e03"
+                        >
+
+                        </fa-icon>
+
                     </div>
                 </td>
             </tr>
