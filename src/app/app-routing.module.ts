@@ -9,6 +9,11 @@ import {AuthGuard} from './@core/guard/auth.guard';
 const routes: Routes = [
     {
         path: '',
+        pathMatch: 'prefix',
+        redirectTo: 'dashboard'
+    },
+    {
+        path: '',
         component: BaseLayoutComponent,
         canActivate: [AuthGuard],
         children: [
@@ -46,11 +51,6 @@ const routes: Routes = [
                 loadChildren: () => import('./pages/sales/sales.module').then(m => m.SalesModule)
 
             },
-            {
-                path: '',
-                data: {extraParameter: 'dashboard'},
-                loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule)
-            }
         ]
     },
     {

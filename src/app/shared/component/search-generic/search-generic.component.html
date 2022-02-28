@@ -109,23 +109,34 @@
                     </label>
 
                     <label class="col-sm-1">
-                        <button type="button" *ngIf="(searchModel.length-1) === (i) && (i)!= (0)" tabIndex="-1"
+                        <button
+                                class=" btn-transition btn btn-danger circleButton mx-1"
+                                type="button" *ngIf="(searchModel.length-1) === (i) && (i)!= (0)" tabIndex="-1"
                                 (click)="removeRow(i)"
-                        >Remove
+                                ngbTooltip="remove">
+                            <fa-icon [icon]="trashIcon"></fa-icon>
                         </button>
                     </label>
 
                 </div>
-
-
             </div>
             <div class="col-sm-2">
-                <button class=" btn-transition btn btn-outline-primary" type="button" tabIndex="-1"
-                        (click)="addNewRow()">Add new
+
+                <button class=" btn-transition btn btn-primary circleButton mx-1"
+                        type="button" tabIndex="-1" (click)="addNewRow()"
+                        ngbTooltip="add">
+                    <fa-icon [icon]="plusIcon"></fa-icon>
                 </button>
-                <button class=" btn-transition btn btn-outline-primary" (click)="searchByField()">Search</button>
-                <button class=" btn-transition btn btn-outline-secondary" *ngIf="showReset" type="button" tabIndex="-1"
-                        style="background: #f64242; color: white" (click)="resetField()">Reset
+                <button class=" btn-transition btn btn-primary circleButton mx-1"
+                        (click)="searchByField()"
+                        ngbTooltip="search">
+                    <fa-icon [icon]="searchIcon"></fa-icon>
+                </button>
+
+                <button class=" btn-transition btn btn-danger circleButton mx-1"
+                        *ngIf="showReset" type="button" tabIndex="-1"
+                        (click)="resetField()" ngbTooltip="reset">
+                    <fa-icon [icon]="resetIcon"></fa-icon>
                 </button>
             </div>
         </div>

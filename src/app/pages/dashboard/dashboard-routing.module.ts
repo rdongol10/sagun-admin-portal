@@ -7,11 +7,6 @@ const routes: Routes = [
         path: '',
         component: DashboardComponent,
         data: {extraParameter: 'Dashboard'}
-    },
-    {
-        path: '/dashboard',
-        component: DashboardComponent,
-        data: {extraParameter: 'Dashboard'}
     }
 ];
 
