@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {UserNewComponent} from './user-new/user-new.component';
 import {UserListComponent} from './user-list/user-list.component';
 import {UserProfileComponent} from './user-profile/user-profile.component';
+import {ChangePasswordComponent} from './change-password/change-password.component';
 
 const routes: Routes = [
     {
@@ -26,6 +27,12 @@ const routes: Routes = [
     {
         path: 'profile', component: UserProfileComponent, data: {
             extraParameter: 'User Profile', title: 'User Profile ',
+            headerDisplay: 'none'
+        }
+    },
+    {
+        path: 'updatePassword', component: ChangePasswordComponent, data: {
+            extraParameter: 'Change password', title: 'Change password ',
             headerDisplay: 'none'
         }
     },

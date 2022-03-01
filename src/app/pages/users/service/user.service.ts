@@ -7,6 +7,7 @@ import {UserModel} from '../model/user-model';
 import {configApiUrl} from '../../../app-config';
 import {Observable} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
+import {ChangePasswordModel} from "../model/change-password-model";
 
 
 @Injectable({
@@ -29,6 +30,15 @@ export class UserService extends GenericService<UserModel> {
 
     public updateUserProfile(data: UserModel): Observable<UserModel> {
         return this.http.put(this.baseUrl, data).pipe(
+            map((res: UserModel) => {
+                return res;
+            }),
+            catchError((error) => this.handleError(error))
+        );
+    }
+
+    public updatePassword(data: ChangePasswordModel): Observable<UserModel> {
+        return this.http.put(this.baseUrl + '/updatePassword', data).pipe(
             map((res: UserModel) => {
                 return res;
             }),

@@ -28,7 +28,7 @@ export class UserNewComponent implements OnInit {
                     this.model = data.data;
 
                     this.service.display(false);
-                }, error1 => {
+                }, error => {
                     this.service.display(false);
                 });
         } else {
@@ -38,7 +38,7 @@ export class UserNewComponent implements OnInit {
 
     onSubmit() {
         this.service.display(true);
-        if(!this.routeId){
+        if (!this.routeId) {
             this.service.save(this.model)
                 .subscribe((data: any) => {
                     this.service.display(false);
@@ -48,7 +48,7 @@ export class UserNewComponent implements OnInit {
                     this.service.display(false);
                     this.notify.error(error.error.message, 'Error');
                 });
-        }else{
+        } else {
             this.service.update(this.routeId, this.model)
                 .subscribe((data: any) => {
                     this.service.display(false);
