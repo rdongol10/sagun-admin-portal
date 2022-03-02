@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {SearchCriteriaModel} from '../../../@core/class/search-criteria-model';
 import {ProductService} from '../service/product.service';
 import {ToastrService} from 'ngx-toastr';
+import {faFileAlt, faPen} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'app-product-list',
@@ -19,6 +20,9 @@ export class ProductListComponent implements OnInit {
     fieldCondition;
     fieldValue;
     totalCount;
+    editIcon = faPen;
+    fileArchive = faFileAlt;
+
     constructor(private service: ProductService, private notify: ToastrService) {
     }
 

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from '../service/user.service';
 import {ToastrService} from 'ngx-toastr';
 import {SearchCriteriaModel} from '../../../@core/class/search-criteria-model';
+import {faEdit, faPen} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'app-user-list',
@@ -17,7 +18,7 @@ export class UserListComponent implements OnInit {
     fieldName;
     fieldCondition;
     totalCount;
-
+    editIcon = faPen;
     constructor(private service: UserService, private notify: ToastrService) {
     }
 
