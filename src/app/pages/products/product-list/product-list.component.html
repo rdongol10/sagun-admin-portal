@@ -20,13 +20,26 @@
         >
 
             <tr *ngFor="let data of list; let i = index;">
-                <td class="text-center text-muted" style="width: 80px;">{{i+1}}</td>
+                <td class="text-center text-muted" style="width: 80px;">{{i + 1}}</td>
                 <td class="text-center">{{data.name}}</td>
                 <td class="text-center "><img class="tableImage" src={{data.image}}/></td>
                 <td class="text-center">
                     <div role="group" class="btn-group-sm btn-group">
-                        <button routerLink="/product/edit/{{data?.id}}" class="btn-shadow btn btn-primary">Edit</button>
-                        <button class="btn-shadow btn btn-secondary" routerLink="/lotHistory/list/productId/{{data?.id}}">Lot History</button>
+                        <fa-icon [icon]="editIcon"
+                                 ngbTooltip="edit"
+                                 routerLink="/product/edit/{{data?.id}}"
+                                 class="buttonIcons mx-2"
+                                 style="color:#005f73"
+                                 size="lg"
+                        ></fa-icon>
+                        <fa-icon
+                                [icon]="fileArchive"
+                                size="lg"
+                                routerLink="/lotHistory/list/productId/{{data?.id}}"
+                                class="buttonIcons mx-2"
+                                ngbTooltip="Lot history"
+                                style="color:#bb3e03"
+                        ></fa-icon>
                     </div>
                 </td>
             </tr>

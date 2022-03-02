@@ -29,7 +29,13 @@
                 <td class="text-center">{{data.mobileNumber}}</td>
                 <td class="text-center">
                     <div role="group" class="btn-group-sm btn-group">
-                        <button routerLink="/user/edit/{{data?.id}}" class="btn-shadow btn btn-primary">Edit</button>
+                        <fa-icon [icon]="editIcon"
+                                 ngbTooltip="edit"
+                                 routerLink="/user/edit/{{data?.id}}"
+                                 class="buttonIcons"
+                                 style="color:#005f73"
+                                 size="lg"
+                        ></fa-icon>
                     </div>
                 </td>
             </tr>

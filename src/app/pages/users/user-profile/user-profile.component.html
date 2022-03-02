@@ -1,0 +1,101 @@
+<div class="main-card mb-3 card">
+    <div class="card-body">
+        <form #form="ngForm" (ngSubmit)="form.form.valid && onSubmit()">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="position-relative mb-3">
+                        <label for="firstName" class="form-label">First Name</label>
+
+
+                        <input name="firstName" [(ngModel)]="model.firstName"
+                               id="firstName" placeholder="First Name" type="text" class="form-control"
+                               #firstName="ngModel" required
+                               [disabled]="!edit"
+                               [ngClass]="{ 'is-invalid': form.submitted && firstName.invalid }">
+                        <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
+                            <div *ngIf="firstName.errors?.required">First Name is required</div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="position-relative mb-3">
+                        <label for="middleName" class="form-label">Middle Name</label>
+                        <input name="middleName" [(ngModel)]="model.middleName" id="middleName" [disabled]="!edit"
+                               placeholder="middle Name" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="position-relative mb-3">
+                        <label for="lastName" class="form-label">Last Name</label>
+                        <input name="lastName" id="lastName" [(ngModel)]="model.lastName" placeholder="last Name"
+                               type="text" class="form-control"
+                               #lastName="ngModel" required [disabled]="!edit"
+                               [ngClass]="{ 'is-invalid': form.submitted && lastName.invalid }">
+                        <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
+                            <div *ngIf="lastName.errors?.required">Last Name is required</div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="position-relative mb-3">
+                        <label for="emailAddress" class="form-label">emailAddress</label>
+                        <input name="emailAddress" id="emailAddress" placeholder="Email"
+                               [(ngModel)]="model.emailAddress" type="email" class="form-control"
+                               #emailAddress="ngModel" required [disabled]="!edit"
+                               [ngClass]="{ 'is-invalid': form.submitted && emailAddress.invalid }">
+                        <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
+                            <div *ngIf="emailAddress.errors?.required">Email Address is required</div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="position-relative mb-3">
+                        <label for="mobileNumber" class="form-label">Mobile Number</label>
+                        <input name="mobileNumber" id="mobileNumber" placeholder="Mobile Number"
+                               [(ngModel)]="model.mobileNumber" type="text" class="form-control"
+                               #mobileNumber="ngModel" required [disabled]="!edit"
+                               [ngClass]="{ 'is-invalid': form.submitted && mobileNumber.invalid }">
+                        <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
+                            <div *ngIf="mobileNumber.errors?.required">Mobile Number is required</div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="position-relative mb-3">
+                        <label for="userId" class="form-label">UserId</label>
+                        <input name="userId" id="userId" placeholder="userId" [(ngModel)]="model.userId" type="text"
+                               class="form-control"
+                               #userIds="ngModel" required
+                               disabled>
+                    </div>
+                </div>
+            </div>
+
+
+            <button type="button" class="mt-2 mx-2 btn btn-primary" *ngIf="!edit" (click)="onEdit()">
+                Edit
+            </button>
+            <button class="mt-2  mx-2 btn btn-primary" *ngIf="edit">
+               Update
+            </button>
+            <button type="button " (click)="onCancel()" class="mt-2  btn btn-danger mx-2" *ngIf="edit">
+                Cancel
+            </button>
+
+        </form>
+    </div>
+</div>
