@@ -51,6 +51,11 @@ const routes: Routes = [
                 loadChildren: () => import('./pages/sales/sales.module').then(m => m.SalesModule)
 
             },
+            {
+                path: 'expenses',
+                data: {extraParameter: 'expenses'},
+                loadChildren: () => import('./pages/expenses/expenses.module').then(m => m.ExpensesModule)
+            },
         ]
     },
     {
