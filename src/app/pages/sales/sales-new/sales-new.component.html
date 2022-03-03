@@ -76,7 +76,16 @@
                                name="lot{{i}}"
                                #lotName="ngModel" required
                                [ngClass]="{ 'is-invalid': form.submitted && lotName.invalid }"
-                    ></ng-select>
+                    >
+                        <ng-template class="test-class" ng-option-tmp let-item="item" let-index="index"
+                                     let-search="searchTerm">
+                            <div>
+                                <p class="ngSelectTitle ngSelectText">{{item.title}}</p>
+                                <p class="ngSelectDetails ngSelectText">Cost Price - {{item.details?.costPrice}}</p>
+                                <p class="ngSelectDetails ngSelectText">Quantity - {{item.details?.quantity}}</p>
+                            </div>
+                        </ng-template>
+                    </ng-select>
                     <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
                         <div *ngIf="lotName.errors?.required">Lot Name is required</div>
                     </div>
