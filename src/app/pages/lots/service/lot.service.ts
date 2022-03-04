@@ -25,4 +25,13 @@ export class LotService extends GenericService<LotModel> {
         );
     }
 
+
+    public searchByProduct(productId: number) {
+        return this.http.post(this.baseUrl + '/searchByProductId/' + productId, null).pipe(
+            map((data: any) => {
+                return data;
+            }),
+            catchError((error) => this.handleError(error))
+        );
+    }
 }

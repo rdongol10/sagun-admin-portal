@@ -116,9 +116,9 @@ export class SalesNewComponent implements OnInit {
     }
 
     addSalesDetails() {
-        const dtl = new SalesDetailModel();
-        dtl.uniqueId = new Date().toString();
-        this.model.salesDetails.push(dtl);
+        const salesDetailModel = new SalesDetailModel();
+        salesDetailModel.uniqueId = new Date().toString();
+        this.model.salesDetails.push(salesDetailModel);
         setTimeout(() => {
             this.model.salesDetails = [...this.model.salesDetails];
         }, 0);

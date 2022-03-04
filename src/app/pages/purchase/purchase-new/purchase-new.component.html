@@ -1,0 +1,226 @@
+<div class="main-card mb-3 card">
+    <div class="card-body">
+        <form #form="ngForm" (ngSubmit)="form.form.valid && onSubmit()">
+
+            <div class="row">
+                <div class="col-md-2">
+                    Product
+                </div>
+                <div class="col-md-2">
+                    Lot
+                </div>
+                <div class="col-md-2">
+                    Cost price
+                </div>
+                <div class="col-md-2">
+                    Mark price
+                </div>
+                <div class="col-md-1">
+                    Quantity
+                </div>
+                <div class="col-md-2">
+                    Total
+                </div>
+            </div>
+            <div class="row mt-2" *ngFor="let purchaseDetails of model.purchaseDetails; let i=index; trackBy: customTB">
+                <div class="col-md-2" *ngIf="!routeId">
+                    <ng-select [items]="products"
+                               bindLabel="title"
+                               bindValue="code"
+                               [(ngModel)]="purchaseDetails.productId"
+                               (search)="searchProduct($event)"
+                               (change)="changeProduct($event,i)"
+                               name="product{{i}}"
+                               #productId="ngModel" required
+                               [ngClass]="{ 'is-invalid': form.submitted && productId.invalid }"
+                    ></ng-select>
+                    <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
+                        <div *ngIf="productId.errors?.required">Product is required</div>
+
+                    </div>
+                </div>
+                <div class="col-md-2" *ngIf="routeId">
+                    <input class="form-control" value="{{purchaseDetails.productName}}" disabled>
+                </div>
+
+                <div class="col-md-2" *ngIf="!routeId">
+                    <ng-select [items]="purchaseDetails.selectLots"
+                               bindLabel="title"
+                               bindValue="code"
+                               [(ngModel)]="purchaseDetails.lotId"
+                               (change)="changeLot($event,i)"
+                               name="lot{{i}}"
+                               #lotName="ngModel" required
+                               [ngClass]="{ 'is-invalid': form.submitted && lotName.invalid }"
+                               [disabled]="!purchaseDetails.productId"
+                               (change)="calculateDetailsTotal(i)"
+                    >
+                        <ng-template class="test-class" ng-option-tmp let-item="item" let-index="index"
+                                     let-search="searchTerm">
+                            <div>
+                                <p class="ngSelectTitle ngSelectText">{{item.title}}</p>
+                                <p class="ngSelectDetails ngSelectText">Cost Price - {{item.details?.costPrice}}</p>
+                                <p class="ngSelectDetails ngSelectText">Mark Price - {{item.details?.markPrice}}</p>
+                            </div>
+                        </ng-template>
+                    </ng-select>
+                    <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
+                        <div *ngIf="lotName.errors?.required">Lot Name is required</div>
+                    </div>
+                </div>
+                <div class="col-md-2" *ngIf="routeId">
+                    <input class="form-control" value="{{purchaseDetails.lotName}}" disabled>
+                </div>
+
+                <div class="col-md-2">
+                    <input [(ngModel)]="purchaseDetails.costPrice"
+                           name="costPrice{{i}}" class="form-control"
+                           #costPrice="ngModel" required
+                           appMinMaxValidator
+                           min="1"
+                           [ngClass]="{ 'is-invalid': form.submitted && costPrice.invalid }"
+                           [disabled]="routeId || purchaseDetails.lotId!=0"
+                           (change)="calculateDetailsTotal(i)"
+                           (keyup)="calculateDetailsTotal(i)"
+                    >
+                    <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
+                        <div *ngIf="costPrice.errors?.required">Cost Price is required</div>
+                        <div *ngIf="costPrice.errors?.min">Cost Price can not be less than 1</div>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <input [(ngModel)]="purchaseDetails.markPrice"
+                           name="markPrice{{i}}" class="form-control"
+                           #markPrice="ngModel" required
+                           appMinMaxValidator
+                           min="1"
+                           [ngClass]="{ 'is-invalid': form.submitted && markPrice.invalid }"
+                           [disabled]="routeId || purchaseDetails.lotId!=0">
+                    <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
+                        <div *ngIf="markPrice.errors?.required">Mark Price is required</div>
+                        <div *ngIf="markPrice.errors?.min">Mark Price can not be less than 1</div>
+                    </div>
+                </div>
+
+                <div class="col-md-1">
+                    <input [(ngModel)]="purchaseDetails.quantity" name="quantity{{i}}" class="form-control"
+                           type="number"
+                           #quantity="ngModel" required
+                           appMinMaxValidator
+                           min="1"
+                           [ngClass]="{ 'is-invalid': form.submitted && quantity.invalid }"
+                           [disabled]="routeId || !purchaseDetails.productId"
+                           (change)="calculateDetailsTotal(i)"
+                           (keyup)="calculateDetailsTotal(i)"
+                    >
+                    <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
+                        <div *ngIf="quantity.errors?.required">Quantity is required</div>
+                        <div *ngIf="quantity.errors?.min">Quantity can not be less than 1</div>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <input [(ngModel)]="purchaseDetails.total" name="total{{i}}" class="form-control" type="number"
+                           #total="ngModel" required
+                           appMinMaxValidator
+                           min="1"
+                           [ngClass]="{ 'is-invalid': form.submitted && total.invalid }"
+                           disabled
+                    >
+                    <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
+                        <div *ngIf="total.errors?.required">Total is required</div>
+                        <div *ngIf="total.errors?.min">Total can not be less than 1</div>
+                    </div>
+                </div>
+                <div *ngIf="i==0 && !routeId" class="col-md-1">
+                    <button type="button" class="btn btn-primary" (click)="addPurchaseDetails()">Add</button>
+                </div>
+                <div *ngIf="i>0 && !routeId" class="col-md-1">
+                    <button type="button" class="btn btn-danger" (click)="removePurchaseDetails(i)">Remove</button>
+                </div>
+            </div>
+            <hr/>
+            <div class="row mt-2">
+                <div class="col-md-7"></div>
+                <div class="col-md-2 text-end">Total</div>
+                <div class="col-md-2">
+                    <input [(ngModel)]="model.totalCostPrice"
+                           name="totalCostPrice" class="form-control"
+                           disabled>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-7"></div>
+                <div class="col-md-2 text-end">Discount</div>
+                <div class="col-md-2">
+                    <input [(ngModel)]="model.discount"
+                           name="discount" class="form-control"
+                           type="number"
+                           (change)="calculateTotal()"
+                           (keyup)="calculateTotal()"
+                           [disabled]="routeId"
+                    >
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-7"></div>
+                <div class="col-md-2 text-end">Net Total</div>
+                <div class="col-md-2">
+                    <input [(ngModel)]="model.netCostPrice"
+                           name="netCostPrice" class="form-control"
+                           type="number" disabled>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-7"></div>
+                <div class="col-md-2 text-end">
+                    Payment Status
+                </div>
+                <div class="col-md-2">
+                    <select class="form-select" name="paymentStatus" id="paymentStatus"
+                            [(ngModel)]="model.paymentStatus">
+                        <option *ngFor="let status of paymentStatus"
+                                value="{{status.code}}"> {{status.title}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mt-2" *ngIf="model.paymentStatus==paymentStatusEnum.Partial_Payment">
+                <div class="col-md-7"></div>
+                <div class="col-md-2 text-end">
+                    Paid Amount
+                </div>
+                <div class="col-md-2">
+                    <input [(ngModel)]="model.paidAmount" name="paidAmount" class="form-control"
+                           type="number"
+                           #paidAmount="ngModel"
+                           required
+                           appMinMaxValidator
+                           min="1"
+                           [ngClass]="{ 'is-invalid': form.submitted && paidAmount.invalid }"
+                           (change)="calculateRemaining()"
+                           (keyup)="calculateRemaining()"
+                    >
+                    <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
+                        <div *ngIf="paidAmount.errors?.required">Paid Amount is required</div>
+                        <div *ngIf="paidAmount.errors?.min">Paid Amount can not be less than 1</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2" *ngIf="model.paymentStatus==paymentStatusEnum.Partial_Payment">
+                <div class="col-md-7"></div>
+                <div class="col-md-2 text-end">
+                    Remaining
+                </div>
+                <div class="col-md-2">
+                    <input [(ngModel)]="model.remaining" name="remaining" class="form-control"
+                           type="number"
+                           #remaining="ngModel"
+                           disabled>
+                </div>
+            </div>
+            <button class="mt-2 mx-2  btn btn-primary">Submit</button>
+            <button type="button" routerLink="/purchase/list" class="mt-2  btn btn-danger">Cancel</button>
+        </form>
+    </div>
+</div>
