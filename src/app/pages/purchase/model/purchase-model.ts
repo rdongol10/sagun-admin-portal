@@ -10,7 +10,7 @@ export class PurchaseModel {
     at: number;
     discount: number;
     netCostPrice: number;
-    paymentStatus: number;
+    paymentStatus = 0;
     paidAmount: number;
     remaining: number;
     createdBy: string;

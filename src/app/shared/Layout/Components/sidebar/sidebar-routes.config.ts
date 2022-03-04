@@ -110,11 +110,11 @@ export const sideMenuList: SideMenuInterface[] = [
         label: 'Purchase',
         icon: 'shopbag',
         childMenu: [
-            // {
-            //     url: 'expenses/new',
-            //     label: 'New',
-            //     childMenu: [],
-            // },
+            {
+                url: 'purchase/new',
+                label: 'New',
+                childMenu: [],
+            },
             {
                 url: 'purchase/list',
                 label: 'List',
