@@ -43,35 +43,6 @@ export const sideMenuList: SideMenuInterface[] = [
         ],
     },
     {
-        id: 'lot',
-        label: 'Lot',
-        icon: 'note',
-        childMenu: [
-            {
-                url: 'lot/new',
-                label: 'New',
-                childMenu: [],
-            },
-            {
-                url: 'lot/list',
-                label: 'List',
-                childMenu: [],
-            }
-        ],
-    },
-    {
-        id: 'lotHistory',
-        label: 'Lot History',
-        icon: 'news-paper',
-        childMenu: [
-            {
-                url: 'lotHistory/list',
-                label: 'List',
-                childMenu: [],
-            }
-        ],
-    },
-    {
         id: 'purchase',
         label: 'Purchase',
         icon: 'shopbag',
@@ -91,7 +62,7 @@ export const sideMenuList: SideMenuInterface[] = [
     {
         id: 'sales',
         label: 'Sales',
-        icon: 'junk',
+        icon: 'cart',
         childMenu: [
             {
                 url: 'sales/new',
@@ -117,6 +88,30 @@ export const sideMenuList: SideMenuInterface[] = [
             },
             {
                 url: 'expenses/list',
+                label: 'List',
+                childMenu: [],
+            }
+        ],
+    },
+    {
+        id: 'lot',
+        label: 'Lot',
+        icon: 'note',
+        childMenu: [
+            {
+                url: 'lot/list',
+                label: 'List',
+                childMenu: [],
+            }
+        ],
+    },
+    {
+        id: 'lotHistory',
+        label: 'Lot History',
+        icon: 'news-paper',
+        childMenu: [
+            {
+                url: 'lotHistory/list',
                 label: 'List',
                 childMenu: [],
             }
