@@ -87,5 +87,22 @@ export const sideMenuList: SideMenuInterface[] = [
                 childMenu: [],
             }
         ],
+    },
+    {
+        id: 'expenses',
+        label: 'Expenses',
+        icon: 'shopbag',
+        childMenu: [
+            // {
+            //     url: 'sales/new',
+            //     label: 'New',
+            //     childMenu: [],
+            // },
+            {
+                url: 'expenses/list',
+                label: 'List',
+                childMenu: [],
+            }
+        ],
     }
 ];

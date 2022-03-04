@@ -7,7 +7,8 @@ export const configApiUrl = {
     PRODUCT_API: MainUrl + 'product',
     LOT_API: MainUrl + 'lot',
     LOT_HISTORY_API: MainUrl + 'lotHistory',
-    SALES_API: MainUrl + 'sales'
+    SALES_API: MainUrl + 'sales',
+    EXPENSES_API: MainUrl + 'expenses'
 };
 
 export const ORDER_STATUS: SelectableValue[] = [

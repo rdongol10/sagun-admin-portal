@@ -1,0 +1,63 @@
+<div class="main-card mb-3 card">
+    <app-search-generic (emitDataModel)="search($event)"
+                        [searchField]="searchField"
+                        [searchFieldCondition]="searchFieldCondition"
+                        [searchFieldValues]="searchFieldValues"></app-search-generic>
+    <div class="table-responsive">
+        <lib-generic-table
+                (sortOrderChange)="sort($event)"
+                [dataList]="list"
+                [headers]="[
+                {title: '#', width: '', sort: '', colValue : ''},
+                {title: 'Detail', width: '', sort: 'detail', colValue : 'detail'},
+                {title: 'Amount', width: '', sort: 'amount', colValue : 'amount'},
+                {title: 'Payment Status', width: '', sort: 'paymentStatus', colValue : 'paymentStatus'},
+                {title: 'Paid Amount', width: '', sort: 'paidAmount', colValue : 'paidAmount'},
+                {title: 'Remaining', width: '', sort: 'remaining', colValue : 'remaining'},
+                {title: 'Date', width: '', sort: 'creationDate', colValue : 'creationDate'},
+                {title: 'Action', width: '', sort: '', colValue : ''},
+                ]"
+                [totalCount]="totalCount"
+                [pageNumber]="searchModel.pageNumber"
+                [pageSize]="searchModel.pageSize"
+                (paginationChange)="changeIndex($event)"
+        >
+
+            <tr *ngFor="let data of list; let i = index;">
+                <td class="text-center text-muted" style="width: 80px;">{{i + 1}}</td>
+                <td class="text-center">{{data.detail}}</td>
+                <td class="text-center">{{data.amount}}</td>
+                <td class="text-center">{{data.paymentStatus}}</td>
+                <td class="text-center">{{data.paidAmount}}</td>
+                <td class="text-center">{{data.remaining}}</td>
+                <td class="text-center">{{data.creationDate}}</td>
+                <td class="text-center">
+                    <!--                    <div role="group" class="btn-group-sm btn-group">-->
+                    <!--                        <fa-icon-->
+                    <!--                                [icon]="plusIcon"-->
+                    <!--                                routerLink="/lot/addStock/{{data?.id}}"-->
+                    <!--                                class="buttonIcons mx-2"-->
+                    <!--                                ngbTooltip="Add Stock"-->
+                    <!--                                style="color:#005f73"-->
+                    <!--                                size="lg"-->
+                    <!--                        >-->
+
+                    <!--                        </fa-icon>-->
+
+                    <!--                        <fa-icon-->
+                    <!--                                [icon]="fileArchive"-->
+                    <!--                                size="lg"-->
+                    <!--                                routerLink="/lotHistory/list/lotId/{{data?.id}}"-->
+                    <!--                                class="buttonIcons mx-2"-->
+                    <!--                                ngbTooltip="Lot history"-->
+                    <!--                                style="color:#bb3e03"-->
+                    <!--                        >-->
+
+                    <!--                        </fa-icon>-->
+
+                    <!--                    </div>-->
+                </td>
+            </tr>
+        </lib-generic-table>
+    </div>
+</div>

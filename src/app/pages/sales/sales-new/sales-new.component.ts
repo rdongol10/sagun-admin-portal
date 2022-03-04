@@ -110,6 +110,7 @@ export class SalesNewComponent implements OnInit {
             this.model.salesDetails[index].costPrice = event.details.costPrice;
             this.model.salesDetails[index].remainingQuantity = event.details.quantity;
         }
+        this.lots = [];
         this.calculateDetailsTotal(index);
         this.calculateTotal();
     }
