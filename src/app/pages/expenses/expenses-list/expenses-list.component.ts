@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {SearchCriteriaModel} from '../../../@core/class/search-criteria-model';
-import {faFileAlt, faPlus} from '@fortawesome/free-solid-svg-icons';
+import {faPen} from '@fortawesome/free-solid-svg-icons';
 import {ToastrService} from 'ngx-toastr';
 import {ExpensesService} from '../service/expenses.service';
 
@@ -19,8 +19,7 @@ export class ExpensesListComponent implements OnInit {
     fieldName;
     fieldCondition;
     totalCount;
-    plusIcon = faPlus;
-    fileArchive = faFileAlt;
+    editIcon = faPen;
 
 
     constructor(private service: ExpensesService, private notify: ToastrService) {
