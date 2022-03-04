@@ -9,15 +9,12 @@
                 [dataList]="list"
                 [headers]="[
                 {title: '#', width: '', sort: '', colValue : ''},
-                {title: 'Booked Date', width: '', sort: 'bookedDate', colValue : 'bookedDate'},
-                {title: 'Delivered to', width: '', sort: 'deliveredTo', colValue : 'deliveredTo'},
-                {title: 'Order status', width: '', sort: 'orderStatus', colValue : 'orderStatus'},
-                {title: 'Delivered by', width: '', sort: 'deliveredBy', colValue : 'deliveredBy'},
+                {title: 'Detail', width: '', sort: 'detail', colValue : 'detail'},
+                {title: 'Amount', width: '', sort: 'amount', colValue : 'amount'},
                 {title: 'Payment Status', width: '', sort: 'paymentStatus', colValue : 'paymentStatus'},
-                {title: 'Total Cost Price', width: '', sort: 'totalCostPrice', colValue : 'totalCostPrice'},
-                {title: 'Net Selling Price', width: '', sort: 'netSellingPrice', colValue : 'netSellingPrice'},
                 {title: 'Paid Amount', width: '', sort: 'paidAmount', colValue : 'paidAmount'},
-                {title: 'Remaining Amount', width: '', sort: 'remainingAmount', colValue : 'remainingAmount'},
+                {title: 'Remaining', width: '', sort: 'remaining', colValue : 'remaining'},
+                {title: 'Date', width: '', sort: 'creationDate', colValue : 'creationDate'},
                 {title: 'Action', width: '', sort: '', colValue : ''},
                 ]"
                 [totalCount]="totalCount"
@@ -25,22 +22,20 @@
                 [pageSize]="searchModel.pageSize"
                 (paginationChange)="changeIndex($event)"
         >
+
             <tr *ngFor="let data of list; let i = index;">
                 <td class="text-center text-muted" style="width: 80px;">{{i + 1}}</td>
-                <td class="text-center">{{data.bookedDate}}</td>
-                <td class="text-center">{{data.deliveredTo}}</td>
-                <td class="text-center">{{data.orderStatus | orderStatus}}</td>
-                <td class="text-center">{{data.deliveredBy}}</td>
+                <td class="text-center">{{data.detail}}</td>
+                <td class="text-center">{{data.amount}}</td>
                 <td class="text-center">{{data.paymentStatus | paymentStatus}}</td>
-                <td class="text-center">{{data.totalCostPrice}}</td>
-                <td class="text-center">{{data.netSellingPrice}}</td>
                 <td class="text-center">{{data.paidAmount}}</td>
-                <td class="text-center">{{data.remainingAmount}}</td>
+                <td class="text-center">{{data.remaining}}</td>
+                <td class="text-center">{{data.creationDate}}</td>
                 <td class="text-center">
                     <div role="group" class="btn-group-sm btn-group">
                         <fa-icon [icon]="editIcon"
                                  ngbTooltip="edit"
-                                 routerLink="/sales/edit/{{data?.id}}"
+                                 routerLink="/expenses/edit/{{data?.id}}"
                                  class="buttonIcons"
                                  style="color:#005f73"
                                  size="lg"
