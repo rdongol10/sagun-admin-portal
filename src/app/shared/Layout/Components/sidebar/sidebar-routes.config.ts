@@ -77,6 +77,23 @@ export const sideMenuList: SideMenuInterface[] = [
         ],
     },
     {
+        id: 'income',
+        label: 'Income',
+        icon: 'cash',
+        childMenu: [
+            {
+                url: 'income/new',
+                label: 'New',
+                childMenu: [],
+            },
+            {
+                url: 'income/list',
+                label: 'List',
+                childMenu: [],
+            }
+        ],
+    },
+    {
         id: 'expenses',
         label: 'Expenses',
         icon: 'calculator',
