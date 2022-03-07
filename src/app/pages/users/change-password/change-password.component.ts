@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ChangePasswordModel} from '../model/change-password-model';
 import {UserService} from '../service/user.service';
 import {ToastrService} from 'ngx-toastr';
+import {NgForm} from '@angular/forms';
 
 @Component({
     selector: 'app-change-password',
@@ -10,6 +11,9 @@ import {ToastrService} from 'ngx-toastr';
 })
 export class ChangePasswordComponent implements OnInit {
     model: ChangePasswordModel = new ChangePasswordModel();
+
+    @ViewChild('form', {static: false})
+    form: NgForm;
 
     constructor(private service: UserService, private notify: ToastrService) {
     }
@@ -23,6 +27,7 @@ export class ChangePasswordComponent implements OnInit {
             .subscribe((data: any) => {
                 this.service.display(false);
                 this.notify.success('Password updated');
+                this.form.resetForm();
             }, error => {
                 this.service.display(false);
                 this.notify.error(error.error.message, 'Error');
