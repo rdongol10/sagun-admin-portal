@@ -14,6 +14,7 @@
                 {title: 'Cost Price', width: '', sort: 'netCostPrice', colValue : 'netCostPrice'},
                 {title: 'Paid Amount', width: '', sort: 'paidAmount', colValue : 'paidAmount'},
                 {title: 'Remaining Amount', width: '', sort: 'remaining', colValue : 'remaining'},
+                {title:'Detail', width: '', sort: '', colValue : ''},
                 {title: 'Action', width: '', sort: '', colValue : ''},
                 ]"
                 [totalCount]="totalCount"
@@ -28,6 +29,10 @@
                 <td class="text-center">{{data.netCostPrice}}</td>
                 <td class="text-center">{{data.paidAmount}}</td>
                 <td class="text-center">{{data.remaining}}</td>
+                <td>
+                    <app-shopping-details [shoppingDetails]="data.purchaseDetails"></app-shopping-details>
+                </td>
+
                 <td class="text-center">
                     <div role="group" class="btn-group-sm btn-group">
                         <fa-icon [icon]="editIcon"
