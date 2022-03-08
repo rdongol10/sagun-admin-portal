@@ -5,13 +5,11 @@ import {LotRoutingModule} from './lot-routing.module';
 import {LotListComponent} from './lot-list/lot-list.component';
 import {FormsModule} from '@angular/forms';
 import {SharedModule} from '../../shared/shared.module';
-import { LotNewComponent } from './lot-new/lot-new.component';
 
 
 @NgModule({
   declarations: [
-    LotListComponent,
-    LotNewComponent
+    LotListComponent
   ],
   imports: [
     CommonModule,

@@ -43,29 +43,17 @@ export const sideMenuList: SideMenuInterface[] = [
         ],
     },
     {
-        id: 'lot',
-        label: 'Lot',
-        icon: 'note',
+        id: 'purchase',
+        label: 'Purchase',
+        icon: 'shopbag',
         childMenu: [
             {
-                url: 'lot/new',
+                url: 'purchase/new',
                 label: 'New',
                 childMenu: [],
             },
             {
-                url: 'lot/list',
-                label: 'List',
-                childMenu: [],
-            }
-        ],
-    },
-    {
-        id: 'lotHistory',
-        label: 'Lot History',
-        icon: 'news-paper',
-        childMenu: [
-            {
-                url: 'lotHistory/list',
+                url: 'purchase/list',
                 label: 'List',
                 childMenu: [],
             }
@@ -74,7 +62,7 @@ export const sideMenuList: SideMenuInterface[] = [
     {
         id: 'sales',
         label: 'Sales',
-        icon: 'junk',
+        icon: 'cart',
         childMenu: [
             {
                 url: 'sales/new',
@@ -89,17 +77,58 @@ export const sideMenuList: SideMenuInterface[] = [
         ],
     },
     {
+        id: 'income',
+        label: 'Income',
+        icon: 'cash',
+        childMenu: [
+            {
+                url: 'income/new',
+                label: 'New',
+                childMenu: [],
+            },
+            {
+                url: 'income/list',
+                label: 'List',
+                childMenu: [],
+            }
+        ],
+    },
+    {
         id: 'expenses',
         label: 'Expenses',
-        icon: 'shopbag',
+        icon: 'calculator',
         childMenu: [
-            // {
-            //     url: 'sales/new',
-            //     label: 'New',
-            //     childMenu: [],
-            // },
+            {
+                url: 'expenses/new',
+                label: 'New',
+                childMenu: [],
+            },
             {
                 url: 'expenses/list',
+                label: 'List',
+                childMenu: [],
+            }
+        ],
+    },
+    {
+        id: 'lot',
+        label: 'Lot',
+        icon: 'note',
+        childMenu: [
+            {
+                url: 'lot/list',
+                label: 'List',
+                childMenu: [],
+            }
+        ],
+    },
+    {
+        id: 'lotHistory',
+        label: 'Lot History',
+        icon: 'news-paper',
+        childMenu: [
+            {
+                url: 'lotHistory/list',
                 label: 'List',
                 childMenu: [],
             }

@@ -9,4 +9,5 @@ export class LotSelectableValue {
 class Details {
     costPrice: number;
     quantity: number;
+    markPrice: number;
 }

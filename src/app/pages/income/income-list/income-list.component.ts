@@ -2,14 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {SearchCriteriaModel} from '../../../@core/class/search-criteria-model';
 import {faPen} from '@fortawesome/free-solid-svg-icons';
 import {ToastrService} from 'ngx-toastr';
-import {ExpensesService} from '../service/expenses.service';
+import {IncomeService} from '../service/income.service';
 
 @Component({
-    selector: 'app-expenses-list',
-    templateUrl: './expenses-list.component.html',
-    styleUrls: ['./expenses-list.component.sass']
+    selector: 'app-income-list',
+    templateUrl: './income-list.component.html',
+    styleUrls: ['./income-list.component.sass']
 })
-export class ExpensesListComponent implements OnInit {
+export class IncomeListComponent implements OnInit {
 
     list = [];
     searchModel = new SearchCriteriaModel();
@@ -22,7 +22,7 @@ export class ExpensesListComponent implements OnInit {
     editIcon = faPen;
 
 
-    constructor(private service: ExpensesService, private notify: ToastrService) {
+    constructor(private service: IncomeService, private notify: ToastrService) {
     }
 
     ngOnInit(): void {

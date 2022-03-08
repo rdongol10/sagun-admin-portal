@@ -2,14 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {SearchCriteriaModel} from '../../../@core/class/search-criteria-model';
 import {faPen} from '@fortawesome/free-solid-svg-icons';
 import {ToastrService} from 'ngx-toastr';
-import {ExpensesService} from '../service/expenses.service';
+import {PurchaseService} from '../service/purchase.service';
 
 @Component({
-    selector: 'app-expenses-list',
-    templateUrl: './expenses-list.component.html',
-    styleUrls: ['./expenses-list.component.sass']
+    selector: 'app-purchase-list',
+    templateUrl: './purchase-list.component.html',
+    styleUrls: ['./purchase-list.component.sass']
 })
-export class ExpensesListComponent implements OnInit {
+export class PurchaseListComponent implements OnInit {
 
     list = [];
     searchModel = new SearchCriteriaModel();
@@ -21,8 +21,7 @@ export class ExpensesListComponent implements OnInit {
     totalCount;
     editIcon = faPen;
 
-
-    constructor(private service: ExpensesService, private notify: ToastrService) {
+    constructor(private service: PurchaseService, private notify: ToastrService) {
     }
 
     ngOnInit(): void {
@@ -37,7 +36,6 @@ export class ExpensesListComponent implements OnInit {
             });
         this.getList();
     }
-
 
     getList(reset: boolean = false, value?) {
         if (reset) {
@@ -59,6 +57,7 @@ export class ExpensesListComponent implements OnInit {
     }
 
     sort(sort: { key: string; value: string }): void {
+        console.log(sort);
         this.searchModel.sortField = sort.key;
         if (sort.value == 'asc') {
             this.searchModel.sortOrder = 'asc';

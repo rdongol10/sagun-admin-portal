@@ -1,0 +1,41 @@
+<div class="main-card mb-3 card">
+    <div class="card-body">
+        <form #form="ngForm" (ngSubmit)="form.form.valid && onSubmit()">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="position-relative mb-3">
+                        <label for='detail' class="form-label">Detail</label>
+                        <input type="text" class="form-control" name="detail" id="detail"
+                               [(ngModel)]="model.detail"
+                               #detail="ngModel" required
+                               [ngClass]="{ 'is-invalid': form.submitted && detail.invalid }"
+                        >
+                        <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
+                            <div *ngIf="detail.errors?.required">Detail is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="position-relative mb-3">
+                        <label class="form-label">Amount</label>
+                        <input type="number" class="form-control" name="amount" id="amount"
+                               [(ngModel)]="model.amount"
+                               #amount="ngModel" required
+                               [ngClass]="{ 'is-invalid': form.submitted && amount.invalid }"
+                               appMinMaxValidator
+                               min="1"
+                        >
+                        <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
+                            <div *ngIf="amount.errors?.required">Amount is required</div>
+                            <div *ngIf="amount.errors?.min">Amount can not be less than 1</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="mt-2 mx-2 btn btn-primary">
+                <span>Add</span>
+            </button>
+            <button type="button" [routerLink]="'/income/list'" class="mt-2  btn btn-danger">Cancel</button>
+        </form>
+    </div>
+</div>

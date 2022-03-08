@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 
 import {BaseLayoutComponent} from './shared/Layout/base-layout/base-layout.component';
 import {PagesLayoutComponent} from './shared/Layout/pages-layout/pages-layout.component';
@@ -55,6 +55,16 @@ const routes: Routes = [
                 path: 'expenses',
                 data: {extraParameter: 'expenses'},
                 loadChildren: () => import('./pages/expenses/expenses.module').then(m => m.ExpensesModule)
+            },
+            {
+                path: 'purchase',
+                data: {extraParameter: 'purchase'},
+                loadChildren: () => import('./pages/purchase/purchase.module').then(m => m.PurchaseModule)
+            },
+            {
+                path: 'income',
+                data: {extraParameter: 'income'},
+                loadChildren: () => import('./pages/income/income.module').then(m => m.IncomeModule)
             },
         ]
     },

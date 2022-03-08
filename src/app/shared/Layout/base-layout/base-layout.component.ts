@@ -78,7 +78,7 @@ export class BaseLayoutComponent {
 
         const nextUrl = path && path !== '/dashboard' ? `${url}${path.replace('dashboard', '')}` : url;
         console.log(nextUrl);
-        const breadcrumb = <any> {
+        const breadcrumb = <any>{
             label: label, url: nextUrl
         };
 

@@ -1,1 +1,98 @@
-<p>expenses-new works!</p>
+<div class="main-card mb-3 card">
+    <div class="card-body">
+        <form #form="ngForm" (ngSubmit)="form.form.valid && onSubmit()">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="position-relative mb-3">
+                        <label for='detail' class="form-label">Expense Detail</label>
+                        <input type="text" class="form-control" name="detail" id="detail"
+                               [(ngModel)]="model.detail"
+                               #detail="ngModel" required
+                               [ngClass]="{ 'is-invalid': form.submitted && detail.invalid }"
+                               [disabled]="routeId"
+                        >
+                        <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
+                            <div *ngIf="detail.errors?.required">Detail is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="position-relative mb-3" >
+                        <label class="form-label">Paid by</label>
+                        <input type="text" class="form-control" name="paidBy" id="paidBy"
+                               [(ngModel)]="model.paidBy"
+                               #paidBy="ngModel"
+                               [ngClass]="{ 'is-invalid': form.submitted && paidBy.invalid }"
+                               [disabled]="routeId"
+                        >
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="position-relative mb-3" >
+                        <label class="form-label">Amount</label>
+                        <input type="number" class="form-control" name="amount" id="amount"
+                               [(ngModel)]="model.amount"
+                               #amount="ngModel" required
+                               [ngClass]="{ 'is-invalid': form.submitted && amount.invalid }"
+                               [disabled]="routeId"
+                               appMinMaxValidator
+                               min="1"
+                        >
+                        <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
+                            <div *ngIf="amount.errors?.required">Amount is required</div>
+                            <div *ngIf="amount.errors?.min">Amount can not be less than 1</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="position-relative mb-3">
+                        <label for='detail' class="form-label">Payment Status</label>
+                        <select class="form-select" name="paymentStatus" id="paymentStatus"
+                                [(ngModel)]="model.paymentStatus" #paymentStatuses="ngModel"
+                                >
+                            <option *ngFor="let status of paymentStatus"
+                                    value="{{status.code}}"> {{status.title}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3" *ngIf="model.paymentStatus==paymentStatusEnum.Partial_Payment">
+                    <label for='paidAmount' class="form-label">Paid Amount</label>
+                    <input [(ngModel)]="model.paidAmount" name="paidAmount" class="form-control"
+                           type="number"
+                           id="paidAmount"
+                           (change)="paidAmountChange($event)"
+                           (keyup)="paidAmountChange($event)"
+                           #paidAmount="ngModel"
+                           required
+                           appMinMaxValidator
+                           min="1"
+                           [ngClass]="{ 'is-invalid': form.submitted && paidAmount.invalid }">
+                    <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
+                        <div *ngIf="paidAmount.errors?.required">Paid Amount is required</div>
+                        <div *ngIf="paidAmount.errors?.min">Paid Amount can not be less than 1</div>
+                    </div>
+
+                </div>
+                <div class="col-md-3" *ngIf="model.paymentStatus==paymentStatusEnum.Partial_Payment">
+                    <label for='remaining' class="form-label">Remaining</label>
+                    <input [(ngModel)]="model.remaining" name="remaining" class="form-control"
+                           type="number"
+                           id="remaining"
+                           #remainingAmount="ngModel"
+                           disabled
+                    >
+
+                </div>
+
+            </div>
+
+            <button class="mt-2 mx-2 btn btn-primary">
+                <span *ngIf="routeId">Update</span>
+                <span *ngIf="!routeId">Add</span>
+            </button>
+            <button type="button" [routerLink]="'/expenses/list'" class="mt-2  btn btn-danger">Cancel</button>
+        </form>
+    </div>
+</div>
