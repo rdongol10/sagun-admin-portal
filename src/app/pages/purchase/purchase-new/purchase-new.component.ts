@@ -62,6 +62,8 @@ export class PurchaseNewComponent implements OnInit {
         setTimeout(() => {
             this.model.purchaseDetails = [...this.model.purchaseDetails];
         }, 0);
+
+        this.calculateTotal();
     }
 
     customTB(index, item) {
@@ -105,6 +107,7 @@ export class PurchaseNewComponent implements OnInit {
             this.model.purchaseDetails[index].lotId = null;
             this.model.purchaseDetails[index].costPrice = null;
             this.model.purchaseDetails[index].markPrice = null;
+            this.calculateDetailsTotal(index);
             return;
         }
         this.model.purchaseDetails[index].productId = event.code;
@@ -118,6 +121,7 @@ export class PurchaseNewComponent implements OnInit {
             }
         );
         this.products = [];
+        this.calculateDetailsTotal(index);
     }
 
     calculateDetailsTotal(index) {

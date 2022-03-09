@@ -17,13 +17,14 @@ import {PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {SearchGenericComponent} from './component/search-generic/search-generic.component';
-import {ngxLoadingAnimationTypes, NgxLoadingModule} from 'ngx-loading';
+import {NgxLoadingModule} from 'ngx-loading';
 import {GenericTableModule} from '../../../projects/generic-table/src/lib/generic-table.module';
 import {GenericImageUploaderComponent} from './component/generic-image-uploader/generic-image-uploader.component';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {OrderStatusPipe} from './pipe/order-status.pipe';
 import {PaymentStatusPipe} from './pipe/payment-status.pipe';
 import {MinMaxValidatorDirective} from './Directive/validator/min-max-validator.directive';
+import {ShoppingDetailsComponent} from './component/shopping-details/shopping-details.component';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import {MinMaxValidatorDirective} from './Directive/validator/min-max-validator.
         OrderStatusPipe,
         PaymentStatusPipe,
         MinMaxValidatorDirective,
+        ShoppingDetailsComponent,
     ],
     imports: [
         CommonModule,
@@ -85,7 +87,8 @@ import {MinMaxValidatorDirective} from './Directive/validator/min-max-validator.
         NgSelectModule,
         OrderStatusPipe,
         PaymentStatusPipe,
-        MinMaxValidatorDirective
+        MinMaxValidatorDirective,
+        ShoppingDetailsComponent
     ]
 })
 export class SharedModule {
