@@ -62,6 +62,8 @@ export class PurchaseNewComponent implements OnInit {
         setTimeout(() => {
             this.model.purchaseDetails = [...this.model.purchaseDetails];
         }, 0);
+
+        this.calculateTotal();
     }
 
     customTB(index, item) {

@@ -129,6 +129,7 @@ export class SalesNewComponent implements OnInit {
         setTimeout(() => {
             this.model.salesDetails = [...this.model.salesDetails];
         }, 0);
+        this.calculateTotal();
     }
 
     quantityChanged(event, index) {
