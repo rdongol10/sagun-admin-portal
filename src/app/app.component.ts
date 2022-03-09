@@ -22,7 +22,6 @@ export class AppComponent {
     constructor() {
         GenericService.status.subscribe((val: boolean) => {
             setTimeout(() => {
-                console.log(val ," -- >val")
                 this.loading = val;
             }, 10);
         });

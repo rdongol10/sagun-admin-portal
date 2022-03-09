@@ -17,9 +17,10 @@ export class ExpensesService extends GenericService<ExpensesModel> {
     }
 
     public updateSales(id: number, data: ExpensesModel): Observable<ExpensesModel> {
-        return this.http.put(this.baseUrl + '/updateExpenses/' + id, data).pipe(
-            map((res: ExpensesModel) => {
-                return res;
+        return this.http.put(this.baseUrl + '/updateExpenses/' + id, data, { observe: 'response'}).pipe(
+            map((res: any) => {
+                this.setUpdatedHeader(res);
+                return res.body;
             }),
             catchError((error) => this.handleError(error))
         );

@@ -17,9 +17,10 @@ export class LotHistoryService extends GenericService<LotHistoryModel> {
     }
 
     public getAllByEntity(data, entity: string, entityId): Observable<LotHistoryModel> {
-        return this.http.post(this.baseUrl + '/findAll/' + entity + '/' + entityId, data).pipe(
-            map((res: LotHistoryModel) => {
-                return res;
+        return this.http.post(this.baseUrl + '/findAll/' + entity + '/' + entityId, data, { observe: 'response'}).pipe(
+            map((res: any) => {
+                this.setUpdatedHeader(res);
+                return res.body;
             }),
             catchError((error) => this.handleError(error))
         );

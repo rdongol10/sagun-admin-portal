@@ -7,7 +7,7 @@ import {UserModel} from '../model/user-model';
 import {configApiUrl} from '../../../app-config';
 import {Observable} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
-import {ChangePasswordModel} from "../model/change-password-model";
+import {ChangePasswordModel} from '../model/change-password-model';
 
 
 @Injectable({
@@ -20,27 +20,30 @@ export class UserService extends GenericService<UserModel> {
     }
 
     public getUserProfile(): Observable<UserModel> {
-        return this.http.get(this.baseUrl + '/profile').pipe(
-            map((res: UserModel) => {
-                return res;
+        return this.http.get(this.baseUrl + '/profile', { observe: 'response'}).pipe(
+            map((res: any) => {
+                this.setUpdatedHeader(res);
+                return res.body;
             }),
             catchError((error) => this.handleError(error))
         );
     }
 
     public updateUserProfile(data: UserModel): Observable<UserModel> {
-        return this.http.put(this.baseUrl, data).pipe(
-            map((res: UserModel) => {
-                return res;
+        return this.http.put(this.baseUrl, data, { observe: 'response'}).pipe(
+            map((res: any) => {
+                this.setUpdatedHeader(res);
+                return res.body;
             }),
             catchError((error) => this.handleError(error))
         );
     }
 
     public updatePassword(data: ChangePasswordModel): Observable<UserModel> {
-        return this.http.put(this.baseUrl + '/updatePassword', data).pipe(
-            map((res: UserModel) => {
-                return res;
+        return this.http.put(this.baseUrl + '/updatePassword', data, { observe: 'response'}).pipe(
+            map((res: any) => {
+                this.setUpdatedHeader(res);
+                return res.body;
             }),
             catchError((error) => this.handleError(error))
         );
