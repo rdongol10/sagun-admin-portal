@@ -19,63 +19,70 @@ export class GenericService<T> {
     }
 
     public save(data: T): Observable<T> {
-        return this.http.post(this.baseUrl, data).pipe(
-            map((res: T) => {
-                return res;
+        return this.http.post(this.baseUrl, data, { observe: 'response'}).pipe(
+            map((res: any) => {
+              this.setUpdatedHeader(res);
+              return res.body;
             }),
             catchError((error) => this.handleError(error))
         );
     }
 
     public getById(id: number): Observable<T> {
-        return this.http.get(this.baseUrl + '/' + id).pipe(
-            map((res: T) => {
-                return res;
+        return this.http.get(this.baseUrl + '/' + id,{ observe: 'response'}).pipe(
+            map((res: any) => {
+                this.setUpdatedHeader(res);
+                return res.body;
             }),
             catchError((error) => this.handleError(error))
         );
     }
 
     public getAll(data): Observable<T> {
-        return this.http.post(this.baseUrl + '/findAll', data).pipe(
-            map((res: T) => {
-                return res;
+        return this.http.post(this.baseUrl + '/findAll', data, { observe: 'response'}).pipe(
+            map((res: any) => {
+                this.setUpdatedHeader(res);
+                return res.body;
             }),
             catchError((error) => this.handleError(error))
         );
     }
 
     public getSearchField(): Observable<T> {
-        return this.http.get(this.baseUrl + '/searchFields').pipe(
-            map((data: T) => {
-                return data;
+        return this.http.get(this.baseUrl + '/searchFields', { observe: 'response'}).pipe(
+            map((res: any) => {
+                this.setUpdatedHeader(res);
+                return res.body;
             }),
             catchError((error) => this.handleError(error))
         );
     }
 
     public update(id: number, data: T): Observable<T> {
-        return this.http.put(this.baseUrl + '/' + id, data).pipe(
-            map((res: T) => {
-                return res;
+        return this.http.put(this.baseUrl + '/' + id, data, { observe: 'response'}).pipe(
+            map((res: any) => {
+                this.setUpdatedHeader(res);
+                return res.body;
             }),
             catchError((error) => this.handleError(error))
         );
     }
 
     public search(query: SelectSearchRequest) {
-        return this.http.post(this.baseUrl + '/search', query).pipe(
-            map((data: any) => {
-                return data;
+        return this.http.post(this.baseUrl + '/search', query, { observe: 'response'}).pipe(
+            map((res: any) => {
+                this.setUpdatedHeader(res);
+                return res.body;
             }),
             catchError((error) => this.handleError(error))
         );
     }
 
     public delete(id: number): Observable<T> {
-        return this.http.delete(this.baseUrl + 'delete/' + id).pipe(
-            map((data: T) => {
-                return data;
+        return this.http.delete(this.baseUrl + 'delete/' + id, { observe: 'response'}).pipe(
+            map((res: any) => {
+                this.setUpdatedHeader(res);
+                return res.body;
             }),
             catchError((error) => this.handleError(error))
         );
@@ -90,6 +97,9 @@ export class GenericService<T> {
         //     headers = headers.set('X-XSRF-TOKEN', cookie);
         // }
         return headers;
+    }
+    setUpdatedHeader(res) {
+        localStorage.setItem('token', JSON.stringify(res.headers.get('Authorization')));
     }
 
     public display(value: boolean) {

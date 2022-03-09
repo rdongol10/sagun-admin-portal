@@ -17,9 +17,10 @@ export class LotService extends GenericService<LotModel> {
     }
 
     public inStock(id: number, data: LotModel): Observable<LotModel> {
-        return this.http.put(this.baseUrl + '/inStock/' + id, data).pipe(
-            map((res: LotModel) => {
-                return res;
+        return this.http.put(this.baseUrl + '/inStock/' + id, data, { observe: 'response'}).pipe(
+            map((res: any) => {
+                this.setUpdatedHeader(res);
+                return res.body;
             }),
             catchError((error) => this.handleError(error))
         );
@@ -27,9 +28,10 @@ export class LotService extends GenericService<LotModel> {
 
 
     public searchByProduct(productId: number) {
-        return this.http.post(this.baseUrl + '/searchByProductId/' + productId, null).pipe(
-            map((data: any) => {
-                return data;
+        return this.http.post(this.baseUrl + '/searchByProductId/' + productId, null, { observe: 'response'}).pipe(
+            map((res: any) => {
+                this.setUpdatedHeader(res);
+                return res.body;
             }),
             catchError((error) => this.handleError(error))
         );
