@@ -13,6 +13,7 @@
                 {title: 'Product Name', width: '', sort: 'productName', colValue : 'productName'},
                 {title: 'Cost Price', width: '', sort: 'costPrice', colValue : 'costPrice'},
                 {title: 'Quantity', width: '', sort: 'quantity', colValue : 'quantity'},
+                {title: 'Mark Price', width: '', sort: 'markPrice', colValue : 'markPrice'},
                 {title: 'Created on', width: '', sort: 'creationDate', colValue : 'creationDate'},
                 {title: 'Action', width: '', sort: '', colValue : ''},
                 ]"
@@ -28,16 +29,17 @@
                 <td class="text-center">{{data.productName}}</td>
                 <td class="text-center">{{data.costPrice}}</td>
                 <td class="text-center">{{data.quantity}}</td>
+                <td class="text-center">{{data.markPrice}}</td>
                 <td class="text-center">{{data.creationDate}}</td>
                 <td class="text-center">
                     <div role="group" class="btn-group-sm btn-group">
                         <fa-icon
-                            [icon]="fileArchive"
-                            size="lg"
-                            routerLink="/lotHistory/list/lotId/{{data?.id}}"
-                            class="buttonIcons mx-2"
-                            ngbTooltip="Lot history"
-                            style="color:#bb3e03"
+                                [icon]="fileArchive"
+                                size="lg"
+                                routerLink="/lotHistory/list/lotId/{{data?.id}}"
+                                class="buttonIcons mx-2"
+                                ngbTooltip="Lot history"
+                                style="color:#bb3e03"
                         >
 
                         </fa-icon>
