@@ -105,14 +105,17 @@ export class SalesNewComponent implements OnInit {
             this.model.salesDetails[index].lotId = 0;
             this.model.salesDetails[index].costPrice = 0;
             this.model.salesDetails[index].remainingQuantity = 0;
+            this.model.salesDetails[index].markPrice = 0;
         } else {
             this.model.salesDetails[index].lotId = event.code;
             this.model.salesDetails[index].costPrice = event.details.costPrice;
             this.model.salesDetails[index].remainingQuantity = event.details.quantity;
+            this.model.salesDetails[index].markPrice = event.details.markPrice;
         }
         this.lots = [];
         this.calculateDetailsTotal(index);
         this.calculateTotal();
+        this.calculateSellingPrice();
     }
 
     addSalesDetails() {
@@ -130,11 +133,13 @@ export class SalesNewComponent implements OnInit {
             this.model.salesDetails = [...this.model.salesDetails];
         }, 0);
         this.calculateTotal();
+        this.calculateSellingPrice();
     }
 
     quantityChanged(event, index) {
         this.calculateDetailsTotal(index);
         this.calculateTotal();
+        this.calculateSellingPrice();
     }
 
     calculateDetailsTotal(index) {
@@ -142,6 +147,17 @@ export class SalesNewComponent implements OnInit {
             = !this.model.salesDetails[index].costPrice || !this.model.salesDetails[index].quantity
             ? 0 :
             this.model.salesDetails[index].costPrice * this.model.salesDetails[index].quantity;
+    }
+
+    calculateSellingPrice() {
+        let sellingPrice = 0;
+        this.model.salesDetails.forEach((detail) => {
+            if (detail.markPrice && detail.quantity) {
+                sellingPrice += detail.markPrice * detail.quantity;
+            }
+        });
+        this.model.sellingPrice = sellingPrice;
+        this.calculateNetSellingPrice();
     }
 
     calculateTotal() {

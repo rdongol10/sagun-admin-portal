@@ -6,5 +6,6 @@ export class SalesDetailModel {
     costPrice: number;
     quantity = 0;
     totalCostPrice: number;
+    markPrice: number;
     uniqueId;
 }

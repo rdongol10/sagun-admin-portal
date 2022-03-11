@@ -58,8 +58,11 @@
                 <div class="col-md-2" [hidden]="routeId">
                     Remaining Quantity
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-1">
                     Quantity
+                </div>
+                <div class="col-md-2">
+                    Mark Price
                 </div>
                 <div class="col-md-2">
                     Total
@@ -82,7 +85,8 @@
                             <div>
                                 <p class="ngSelectTitle ngSelectText">{{item.title}}</p>
                                 <p class="ngSelectDetails ngSelectText">Cost Price - {{item.details?.costPrice}}</p>
-                                <p class="ngSelectDetails ngSelectText">Quantity - {{item.details?.quantity}}</p>
+                                <p class="ngSelectDetails ngSelectText">Remaining - {{item.details?.quantity}}</p>
+                                <p class="ngSelectDetails ngSelectText">Mark Price - {{item.details?.markPrice}}</p>
                             </div>
                         </ng-template>
                     </ng-select>
@@ -103,7 +107,7 @@
                     <input [(ngModel)]="salesDetail.remainingQuantity" name="remainingQuantity{{i}}"
                            class="form-control" disabled>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-1">
                     <input [(ngModel)]="salesDetail.quantity" name="quantity{{i}}" class="form-control" type="number"
                            (change)="quantityChanged($event,i)"
                            (keyup)="quantityChanged($event,i)"
@@ -116,18 +120,21 @@
                     <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
                         <div *ngIf="quantity.errors?.required">Quantity is required</div>
                         <div *ngIf="quantity.errors?.min">Quantity can not be less than 1</div>
-
                     </div>
+                </div>
+                <div class="col-md-2" >
+                    <input [(ngModel)]="salesDetail.markPrice" name="markPrice{{i}}"
+                           class="form-control" disabled>
                 </div>
                 <div class="col-md-2">
                     <input [(ngModel)]="salesDetail.totalCostPrice" name="totalCostPrice{{i}}" class="form-control"
                            disabled>
                 </div>
 
-                <div *ngIf="i==0 && !routeId" class="col-md-2">
+                <div *ngIf="i==0 && !routeId" class="col-md-1">
                     <button type="button" class="btn btn-primary" (click)="addSalesDetails()">Add</button>
                 </div>
-                <div *ngIf="i>0 && !routeId" class="col-md-2">
+                <div *ngIf="i>0 && !routeId" class="col-md-1">
                     <button type="button" class="btn btn-danger" (click)="removeSaleDetails(i)">Remove</button>
                 </div>
             </div>
@@ -138,6 +145,8 @@
                 <div class="col-md-2" [hidden]="routeId">
                 </div>
                 <div class="col-md-2">
+                </div>
+                <div class="col-md-1">
                 </div>
                 <div class="col-md-2">
                 </div>
@@ -155,6 +164,8 @@
                 <div class="col-md-2">
                 </div>
                 <div class="col-md-2">
+                </div>
+                <div class="col-md-1">
                 </div>
                 <div class="col-md-2">
                     Additional Charges
@@ -174,6 +185,8 @@
                 </div>
                 <div class="col-md-2">
                 </div>
+                <div class="col-md-1">
+                </div>
                 <div class="col-md-2">
                     Total Cost Price
                 </div>
@@ -182,13 +195,14 @@
                            type="number" disabled>
                 </div>
             </div>
-
             <div class="row mt-2">
                 <div class="col-md-2" [hidden]="routeId">
                 </div>
                 <div class="col-md-2">
                 </div>
                 <div class="col-md-2">
+                </div>
+                <div class="col-md-1">
                 </div>
                 <div class="col-md-2">
                     Selling Price
@@ -216,6 +230,8 @@
                 </div>
                 <div class="col-md-2">
                 </div>
+                <div class="col-md-1">
+                </div>
                 <div class="col-md-2">
                     Discount
                 </div>
@@ -234,6 +250,8 @@
                 </div>
                 <div class="col-md-2">
                 </div>
+                <div class="col-md-1">
+                </div>
                 <div class="col-md-2">
                     Net Selling Price
                 </div>
@@ -249,6 +267,8 @@
                 <div class="col-md-2">
                 </div>
                 <div class="col-md-2">
+                </div>
+                <div class="col-md-1">
                 </div>
                 <div class="col-md-2">
                     Payment Status
@@ -267,6 +287,8 @@
                 <div class="col-md-2">
                 </div>
                 <div class="col-md-2">
+                </div>
+                <div class="col-md-1">
                 </div>
                 <div class="col-md-2">
                     Paid Amount
@@ -293,6 +315,8 @@
                 <div class="col-md-2">
                 </div>
                 <div class="col-md-2">
+                </div>
+                <div class="col-md-1">
                 </div>
                 <div class="col-md-2">
                     Remaining Amount
