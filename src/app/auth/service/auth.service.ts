@@ -27,6 +27,7 @@ export class AuthService extends GenericService<any>{
                 if (theBody) {
                     localStorage.setItem('token', JSON.stringify(response.headers.get('Authorization')));
                     localStorage.setItem('userDetails', JSON.stringify(theBody));
+                    localStorage.setItem('expires', JSON.stringify(response.headers.get('Expires')));
                     return true;
                 }else {
                     return false;

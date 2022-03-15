@@ -98,8 +98,10 @@ export class GenericService<T> {
         // }
         return headers;
     }
+
     setUpdatedHeader(res) {
         localStorage.setItem('token', JSON.stringify(res.headers.get('Authorization')));
+        localStorage.setItem('expires', JSON.stringify(res.headers.get('Expires')));
     }
 
     public display(value: boolean) {
