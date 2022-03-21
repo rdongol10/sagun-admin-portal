@@ -42,6 +42,13 @@
                 </td>
                 <td class="text-center">
                     <div role="group" class="btn-group-sm btn-group">
+                        <fa-icon [icon]="viewIcon"
+                                 ngbTooltip="details"
+                                 class="buttonIcons me-3"
+                                 style="color:#005f73"
+                                 size="lg"
+                                 (click)="viewDetails(data?.id)"
+                        ></fa-icon>
                         <fa-icon [icon]="editIcon"
                                  ngbTooltip="edit"
                                  routerLink="/sales/edit/{{data?.id}}"

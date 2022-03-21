@@ -58,7 +58,7 @@ import {ShoppingDetailsComponent} from './component/shopping-details/shopping-de
         GenericTableModule,
         FontAwesomeModule,
         LoadingBarRouterModule,
-        NgSelectModule
+        NgSelectModule,
     ],
     exports: [
         CommonModule,
