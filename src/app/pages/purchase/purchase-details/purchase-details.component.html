@@ -1,0 +1,86 @@
+<div class="main-card card">
+    <div class="modal-header">
+        <h4 class="modal-title"><b>Details</b></h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss()"></button>
+    </div>
+
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-2">
+                <label class="form-label label-heading"> Product</label>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label label-heading"> Lot</label>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label label-heading"> Cost price</label>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label label-heading"> Mark price</label>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label label-heading"> Quantity </label>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label label-heading"> Total</label>
+            </div>
+        </div>
+
+        <div class="row " *ngFor="let purchaseDetail of purchaseModel.purchaseDetails">
+            <div class="col-md-2">
+                <label class="form-label "> {{purchaseDetail.productName}}</label>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label "> {{purchaseDetail.lotName}}</label>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label"> {{purchaseDetail.costPrice}}</label>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label"> {{purchaseDetail.markPrice}}</label>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label"> {{purchaseDetail.quantity}} </label>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label"> {{purchaseDetail.total}}</label>
+            </div>
+        </div>
+        <hr>
+        <div class="row ">
+            <div class="col-md-8"></div>
+            <div class="col-md-2"><label class="form-label label-heading">Total</label></div>
+            <div class="col-md-2">{{purchaseModel.totalCostPrice}}</div>
+        </div>
+        <div class="row ">
+            <div class="col-md-8"></div>
+            <div class="col-md-2"><label class="form-label label-heading">Discount</label></div>
+            <div class="col-md-2">{{purchaseModel.discount}}</div>
+        </div>
+        <div class="row ">
+            <div class="col-md-8"></div>
+            <div class="col-md-2"><label class="form-label label-heading">Net Total</label></div>
+            <div class="col-md-2">{{purchaseModel.netCostPrice}}</div>
+        </div>
+        <hr>
+        <div class="row ">
+            <div class="col-md-8"></div>
+            <div class="col-md-2"><label class="form-label label-heading">Payment Status</label></div>
+            <div class="col-md-2">{{purchaseModel.paymentStatus | paymentStatus}}</div>
+        </div>
+        <div class="row" *ngIf="purchaseModel.paymentStatus==paymentStatusEnum.Partial_Payment">
+            <div class="col-md-8"></div>
+            <div class="col-md-2"><label class="form-label label-heading">Paid Amount</label></div>
+            <div class="col-md-2">{{purchaseModel.paidAmount}}</div>
+        </div>
+        <div class="row" *ngIf="purchaseModel.paymentStatus==paymentStatusEnum.Partial_Payment">
+            <div class="col-md-8"></div>
+            <div class="col-md-2"><label class="form-label label-heading">Remaining</label></div>
+            <div class="col-md-2">{{purchaseModel.remaining}}</div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="activeModal.dismiss()">Close</button>
+    </div>
+</div>
