@@ -26,6 +26,23 @@ export const sideMenuList: SideMenuInterface[] = [
         ],
     },
     {
+        id: 'role',
+        label: 'Role',
+        icon: 'users',
+        childMenu: [
+            {
+                url: 'role/new',
+                label: 'New',
+                childMenu: [],
+            },
+            {
+                url: 'role/list',
+                label: 'List',
+                childMenu: [],
+            }
+        ],
+    },
+    {
         id: 'product',
         label: 'Product',
         icon: 'gift',
