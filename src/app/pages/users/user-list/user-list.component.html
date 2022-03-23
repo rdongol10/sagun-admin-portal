@@ -13,6 +13,7 @@
                 {title: 'Email', width: '', sort: 'emailAddress', colValue : 'emailAddress'},
                 {title: 'FullName', width: '', sort: 'firstName', colValue : 'firstName'},
                 {title: 'Mobile Number', width: '', sort: 'mobileNumber', colValue : 'mobileNumber'},
+                {title: 'Role', width: '', sort: '', colValue : ''},
                 {title: 'Action', width: '', sort: '', colValue : ''},
                 ]"
                 [totalCount]="totalCount"
@@ -26,6 +27,7 @@
                 <td class="text-center">{{data.emailAddress}}</td>
                 <td class="text-center">{{data.firstName ? data.firstName : ''}} {{data.middleName ? data.middleName : ''}}  {{data.lastName ? data.lastName : ''}}</td>
                 <td class="text-center">{{data.mobileNumber}}</td>
+                <td class="text-center">{{data.roleTitle}}</td>
                 <td class="text-center">
                     <div role="group" class="btn-group-sm btn-group">
                         <fa-icon [icon]="editIcon"
