@@ -8,4 +8,6 @@ export class UserModel {
     password: string;
     rePassword: string;
     userId: string;
+    roleId: number;
+    roleTitle: string;
 }

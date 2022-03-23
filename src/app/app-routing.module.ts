@@ -23,6 +23,10 @@ const routes: Routes = [
                 loadChildren: () => import('./pages/users/users.module').then(m => m.UsersModule)
 
             }, {
+                path: 'role',
+                data: {extraParameter: 'role'},
+                loadChildren: () => import('./pages/role/role.module').then(m => m.RoleModule)
+            }, {
                 path: 'product',
                 data: {extraParameter: 'product'},
                 loadChildren: () => import('./pages/products/product.module').then(m => m.ProductModule)
@@ -66,6 +70,7 @@ const routes: Routes = [
                 data: {extraParameter: 'income'},
                 loadChildren: () => import('./pages/income/income.module').then(m => m.IncomeModule)
             },
+
         ]
     },
     {

@@ -10,7 +10,8 @@ export const configApiUrl = {
     SALES_API: MainUrl + 'sales',
     EXPENSES_API: MainUrl + 'expenses',
     PURCHASE_API: MainUrl + 'purchase',
-    INCOME_API: MainUrl + 'income'
+    INCOME_API: MainUrl + 'income',
+    ROLE_API: MainUrl + 'role'
 };
 
 export const ORDER_STATUS: SelectableValue[] = [
