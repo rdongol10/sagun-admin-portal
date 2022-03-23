@@ -3,6 +3,9 @@ import {UserService} from '../service/user.service';
 import {UserModel} from '../model/user-model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
+import {SelectableValue} from '../../../@core/class/selectable-value';
+import {SelectSearchRequest} from '../../../@core/class/select-search-request';
+import {RoleService} from '../../role/service/role.service';
 
 @Component({
     selector: 'app-user-new',
@@ -12,13 +15,16 @@ import {ToastrService} from 'ngx-toastr';
 export class UserNewComponent implements OnInit {
     model: UserModel = new UserModel();
     routeId;
+    roles: SelectableValue[] = [];
 
-    constructor(private service: UserService, private router: Router, private notify: ToastrService, private route: ActivatedRoute) {
+    constructor(private service: UserService, private roleService: RoleService,
+                private router: Router, private notify: ToastrService,
+                private route: ActivatedRoute) {
     }
 
     ngOnInit(): void {
         this.route.params.subscribe(params => {
-            this.routeId = (params['id']);
+            this.routeId = (params.id);
         });
         this.service.display(true);
         if (this.routeId) {
@@ -61,4 +67,30 @@ export class UserNewComponent implements OnInit {
         }
 
     }
+
+    searchRole(event) {
+        if (event.term.trim() === '') {
+            this.roles = [];
+            return;
+        }
+
+        const query: SelectSearchRequest = new SelectSearchRequest();
+        query.searchQuery = event.term;
+        this.roleService.search(query).subscribe(
+            (data: any) => {
+                this.roles = data.data;
+            }, error => {
+                this.notify.error(error.error.message, 'Error');
+            }
+        );
+    }
+
+    changeRole(event) {
+        if (event === undefined) {
+            this.model.roleId = null;
+        } else {
+            this.model.roleId = event.code;
+        }
+    }
+
 }

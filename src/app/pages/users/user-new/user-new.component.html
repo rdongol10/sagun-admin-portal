@@ -37,7 +37,6 @@
                 </div>
             </div>
 
-
             <div class="row">
                 <div class="col-md-8">
                     <div class="position-relative mb-3">
@@ -86,6 +85,38 @@
                 </div>
 
             </div>
+            <div class="row" *ngIf="!routeId">
+                <div class="col-md-3">
+                    <div class="position-relative mb-3">
+                        <label for="role" class="form-label">Role</label>
+
+                        <ng-select placeholder="Role" [items]="roles"
+                                   bindLabel="title"
+                                   bindValue="code"
+                                   [(ngModel)]="model.roleId"
+                                   name="role"
+                                   id="role"
+                                   (search)="searchRole($event)"
+                                   (change)="changeRole($event)"
+                                   #role="ngModel" required
+                                   [ngClass]="{ 'is-invalid': form.submitted && role.invalid }"
+                        ></ng-select>
+                        <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
+                            <div *ngIf="role.errors?.required">Role is required</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="routeId">
+                <div class="col-md-3">
+                    <div class="position-relative mb-3">
+                        <label for="role" class="form-label">Role</label>
+                        <input type="text" class="form-control" value="{{model.roleTitle}}" disabled/>
+                    </div>
+                </div>
+            </div>
+
             <div class="row" *ngIf="!routeId">
                 <div class="col-md-4">
                     <div class="position-relative mb-3">
