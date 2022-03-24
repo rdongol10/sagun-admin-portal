@@ -33,7 +33,7 @@
                 <td class="text-center">{{data.creationDate}}</td>
                 <td class="text-center">
                     <div role="group" class="btn-group-sm btn-group">
-                        <fa-icon
+                        <fa-icon *ngIf="allowedGrants.includes('lotHistory:list')"
                                 [icon]="fileArchive"
                                 size="lg"
                                 routerLink="/lotHistory/list/lotId/{{data?.id}}"
@@ -41,7 +41,6 @@
                                 ngbTooltip="Lot history"
                                 style="color:#bb3e03"
                         >
-
                         </fa-icon>
 
                     </div>

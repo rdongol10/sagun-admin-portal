@@ -30,7 +30,7 @@
                 <td class="text-center">{{data.roleTitle}}</td>
                 <td class="text-center">
                     <div role="group" class="btn-group-sm btn-group">
-                        <fa-icon [icon]="editIcon"
+                        <fa-icon [icon]="editIcon" *ngIf="allowedGrants.includes('user:edit')"
                                  ngbTooltip="edit"
                                  routerLink="/user/edit/{{data?.id}}"
                                  class="buttonIcons"

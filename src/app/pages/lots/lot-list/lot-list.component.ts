@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {SearchCriteriaModel} from '../../../@core/class/search-criteria-model';
 import {ToastrService} from 'ngx-toastr';
 import {LotService} from '../service/lot.service';
-import {faFileAlt, faFileArchive, faPlus} from '@fortawesome/free-solid-svg-icons';
+import {faFileAlt, faFileArchive, faPen, faPlus} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'app-lot-list',
@@ -21,6 +21,7 @@ export class LotListComponent implements OnInit {
     totalCount;
     plusIcon = faPlus;
     fileArchive = faFileAlt;
+    allowedGrants = JSON.parse(localStorage.getItem('allowedGrants'));
 
 
     constructor(private service: LotService, private notify: ToastrService) {

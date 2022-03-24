@@ -25,7 +25,7 @@
                 <td class="text-center "><img class="tableImage" src={{data.image}}/></td>
                 <td class="text-center">
                     <div role="group" class="btn-group-sm btn-group">
-                        <fa-icon [icon]="editIcon"
+                        <fa-icon *ngIf="allowedGrants.includes('product:edit')" [icon]="editIcon"
                                  ngbTooltip="edit"
                                  routerLink="/product/edit/{{data?.id}}"
                                  class="buttonIcons mx-2"
@@ -33,6 +33,7 @@
                                  size="lg"
                         ></fa-icon>
                         <fa-icon
+                                *ngIf="allowedGrants.includes('lotHistory:list')"
                                 [icon]="fileArchive"
                                 size="lg"
                                 routerLink="/lotHistory/list/productId/{{data?.id}}"

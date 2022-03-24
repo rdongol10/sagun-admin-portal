@@ -19,6 +19,7 @@ export class UserListComponent implements OnInit {
     fieldCondition;
     totalCount;
     editIcon = faPen;
+    allowedGrants = JSON.parse(localStorage.getItem('allowedGrants'));
     constructor(private service: UserService, private notify: ToastrService) {
     }
 

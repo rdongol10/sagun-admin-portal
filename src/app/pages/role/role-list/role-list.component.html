@@ -22,7 +22,7 @@
                 <td class="text-center">{{data.title}}</td>
                 <td class="text-center">
                     <div role="group" class="btn-group-sm btn-group">
-                        <fa-icon [icon]="editIcon"
+                        <fa-icon *ngIf="allowedGrants.includes('role:edit')" [icon]="editIcon"
                                  ngbTooltip="edit"
                                  routerLink="/role/edit/{{data?.id}}"
                                  class="buttonIcons"

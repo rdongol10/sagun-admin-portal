@@ -22,6 +22,7 @@ export class ProductListComponent implements OnInit {
     totalCount;
     editIcon = faPen;
     fileArchive = faFileAlt;
+    allowedGrants = JSON.parse(localStorage.getItem('allowedGrants'));
 
     constructor(private service: ProductService, private notify: ToastrService) {
     }
