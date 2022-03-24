@@ -118,6 +118,8 @@ export class GenericService<T> {
     protected handleError(error: any) {
         if (error.status == 401) {
             this.router.navigateByUrl('/auth/login').then(r => this.display(false));
+        } else if (error.status == 403) {
+            this.router.navigateByUrl('/accessDenied').then(r => this.display(false));
         } else {
 
             console.log('err=>', error);
