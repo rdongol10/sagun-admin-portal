@@ -1,3 +1,5 @@
+import {PermissionInfo} from '../../role/model/permission-info-model';
+
 export class UserModel {
     id;
     emailAddress: string;
@@ -10,4 +12,5 @@ export class UserModel {
     userId: string;
     roleId: number;
     roleTitle: string;
+    permissionInfo: PermissionInfo[] = [];
 }

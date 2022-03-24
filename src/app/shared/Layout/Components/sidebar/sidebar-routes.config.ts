@@ -14,11 +14,13 @@ export const sideMenuList: SideMenuInterface[] = [
         icon: 'user',
         childMenu: [
             {
+                id: 'user:create',
                 url: 'user/new',
                 label: 'New',
                 childMenu: [],
             },
             {
+                id: 'user:list',
                 url: 'user/list',
                 label: 'List',
                 childMenu: [],
@@ -31,11 +33,13 @@ export const sideMenuList: SideMenuInterface[] = [
         icon: 'users',
         childMenu: [
             {
+                id: 'role:create',
                 url: 'role/new',
                 label: 'New',
                 childMenu: [],
             },
             {
+                id: 'role:list',
                 url: 'role/list',
                 label: 'List',
                 childMenu: [],
@@ -48,11 +52,13 @@ export const sideMenuList: SideMenuInterface[] = [
         icon: 'gift',
         childMenu: [
             {
+                id: 'product:create',
                 url: 'product/new',
                 label: 'New',
                 childMenu: [],
             },
             {
+                id: 'product:list',
                 url: 'product/list',
                 label: 'List',
                 childMenu: [],
@@ -65,11 +71,13 @@ export const sideMenuList: SideMenuInterface[] = [
         icon: 'shopbag',
         childMenu: [
             {
+                id: 'purchase:create',
                 url: 'purchase/new',
                 label: 'New',
                 childMenu: [],
             },
             {
+                id: 'purchase:list',
                 url: 'purchase/list',
                 label: 'List',
                 childMenu: [],
@@ -82,11 +90,13 @@ export const sideMenuList: SideMenuInterface[] = [
         icon: 'cart',
         childMenu: [
             {
+                id: 'sales:create',
                 url: 'sales/new',
                 label: 'New',
                 childMenu: [],
             },
             {
+                id: 'sales:list',
                 url: 'sales/list',
                 label: 'List',
                 childMenu: [],
@@ -99,11 +109,13 @@ export const sideMenuList: SideMenuInterface[] = [
         icon: 'cash',
         childMenu: [
             {
+                id: 'income:create',
                 url: 'income/new',
                 label: 'New',
                 childMenu: [],
             },
             {
+                id: 'income:list',
                 url: 'income/list',
                 label: 'List',
                 childMenu: [],
@@ -116,11 +128,13 @@ export const sideMenuList: SideMenuInterface[] = [
         icon: 'calculator',
         childMenu: [
             {
+                id: 'expenses:create',
                 url: 'expenses/new',
                 label: 'New',
                 childMenu: [],
             },
             {
+                id: 'expenses:list',
                 url: 'expenses/list',
                 label: 'List',
                 childMenu: [],
@@ -133,6 +147,7 @@ export const sideMenuList: SideMenuInterface[] = [
         icon: 'note',
         childMenu: [
             {
+                id: 'lot:list',
                 url: 'lot/list',
                 label: 'List',
                 childMenu: [],
@@ -145,6 +160,7 @@ export const sideMenuList: SideMenuInterface[] = [
         icon: 'news-paper',
         childMenu: [
             {
+                id: 'lotHistory:list',
                 url: 'lotHistory/list',
                 label: 'List',
                 childMenu: [],
