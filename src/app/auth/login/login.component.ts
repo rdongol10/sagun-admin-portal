@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
                 console.log(data);
                 this.service.display(false);
                 this.notify.success('User Login Success', 'Success');
-                this.router.navigate(['/user/list']);
+                this.router.navigate(['/dashboard']);
             }, error => {
                 this.service.display(false);
                 this.notify.error(error.error.message, 'Error');
