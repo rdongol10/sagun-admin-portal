@@ -23,6 +23,7 @@ export class PurchaseListComponent implements OnInit {
     totalCount;
     editIcon = faPen;
     viewIcon = faEye;
+    allowedGrants = JSON.parse(localStorage.getItem('allowedGrants'));
 
     constructor(private service: PurchaseService, private notify: ToastrService,
                 private config: NgbModalConfig, private modalService: NgbModal) {

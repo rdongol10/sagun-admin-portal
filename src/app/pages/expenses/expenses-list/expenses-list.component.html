@@ -33,7 +33,8 @@
                 <td class="text-center">{{data.creationDate}}</td>
                 <td class="text-center">
                     <div role="group" class="btn-group-sm btn-group">
-                        <fa-icon [icon]="editIcon"
+                        <fa-icon *ngIf="allowedGrants.includes('expenses:edit')"
+                                [icon]="editIcon"
                                  ngbTooltip="edit"
                                  routerLink="/expenses/edit/{{data?.id}}"
                                  class="buttonIcons"

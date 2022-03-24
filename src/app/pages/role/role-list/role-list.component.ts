@@ -20,6 +20,7 @@ export class RoleListComponent implements OnInit {
     fieldCondition;
     totalCount;
     editIcon = faPen;
+    allowedGrants = JSON.parse(localStorage.getItem('allowedGrants'));
 
     constructor(private service: RoleService, private notify: ToastrService) {
     }
