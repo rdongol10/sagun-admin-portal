@@ -10,6 +10,7 @@
                 [headers]="[
                 {title: '#', width: '', sort: '', colValue : ''},
                 {title: 'Product name', width: '', sort: 'name', colValue : 'name'},
+                {title: 'Product code', width: '', sort: 'productCode', colValue : 'productCode'},
                 {title: 'Image', width: '', sort: '', colValue : ''},
                 {title: 'Action', width: '', sort: '', colValue : ''},
                 ]"
@@ -22,6 +23,7 @@
             <tr *ngFor="let data of list; let i = index;">
                 <td class="text-center text-muted" style="width: 80px;">{{i + 1}}</td>
                 <td class="text-center">{{data.name}}</td>
+                <td class="text-center">{{data.productCode}}</td>
                 <td class="text-center "><img class="tableImage" src={{data.image}}/></td>
                 <td class="text-center">
                     <div role="group" class="btn-group-sm btn-group">
