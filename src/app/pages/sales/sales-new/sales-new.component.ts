@@ -91,7 +91,7 @@ export class SalesNewComponent implements OnInit {
         }
         const query: SelectSearchRequest = new SelectSearchRequest();
         query.searchQuery = event.term;
-        this.lotService.search(query).subscribe(
+        this.lotService.searchByProductName(query).subscribe(
             (data: any) => {
                 this.lots = data.data;
             }, error => {
