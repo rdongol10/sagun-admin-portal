@@ -19,7 +19,7 @@
                         <ngb-accordion [destroyOnHide]="false" [closeOthers]="true" [activeIds]="extraParameter">
 
                             <ngb-panel *ngFor="let item of menuList;let i =index;" id="{{item.id}}"
-                                       [cardClass]="(item.label=='Dashboard' || allowedModels.includes(item.label))?'show':'hidden'">
+                                       [cardClass]="(item.label=='Dashboard' || item.label=='Transaction' || allowedModels.includes(item.label))?'show':'hidden'">
                                 <ng-template ngbPanelHeader>
                                     <button (click)="navigate(item.url)" ngbPanelToggle class="vsm-link">
                                         <i class="vsm-icon pe-7s-{{item.icon}}"></i>
@@ -29,7 +29,7 @@
                                 </ng-template>
                                 <ng-template ngbPanelContent>
                                     <div class="vsm-dropdown" *ngFor="let subItem of item.childMenu"
-                                         [hidden]="!allowedGrants.includes(subItem.id)">
+                                         [hidden]="item.label!='Transaction' && !allowedGrants.includes(subItem.id)">
                                         <div class="vsm-list">
                                             <div class="vsm-item">
                                                 <a routerLinkActive="active-item" routerLink="{{subItem.url}}"
