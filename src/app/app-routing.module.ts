@@ -71,11 +71,15 @@ const routes: Routes = [
                 loadChildren: () => import('./pages/income/income.module').then(m => m.IncomeModule)
             },
             {
+                path: 'transaction',
+                data: {extraParameter: 'transaction'},
+                loadChildren: () => import('./pages/transaction/transaction.module').then(m => m.TransactionModule)
+            },
+            {
                 path: 'accessDenied',
                 data: {extraParameter: 'accessDenied'},
                 loadChildren: () => import('./pages/accessDenied/access-denied.module').then(m => m.AccessDeniedModule)
             },
-
         ]
     },
     {

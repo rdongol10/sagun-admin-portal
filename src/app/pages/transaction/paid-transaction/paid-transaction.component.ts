@@ -1,0 +1,83 @@
+import {Component, OnInit} from '@angular/core';
+import {TransactionService} from '../service/transaction.service';
+import {ToastrService} from 'ngx-toastr';
+import {TransactionSearchRequestModel} from '../model/transaction-search-request-model';
+import {NgbCalendar, NgbDate, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
+import {faSearch} from '@fortawesome/free-solid-svg-icons';
+import {PaidTransactionReportModel} from '../model/paid-transaction-report-model';
+
+
+@Component({
+    selector: 'app-paid-transaction',
+    templateUrl: './paid-transaction.component.html',
+    styleUrls: ['./paid-transaction.component.sass']
+})
+export class PaidTransactionComponent implements OnInit {
+    fromDate;
+    toDate;
+    searchModel: TransactionSearchRequestModel = new TransactionSearchRequestModel();
+    searchIcon = faSearch;
+    transactionData: PaidTransactionReportModel = new PaidTransactionReportModel();
+
+    constructor(private service: TransactionService, private notify: ToastrService,
+                private calendar: NgbCalendar, public formatter: NgbDateParserFormatter) {
+        const currentDate = new Date();
+        this.fromDate = new NgbDate(currentDate.getFullYear(), currentDate.getMonth() + 1, currentDate.getDate() - 7);
+        this.toDate = new NgbDate(currentDate.getFullYear(), currentDate.getMonth() + 1, currentDate.getDate());
+    }
+
+    ngOnInit(): void {
+        this.getList();
+    }
+
+    searchTransaction() {
+        this.getList();
+    }
+
+    getList() {
+        this.service.display(true);
+        this.searchModel.fromDate = this.service.formattedDate(this.fromDate);
+        this.searchModel.toDate = this.service.formattedDate(this.toDate);
+        this.service.paidTransaction(this.searchModel)
+            .subscribe((data: any) => {
+                console.log(data.data);
+                this.transactionData = data.data;
+                this.service.display(false);
+            }, error => {
+                this.notify.error(error.error, 'Error');
+                this.service.display(false);
+            });
+    }
+
+
+    formatDate() {
+        if (this.fromDate) {
+            this.searchModel.fromDate = this.service.formattedDate(this.fromDate);
+        }
+        if (this.toDate) {
+            this.searchModel.toDate = this.service.formattedDate(this.toDate);
+        }
+    }
+
+    onFromDateSelection(date: NgbDate) {
+        this.fromDate = date;
+    }
+
+    onToDateSelection(date: NgbDate) {
+        this.toDate = date;
+    }
+
+    changeIndex(event) {
+        const numb = event.pageNumber;
+        this.searchModel.pageSize = event.pageSize;
+        this.searchModel.pageNumber = Number(numb) + 1;
+        if (numb > this.searchModel.pageNumber) {
+            this.searchModel.pageNumber++;
+            this.getList();
+        } else {
+            this.searchModel.pageNumber--;
+            this.getList();
+        }
+
+    }
+}

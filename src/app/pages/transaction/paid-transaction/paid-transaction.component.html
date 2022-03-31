@@ -1,0 +1,112 @@
+<div class="main-card mb-3 card">
+    <div class="card-body">
+        <form #form="ngForm">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="position-relative mb-3">
+                        <label for="fromDate" class="form-label">From Date</label>
+                        <div class="input-group">
+                            <input class="form-control"
+                                   autocomplete="off"
+                                   placeholder=""
+                                   required
+                                   ngbDatepicker
+                                   #fromDates="ngbDatepicker"
+                                   [value]="formatter.format(fromDate)" name="fromDate"
+                                   id="fromDate"
+                                   (dateSelect)="onFromDateSelection($event)"
+                                   readonly
+                            />
+                            <button class="btn btn-outline-secondary calendar" (click)="fromDates.toggle()"
+                                    type="button"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="position-relative mb-3">
+                        <label for="toDate" class="form-label">To Date</label>
+                        <div class="input-group">
+                            <input class="form-control"
+                                   autocomplete="off"
+                                   placeholder=""
+                                   required
+                                   ngbDatepicker
+                                   #toDates="ngbDatepicker"
+                                   [value]="formatter.format(toDate)" name="toDate"
+                                   id="toDate"
+                                   (dateSelect)="onToDateSelection($event)"
+                                   readonly
+                            />
+                            <button class="btn btn-outline-secondary calendar" (click)="toDates.toggle()"
+                                    type="button"></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="position-relative mb-3">
+                        <br>
+                        <button class=" btn-transition btn btn-primary circleButton mx-1"
+                                (click)="searchTransaction()"
+                                ngbTooltip="search">
+                            <fa-icon [icon]="searchIcon"></fa-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <hr>
+        <div class="row">
+            <div class="col-md-12 text-center income">
+                <h3>
+                    Current Balance : {{transactionData.currentBalance}}
+                </h3>
+            </div>
+        </div>
+        <hr>
+        <div class="table-responsive mx-4">
+            <lib-generic-table
+                    [dataList]="transactionData.data"
+                    [headers]="[
+                {title: 'Creation Date', width: '', sort: '', colValue : ''},
+                {title: 'Transaction Type', width: '', sort: '', colValue : ''},
+                {title: 'Transaction Detail', width: '', sort: '', colValue : ''},
+                {title: 'Amount', width: '', sort: '', colValue : ''},
+                ]"
+                    [totalCount]="transactionData.totalCount"
+                    [pageNumber]="searchModel.pageNumber"
+                    [pageSize]="searchModel.pageSize"
+                    (paginationChange)="changeIndex($event)"
+            >
+                <tr>
+                    <td colspan="3" class="text-center">
+                        <b>Balance on {{transactionData.startClosingBalance.closingDate | date:'YYYY-MM-dd'}}</b>
+                    </td>
+                    <td class="text-center">
+                        <b>{{transactionData.startClosingBalance.amount}}</b>
+                    </td>
+                </tr>
+
+                <tr *ngFor="let data of transactionData.data"
+                    [class]="data.transactionType=='Sales' || data.transactionType=='Income'?'income':'expenses'">
+                    <td class="text-center">{{data.creationDate}} </td>
+                    <td class="text-center">{{data.transactionType}} </td>
+                    <td class="text-center">{{data.details}} </td>
+                    <td class="text-center">{{data.amount}} </td>
+                </tr>
+
+                <tr>
+                    <td colspan="3" class="text-center">
+                        <b> Balance on {{transactionData.endClosingBalance.closingDate | date:'YYYY-MM-dd'}} </b>
+                    </td>
+                    <td class="text-center">
+                        <b>{{transactionData.endClosingBalance.amount  }}</b>
+                    </td>
+                </tr>
+
+            </lib-generic-table>
+
+        </div>
+    </div>
+</div>
