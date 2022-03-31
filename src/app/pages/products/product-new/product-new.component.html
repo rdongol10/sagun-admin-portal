@@ -11,14 +11,13 @@
                         >
                         <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
                             <div *ngIf="name.errors?.required">Product Name is required</div>
-
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="position-relative mb-3">
-                        <label for="name" class="form-label">Product Code</label>
-                        <input name="name" [(ngModel)]="model.productCode" id="productCode" placeholder="Product Code"
+                        <label for="productCode" class="form-label">Product Code</label>
+                        <input name="productCode" [(ngModel)]="model.productCode" id="productCode" placeholder="Product Code"
                                type="text" class="form-control"
                                #productCode="ngModel" required [ngClass]="{ 'is-invalid': form.submitted && productCode.invalid }"
                         >

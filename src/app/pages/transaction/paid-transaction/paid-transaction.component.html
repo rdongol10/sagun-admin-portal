@@ -92,9 +92,13 @@
                     [class]="data.transactionType=='Sales' || data.transactionType=='Income'?'income':'expenses'">
                     <td class="text-center">{{data.creationDate}} </td>
                     <td class="text-center">{{data.transactionType}} </td>
-                    <td class="text-center">{{data.details}} </td>
+                    <td class="text-center">
+                        {{data.details}}<br>
+                        <span class="transactionDetails">{{data.summary}}</span>
+                    </td>
                     <td class="text-center">{{data.amount}} </td>
                 </tr>
+
 
                 <tr>
                     <td colspan="3" class="text-center">

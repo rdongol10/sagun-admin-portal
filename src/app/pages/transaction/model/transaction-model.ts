@@ -5,4 +5,5 @@ export class TransactionModel {
     transactionType: string;
     details: string;
     amount: number;
+    summary: string;
 }
