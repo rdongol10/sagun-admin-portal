@@ -27,14 +27,17 @@ export class PaidTransactionComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.getList();
+        this.getList(true);
     }
 
     searchTransaction() {
-        this.getList();
+        this.getList(true);
     }
 
-    getList() {
+    getList(reset: boolean = false) {
+        if (reset) {
+            this.searchModel.pageNumber = 1;
+        }
         this.service.display(true);
         this.searchModel.fromDate = this.service.formattedDate(this.fromDate);
         this.searchModel.toDate = this.service.formattedDate(this.toDate);
