@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {TransactionService} from '../service/transaction.service';
 import {ToastrService} from 'ngx-toastr';
 import {TransactionSearchRequestModel} from '../model/transaction-search-request-model';
-import {NgbCalendar, NgbDate, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDate, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
 import {faSearch} from '@fortawesome/free-solid-svg-icons';
 import {PaidTransactionReportModel} from '../model/paid-transaction-report-model';
 
@@ -20,9 +20,10 @@ export class PaidTransactionComponent implements OnInit {
     transactionData: PaidTransactionReportModel = new PaidTransactionReportModel();
 
     constructor(private service: TransactionService, private notify: ToastrService,
-                private calendar: NgbCalendar, public formatter: NgbDateParserFormatter) {
+                public formatter: NgbDateParserFormatter) {
         const currentDate = new Date();
-        this.fromDate = new NgbDate(currentDate.getFullYear(), currentDate.getMonth() + 1, currentDate.getDate() - 7);
+        const lastWeekDate = new Date(currentDate.getTime() - (7 * 24 * 60 * 60 * 1000));
+        this.fromDate = new NgbDate(lastWeekDate.getFullYear(), lastWeekDate.getMonth() + 1, lastWeekDate.getDate());
         this.toDate = new NgbDate(currentDate.getFullYear(), currentDate.getMonth() + 1, currentDate.getDate());
     }
 
