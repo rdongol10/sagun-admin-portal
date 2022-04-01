@@ -93,13 +93,15 @@
                     <td class="text-center">{{data.creationDate}} </td>
                     <td class="text-center">{{data.transactionType}} </td>
                     <td class="text-center">
-                        {{data.details}}<br>
-                        <span class="transactionDetails">{{data.summary}}</span>
+                        {{data.details}}
+                        <span class="transactionDetails">
+                            <div *ngFor="let summary of data.summary.split(',')">
+                                   {{summary}}
+                            </div>
+                        </span>
                     </td>
                     <td class="text-center">{{data.amount}} </td>
                 </tr>
-
-
                 <tr>
                     <td colspan="3" class="text-center">
                         <b> Balance on {{transactionData.endClosingBalance.closingDate | date:'YYYY-MM-dd'}} </b>
