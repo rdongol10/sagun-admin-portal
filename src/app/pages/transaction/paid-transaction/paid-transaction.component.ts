@@ -44,7 +44,6 @@ export class PaidTransactionComponent implements OnInit {
         this.searchModel.toDate = this.service.formattedDate(this.toDate);
         this.service.paidTransaction(this.searchModel)
             .subscribe((data: any) => {
-                console.log(data.data);
                 this.transactionData = data.data;
                 this.service.display(false);
             }, error => {
