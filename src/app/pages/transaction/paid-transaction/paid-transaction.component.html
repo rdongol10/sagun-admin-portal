@@ -94,7 +94,7 @@
                     <td class="text-center">{{data.transactionType}} </td>
                     <td class="text-center">
                         {{data.details}}
-                        <span class="transactionDetails">
+                        <span class="transactionDetails" *ngIf="data.summary">
                             <div *ngFor="let summary of data.summary.split(',')">
                                    {{summary}}
                             </div>
