@@ -76,6 +76,11 @@ const routes: Routes = [
                 loadChildren: () => import('./pages/transaction/transaction.module').then(m => m.TransactionModule)
             },
             {
+                path: 'vendor',
+                data: {extraParameter: 'vendor'},
+                loadChildren: () => import('./pages/vendor/vendor.module').then(m => m.VendorModule)
+            },
+            {
                 path: 'accessDenied',
                 data: {extraParameter: 'accessDenied'},
                 loadChildren: () => import('./pages/accessDenied/access-denied.module').then(m => m.AccessDeniedModule)
