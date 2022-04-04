@@ -27,6 +27,24 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="col-md-3">
+                    <div class="position-relative mb-3">
+                        <label for="productCode" class="form-label">Latest price</label>
+                        <input name="latestPrice" [(ngModel)]="model.latestPrice" id="latestPrice" placeholder="Latest price"
+                               type="text" class="form-control"
+                               #latestPrice="ngModel" required [ngClass]="{ 'is-invalid': form.submitted && productCode.invalid }"
+                               appMinMaxValidator
+                               min="1"
+                        >
+                        <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
+                            <div *ngIf="latestPrice.errors?.required">Latest price is required</div>
+                            <div *ngIf="latestPrice.errors?.min">Latest price can not be less than 1</div>
+
+
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="row">
