@@ -3,51 +3,28 @@
                         [searchField]="searchField"
                         [searchFieldCondition]="searchFieldCondition"
                         [searchFieldValues]="searchFieldValues"></app-search-generic>
-    <div class="table-responsive mx-4">
-        <lib-generic-table
-                (sortOrderChange)="sort($event)"
-                [dataList]="list"
-                [headers]="[
-                {title: '#', width: '', sort: '', colValue : ''},
-                {title: 'Product name', width: '', sort: 'name', colValue : 'name'},
-                {title: 'Product code', width: '', sort: 'productCode', colValue : 'productCode'},
-                {title: 'Latest price', width: '', sort: 'latestPrice', colValue : 'latestPrice'},
-                {title: 'Image', width: '', sort: '', colValue : ''},
-                {title: 'Action', width: '', sort: '', colValue : ''},
-                ]"
-                [totalCount]="totalCount"
-                [pageNumber]="searchModel.pageNumber"
-                [pageSize]="searchModel.pageSize"
-                (paginationChange)="changeIndex($event)"
-        >
 
-            <tr *ngFor="let data of list; let i = index;">
-                <td class="text-center text-muted" style="width: 80px;">{{i + 1}}</td>
-                <td class="text-center">{{data.name}}</td>
-                <td class="text-center">{{data.productCode}}</td>
-                <td class="text-center">{{data.latestPrice}}</td>
-                <td class="text-center "><img class="tableImage" src={{data.image}}/></td>
-                <td class="text-center">
-                    <div role="group" class="btn-group-sm btn-group">
-                        <fa-icon *ngIf="allowedGrants.includes('product:edit')" [icon]="editIcon"
-                                 ngbTooltip="edit"
-                                 routerLink="/product/edit/{{data?.id}}"
-                                 class="buttonIcons mx-2"
-                                 style="color:#005f73"
-                                 size="lg"
-                        ></fa-icon>
-                        <fa-icon
-                                *ngIf="allowedGrants.includes('lotHistory:list')"
-                                [icon]="fileArchive"
-                                size="lg"
-                                routerLink="/lotHistory/list/productId/{{data?.id}}"
-                                class="buttonIcons mx-2"
-                                ngbTooltip="Lot history"
-                                style="color:#bb3e03"
-                        ></fa-icon>
-                    </div>
-                </td>
-            </tr>
-        </lib-generic-table>
+    <hr>
+    <div class="card-body">
+        <div class="row">
+            <div *ngFor="let data of list; let i = index;" class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+                <app-product-card [productModel]=data></app-product-card>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-between p-2">
+        <lib-generic-pagination
+            [totalRecords]="totalCount"
+            [recordsPerPage]="searchModel.pageSize"
+            [activePage]="searchModel.pageNumber"
+            (onPageChange)="changeIndex($event)"
+        ></lib-generic-pagination>
+        <div class="col-2">
+            <select class="form-select" style="width: auto" [(ngModel)]="searchModel.pageSize" (ngModelChange)="pageSizeChange($event)">
+                <option *ngFor="let item of pageSizeOptions" [ngValue]="item">{{item}} items per page</option>
+            </select>
+        </div>
     </div>
 </div>
