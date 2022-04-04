@@ -1,0 +1,37 @@
+<div class="card mb-3">
+    <div class="card-body">
+        <div class="product-details text-center">
+            <img src="{{productModel.image}}" class="product-image">
+            <h5>
+                <b>{{productModel.name}}</b>
+            </h5>
+            <p class="mb-0">
+                {{productModel.productCode}}
+            </p>
+            <p class="mb-0">
+                Rs. {{productModel.latestPrice}}
+            </p>
+        </div>
+        <hr>
+        <div class="action-buttons text-center">
+            <div role="group" class="btn-group-sm btn-group">
+                <fa-icon [icon]="editIcon"
+                         ngbTooltip="edit"
+                         routerLink="/product/edit/{{productModel?.id}}"
+                         class="buttonIcons mx-2"
+                         style="color:#005f73"
+                         size="lg"
+                ></fa-icon>
+                <fa-icon
+
+                        [icon]="fileArchive"
+                        size="lg"
+                        routerLink="/lotHistory/list/productId/{{productModel?.id}}"
+                        class="buttonIcons mx-2"
+                        ngbTooltip="Lot history"
+                        style="color:#bb3e03"
+                ></fa-icon>
+            </div>
+        </div>
+    </div>
+</div>

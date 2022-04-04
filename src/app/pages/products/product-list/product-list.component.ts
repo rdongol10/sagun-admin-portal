@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {SearchCriteriaModel} from '../../../@core/class/search-criteria-model';
 import {ProductService} from '../service/product.service';
 import {ToastrService} from 'ngx-toastr';
@@ -23,6 +23,8 @@ export class ProductListComponent implements OnInit {
     editIcon = faPen;
     fileArchive = faFileAlt;
     allowedGrants = JSON.parse(localStorage.getItem('allowedGrants'));
+    pageSizeOptions = [10, 25, 50, 100, 150];
+
 
     constructor(private service: ProductService, private notify: ToastrService) {
     }
@@ -77,8 +79,7 @@ export class ProductListComponent implements OnInit {
     }
 
     changeIndex(event) {
-        const numb = event.pageNumber;
-        this.searchModel.pageSize = event.pageSize;
+        const numb = event;
         this.searchModel.pageNumber = Number(numb) + 1;
         if (numb > this.searchModel.pageNumber) {
             this.searchModel.pageNumber++;
@@ -93,6 +94,12 @@ export class ProductListComponent implements OnInit {
     search(data) {
         this.searchModel.pageNumber = 1;
         this.getList(false, data);
+    }
+
+    pageSizeChange(event) {
+        this.searchModel.pageSize = event;
+        this.searchModel.pageNumber = 1;
+        this.getList();
     }
 
 }
