@@ -58,10 +58,32 @@
 
         <hr>
         <div class="row">
+            <div class="col-md-12 text-center text-info">
+                Opening Balance : {{transactionData.startClosingBalance.amount}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center text-info">
+                Closing Balance : {{transactionData.endClosingBalance.amount}}
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-12 text-center income">
-                <h3>
+                <h3 style="margin-bottom: 0 !important;">
                     Current Balance : {{transactionData.currentBalance}}
                 </h3>
+            </div>
+            <div class="col-md-12 text-center">
+                <div *ngIf="overallGrowth < 0" class="d-inline text-danger">
+                    <i class="fa fa-arrow-down "></i>
+                    <span style="padding-left: 0.25em">{{overallGrowth}}</span>
+                </div>
+                <div class="col-md-12 text-center">
+                    <div *ngIf="overallGrowth > 0" class="d-inline text-success">
+                        <i class="fa fa-arrow-up "></i>
+                        <span style="padding-left: 0.25em">{{overallGrowth}}</span>
+                    </div>
+                </div>
             </div>
         </div>
         <hr>
@@ -79,15 +101,6 @@
                     [pageSize]="searchModel.pageSize"
                     (paginationChange)="changeIndex($event)"
             >
-                <tr>
-                    <td colspan="3" class="text-center">
-                        <b>Balance on {{transactionData.startClosingBalance.closingDate | date:'YYYY-MM-dd'}}</b>
-                    </td>
-                    <td class="text-center">
-                        <b>{{transactionData.startClosingBalance.amount}}</b>
-                    </td>
-                </tr>
-
                 <tr *ngFor="let data of transactionData.data"
                     [class]="data.transactionType=='Sales' || data.transactionType=='Income'?'income':'expenses'">
                     <td class="text-center">{{data.creationDate}} </td>
@@ -102,17 +115,7 @@
                     </td>
                     <td class="text-center">{{data.amount}} </td>
                 </tr>
-                <tr>
-                    <td colspan="3" class="text-center">
-                        <b> Balance on {{transactionData.endClosingBalance.closingDate | date:'YYYY-MM-dd'}} </b>
-                    </td>
-                    <td class="text-center">
-                        <b>{{transactionData.endClosingBalance.amount  }}</b>
-                    </td>
-                </tr>
-
             </lib-generic-table>
-
         </div>
     </div>
 </div>
