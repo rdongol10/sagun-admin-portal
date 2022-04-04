@@ -12,7 +12,9 @@ export const configApiUrl = {
     PURCHASE_API: MainUrl + 'purchase',
     INCOME_API: MainUrl + 'income',
     ROLE_API: MainUrl + 'role',
-    TRANSACTION_API: MainUrl + 'transaction'
+    TRANSACTION_API: MainUrl + 'transaction',
+    VENDOR_API: MainUrl + 'vendor'
+
 };
 
 export const ORDER_STATUS: SelectableValue[] = [

@@ -1,0 +1,79 @@
+<div class="main-card mb-3 card">
+    <div class="card-body">
+        <form #form="ngForm" (ngSubmit)="form.form.valid && onSubmit()">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="position-relative mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input name="name" [(ngModel)]="model.name"
+                               id="name" placeholder="Name" type="text" class="form-control"
+                               #name="ngModel" required
+                               [ngClass]="{ 'is-invalid': form.submitted && name.invalid }">
+                        <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
+                            <div *ngIf="name.errors?.required">Name is required</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="position-relative mb-3">
+                        <label for="name" class="form-label">Contact person</label>
+                        <input name="contactPerson" [(ngModel)]="model.contactPerson"
+                               id="contactPerson" placeholder="Contact person" type="text" class="form-control"
+                               #contactPerson="ngModel" required
+                               [ngClass]="{ 'is-invalid': form.submitted && contactPerson.invalid }">
+                        <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
+                            <div *ngIf="contactPerson.errors?.required">Contact person is required</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="position-relative mb-3">
+                        <label for="name" class="form-label">Address</label>
+                        <input name="address" [(ngModel)]="model.address"
+                               id="address" placeholder="Address" type="text" class="form-control"
+                               #address="ngModel" required
+                               [ngClass]="{ 'is-invalid': form.submitted && contactPerson.invalid }">
+                        <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
+                            <div *ngIf="address.errors?.required">Address is required</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="position-relative mb-3">
+                        <label for="name" class="form-label">Phone number</label>
+                        <input name="phoneNumber" [(ngModel)]="model.phoneNumber"
+                               id="phoneNumber" placeholder="Phone number" type="text" class="form-control"
+                               #phoneNumber="ngModel" required
+                               [ngClass]="{ 'is-invalid': form.submitted && contactPerson.invalid }">
+                        <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
+                            <div *ngIf="phoneNumber.errors?.required">Contact person is required</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="position-relative mb-3">
+                        <label for="name" class="form-label">Secondary Phone number</label>
+                        <input name="secondaryNumber" [(ngModel)]="model.secondaryNumber"
+                               id="secondaryNumber" placeholder=" Secondary Phone number" type="text"
+                               class="form-control"
+                               #secondaryNumber="ngModel"
+                               [ngClass]="{ 'is-invalid': form.submitted && contactPerson.invalid }">
+                    </div>
+                </div>
+            </div>
+
+
+            <button class="mt-2 mx-2 btn btn-primary">
+                <span *ngIf="routeId">Update</span>
+                <span *ngIf="!routeId">Submit</span>
+            </button>
+            <button type="button" [routerLink]="'/vendor/list'" class="mt-2  btn btn-danger">Cancel</button>
+        </form>
+    </div>
+</div>

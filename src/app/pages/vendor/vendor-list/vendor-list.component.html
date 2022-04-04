@@ -1,0 +1,46 @@
+<div class="main-card mb-3 card">
+    <app-search-generic (emitDataModel)="search($event)"
+                        [searchField]="searchField"
+                        [searchFieldCondition]="searchFieldCondition"
+                        [searchFieldValues]="searchFieldValues"></app-search-generic>
+    <div class="table-responsive mx-4">
+        <lib-generic-table
+                (sortOrderChange)="sort($event)"
+                [dataList]="list"
+                [headers]="[
+                {title: '#', width: '', sort: '', colValue : ''},
+                {title: 'Name', width: '', sort: 'name', colValue : 'name'},
+                {title: 'Contact person', width: '', sort: 'contactPerson', colValue : 'contactPerson'},
+                {title: 'Address', width: '', sort: 'address', colValue : 'address'},
+                {title: 'Phone number', width: '', sort: 'phoneNumber', colValue : 'phoneNumber'},
+                {title: 'Secondary number', width: '', sort: 'secondaryNumber', colValue : 'secondaryNumber'},
+                {title: 'Action', width: '', sort: '', colValue : ''},
+                ]"
+                [totalCount]="totalCount"
+                [pageNumber]="searchModel.pageNumber"
+                [pageSize]="searchModel.pageSize"
+                (paginationChange)="changeIndex($event)"
+        >
+            <tr *ngFor="let data of list; let i = index;">
+                <td class="text-center text-muted" style="width: 80px;">{{i + 1}}</td>
+                <td class="text-center">{{data.name}}</td>
+                <td class="text-center">{{data.contactPerson}}</td>
+                <td class="text-center">{{data.address}}</td>
+                <td class="text-center">{{data.phoneNumber}}</td>
+                <td class="text-center">{{data.secondaryNumber}}</td>
+
+                <td class="text-center">
+                    <div role="group" class="btn-group-sm btn-group">
+                        <fa-icon [icon]="editIcon" *ngIf="allowedGrants.includes('vendor:edit')"
+                                 ngbTooltip="edit"
+                                 routerLink="/vendor/edit/{{data?.id}}"
+                                 class="buttonIcons"
+                                 style="color:#005f73"
+                                 size="lg"
+                        ></fa-icon>
+                    </div>
+                </td>
+            </tr>
+        </lib-generic-table>
+    </div>
+</div>
