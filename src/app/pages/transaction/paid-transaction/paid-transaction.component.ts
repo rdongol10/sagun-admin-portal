@@ -18,6 +18,8 @@ export class PaidTransactionComponent implements OnInit {
     searchModel: TransactionSearchRequestModel = new TransactionSearchRequestModel();
     searchIcon = faSearch;
     transactionData: PaidTransactionReportModel = new PaidTransactionReportModel();
+    growth = 0;
+    overallGrowth = 0;
 
     constructor(private service: TransactionService, private notify: ToastrService,
                 public formatter: NgbDateParserFormatter) {
@@ -44,8 +46,9 @@ export class PaidTransactionComponent implements OnInit {
         this.searchModel.toDate = this.service.formattedDate(this.toDate);
         this.service.paidTransaction(this.searchModel)
             .subscribe((data: any) => {
-                console.log(data.data);
                 this.transactionData = data.data;
+                this.growth = this.transactionData.endClosingBalance.amount - this.transactionData.startClosingBalance.amount;
+                this.overallGrowth = this.transactionData.currentBalance - this.transactionData.startClosingBalance.amount;
                 this.service.display(false);
             }, error => {
                 this.notify.error(error.error, 'Error');

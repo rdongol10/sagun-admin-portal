@@ -33,12 +33,15 @@ export class GenericTableComponent implements OnInit {
 
     pageSizeChange(event) {
         this.pageSize = event;
+        setTimeout(() => {
+            this.paginationChange.emit({pageNumber: 1, pageSize: this.pageSize});
+        });
     }
 
     pageNumberChange(event) {
         setTimeout(() => {
             this.paginationChange.emit({pageNumber: event, pageSize: this.pageSize});
-        })
+        });
     }
 
 }
