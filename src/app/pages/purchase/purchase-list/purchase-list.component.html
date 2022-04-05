@@ -10,6 +10,7 @@
                 [headers]="[
                 {title: '#', width: '', sort: '', colValue : ''},
                 {title: 'Purchase Date', width: '', sort: 'creationDate', colValue : 'creationDate'},
+                {title: 'Vendor', width: '', sort: '', colValue : ''},
                 {title: 'Payment Status', width: '', sort: 'paymentStatus', colValue : 'paymentStatus'},
                 {title: 'Cost Price', width: '', sort: 'netCostPrice', colValue : 'netCostPrice'},
                 {title: 'Paid Amount', width: '', sort: 'paidAmount', colValue : 'paidAmount'},
@@ -25,6 +26,7 @@
             <tr *ngFor="let data of list; let i = index;">
                 <td class="text-center text-muted" style="width: 80px;">{{i + 1}}</td>
                 <td class="text-center">{{data.creationDate}}</td>
+                <td class="text-center">{{data.vendorName}}</td>
                 <td class="text-center">{{data.paymentStatus | paymentStatus}}</td>
                 <td class="text-center">{{data.netCostPrice}}</td>
                 <td class="text-center">{{data.paidAmount}}</td>
@@ -36,7 +38,7 @@
                 <td class="text-center">
                     <div role="group" class="btn-group-sm btn-group">
                         <fa-icon *ngIf="allowedGrants.includes('purchase:detail')"
-                                [icon]="viewIcon"
+                                 [icon]="viewIcon"
                                  ngbTooltip="details"
                                  class="buttonIcons me-3"
                                  style="color:#005f73"
@@ -44,7 +46,7 @@
                                  (click)="viewDetails(data?.id)"
                         ></fa-icon>
                         <fa-icon *ngIf="allowedGrants.includes('purchase:edit')"
-                                [icon]="editIcon"
+                                 [icon]="editIcon"
                                  ngbTooltip="edit"
                                  routerLink="/purchase/edit/{{data?.id}}"
                                  class="buttonIcons"
