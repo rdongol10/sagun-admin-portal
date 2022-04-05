@@ -23,13 +23,15 @@ export class ProductListComponent implements OnInit {
     editIcon = faPen;
     fileArchive = faFileAlt;
     allowedGrants = JSON.parse(localStorage.getItem('allowedGrants'));
-    pageSizeOptions = [10, 25, 50, 100, 150];
+    pageSizeOptions = [12, 24, 48, 96, 160];
 
 
     constructor(private service: ProductService, private notify: ToastrService) {
+        this.searchModel.pageSize = 12;
     }
 
     ngOnInit(): void {
+
         this.service.getSearchField()
             .subscribe((data: any) => {
                 this.searchField = data.data;
