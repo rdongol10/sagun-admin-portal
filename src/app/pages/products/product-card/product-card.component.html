@@ -1,7 +1,7 @@
 <div class="card mb-3">
     <div class="card-body">
         <div class="product-details text-center">
-            <img src="{{productModel.image}}" class="product-image">
+            <img src="{{productModel.image?productModel.image:'assets/images/no image found.png' }}" class="product-image">
             <br>
             <br>
             <h5>
