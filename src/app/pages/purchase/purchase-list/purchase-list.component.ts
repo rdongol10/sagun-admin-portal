@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {SearchCriteriaModel} from '../../../@core/class/search-criteria-model';
-import {faPen} from '@fortawesome/free-solid-svg-icons';
+import {faEye, faPen} from '@fortawesome/free-solid-svg-icons';
 import {ToastrService} from 'ngx-toastr';
 import {PurchaseService} from '../service/purchase.service';
+import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
+import {PurchaseDetailsComponent} from '../purchase-details/purchase-details.component';
 
 @Component({
     selector: 'app-purchase-list',
@@ -20,8 +22,11 @@ export class PurchaseListComponent implements OnInit {
     fieldCondition;
     totalCount;
     editIcon = faPen;
+    viewIcon = faEye;
+    allowedGrants = JSON.parse(localStorage.getItem('allowedGrants'));
 
-    constructor(private service: PurchaseService, private notify: ToastrService) {
+    constructor(private service: PurchaseService, private notify: ToastrService,
+                private config: NgbModalConfig, private modalService: NgbModal) {
     }
 
     ngOnInit(): void {
@@ -91,6 +96,18 @@ export class PurchaseListComponent implements OnInit {
     search(data) {
         this.searchModel.pageNumber = 1;
         this.getList(false, data);
+    }
+
+    viewDetails(id) {
+        this.service.display(true);
+        this.service.getById(id)
+            .subscribe((data: any) => {
+                this.service.display(false);
+                this.modalService.open(PurchaseDetailsComponent, { size: 'xl' }).componentInstance.purchaseModel = data.data;
+            }, error => {
+                this.notify.error(error.error, 'Error');
+                this.service.display(false);
+            });
     }
 
 }

@@ -10,6 +10,7 @@ import {PurchaseService} from '../service/purchase.service';
 import {SelectSearchRequest} from '../../../@core/class/select-search-request';
 import {LotSelectableValue} from '../../lots/model/lot-selectable-value';
 import {PAYMENT_STATUS, PaymentStatusEnum} from '../../../app-config';
+import {VendorService} from '../../vendor/service/vendor.service';
 
 @Component({
     selector: 'app-purchase-new',
@@ -23,8 +24,11 @@ export class PurchaseNewComponent implements OnInit {
     paymentStatusEnum = PaymentStatusEnum;
     oldPaidAmount = 0;
     routeId;
+    vendors: SelectableValue[] = [];
 
-    constructor(private service: PurchaseService, private lotService: LotService, private productService: ProductService,
+
+    constructor(private vendorService: VendorService, private service: PurchaseService,
+                private lotService: LotService, private productService: ProductService,
                 private router: Router, private notify: ToastrService, private route: ActivatedRoute) {
     }
 
@@ -197,6 +201,31 @@ export class PurchaseNewComponent implements OnInit {
     onError(error) {
         this.service.display(false);
         this.notify.error(error.error.message, 'Error');
+    }
+
+    searchVendor(event) {
+        if (event.term.trim() === '') {
+            this.vendors = [];
+            return;
+        }
+
+        const query: SelectSearchRequest = new SelectSearchRequest();
+        query.searchQuery = event.term;
+        this.vendorService.search(query).subscribe(
+            (data: any) => {
+                this.vendors = data.data;
+            }, error => {
+                this.notify.error(error.error.message, 'Error');
+            }
+        );
+    }
+
+    changeVendor(event) {
+        if (event === undefined) {
+            this.model.vendorId = null;
+        } else {
+            this.model.vendorId = event.code;
+        }
     }
 
 }

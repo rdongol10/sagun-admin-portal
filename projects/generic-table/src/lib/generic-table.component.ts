@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
     selector: 'lib-generic-table',
@@ -16,9 +16,9 @@ export class GenericTableComponent implements OnInit {
     @Input() pageSizeOptions = [10, 25, 50, 100, 150];
     @Output() paginationChange = new EventEmitter<any>();
 
-
     constructor() {
     }
+
 
     ngOnInit(): void {
     }
@@ -33,12 +33,15 @@ export class GenericTableComponent implements OnInit {
 
     pageSizeChange(event) {
         this.pageSize = event;
+        setTimeout(() => {
+            this.paginationChange.emit({pageNumber: 1, pageSize: this.pageSize});
+        });
     }
 
     pageNumberChange(event) {
-        setTimeout(()=>{
+        setTimeout(() => {
             this.paginationChange.emit({pageNumber: event, pageSize: this.pageSize});
-        })
+        });
     }
 
 }

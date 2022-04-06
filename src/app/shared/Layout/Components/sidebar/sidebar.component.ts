@@ -12,6 +12,8 @@ import {sideMenuList} from './sidebar-routes.config';
 export class SidebarComponent implements OnInit {
     public extraParameter: any;
     menuList = sideMenuList;
+    allowedModels = JSON.parse(localStorage.getItem('allowedModels'));
+    allowedGrants = JSON.parse(localStorage.getItem('allowedGrants'));
 
     constructor(public globals: ThemeOptions, private router: Router, private activatedRoute: ActivatedRoute) {
 
@@ -56,7 +58,6 @@ export class SidebarComponent implements OnInit {
     }
 
     navigate(route) {
-        console.log(route);
         if (route) {
             this.router.navigate([route]);
         }

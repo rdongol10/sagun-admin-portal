@@ -5,6 +5,7 @@ export class PurchaseModel {
     id: number;
     purchaseDetails: PurchaseDetailsModel[] = [];
     vendorId: number;
+    vendorName: string;
     totalCostPrice: number;
     tax: number;
     at: number;

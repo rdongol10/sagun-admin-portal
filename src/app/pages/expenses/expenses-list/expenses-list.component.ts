@@ -20,7 +20,7 @@ export class ExpensesListComponent implements OnInit {
     fieldCondition;
     totalCount;
     editIcon = faPen;
-
+    allowedGrants = JSON.parse(localStorage.getItem('allowedGrants'));
 
     constructor(private service: ExpensesService, private notify: ToastrService) {
     }

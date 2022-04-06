@@ -39,7 +39,7 @@ $sidebar-box-shadow: 7px 0 60px rgba(0, 0, 0, 0.05);
   width: $app-sidebar-width;
   position: fixed;
   height: 100vh;
-  box-shadow: $sidebar-box-shadow;
+  //box-shadow: $sidebar-box-shadow;
   flex-direction: column;
   transition: all .3s ease;
 

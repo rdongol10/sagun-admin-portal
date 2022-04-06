@@ -2,7 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {SearchCriteriaModel} from '../../../@core/class/search-criteria-model';
 import {ToastrService} from 'ngx-toastr';
 import {SalesService} from '../service/sales.service';
-import {faPen} from '@fortawesome/free-solid-svg-icons';
+import {faEye, faPen} from '@fortawesome/free-solid-svg-icons';
+import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
+import {SalesDetailsComponent} from '../sales-details/sales-details.component';
 
 @Component({
     selector: 'app-sales-list',
@@ -20,8 +22,11 @@ export class SalesListComponent implements OnInit {
     fieldCondition;
     totalCount;
     editIcon = faPen;
+    viewIcon = faEye;
+    allowedGrants = JSON.parse(localStorage.getItem('allowedGrants'));
 
-    constructor(private service: SalesService, private notify: ToastrService) {
+    constructor(private service: SalesService, private notify: ToastrService,
+                private config: NgbModalConfig, private modalService: NgbModal) {
     }
 
     ngOnInit(): void {
@@ -91,6 +96,18 @@ export class SalesListComponent implements OnInit {
     search(data) {
         this.searchModel.pageNumber = 1;
         this.getList(false, data);
+    }
+
+    viewDetails(id) {
+        this.service.display(true);
+        this.service.getById(id)
+            .subscribe((data: any) => {
+                this.service.display(false);
+                this.modalService.open(SalesDetailsComponent, { size: 'xl' }).componentInstance.salesModel = data.data;
+            }, error => {
+                this.notify.error(error.error, 'Error');
+                this.service.display(false);
+            });
     }
 
 }

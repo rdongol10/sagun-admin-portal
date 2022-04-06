@@ -39,7 +39,7 @@ import {distinctUntilChanged, filter, map, startWith} from 'rxjs/operators';
 export class BaseLayoutComponent {
     heading = 'Form Layouts';
     subheading = 'Build whatever layout you need with our ArchitectUI framework.';
-    icon = 'pe-7s-home text-success';
+    icon = 'pe-7s-home';
     breadcrumbs$: Observable<any[]>;
     @select('config') public config$: Observable<any>;
 

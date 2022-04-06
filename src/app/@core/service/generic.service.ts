@@ -19,17 +19,17 @@ export class GenericService<T> {
     }
 
     public save(data: T): Observable<T> {
-        return this.http.post(this.baseUrl, data, { observe: 'response'}).pipe(
+        return this.http.post(this.baseUrl, data, {observe: 'response'}).pipe(
             map((res: any) => {
-              this.setUpdatedHeader(res);
-              return res.body;
+                this.setUpdatedHeader(res);
+                return res.body;
             }),
             catchError((error) => this.handleError(error))
         );
     }
 
     public getById(id: number): Observable<T> {
-        return this.http.get(this.baseUrl + '/' + id,{ observe: 'response'}).pipe(
+        return this.http.get(this.baseUrl + '/' + id, {observe: 'response'}).pipe(
             map((res: any) => {
                 this.setUpdatedHeader(res);
                 return res.body;
@@ -39,7 +39,7 @@ export class GenericService<T> {
     }
 
     public getAll(data): Observable<T> {
-        return this.http.post(this.baseUrl + '/findAll', data, { observe: 'response'}).pipe(
+        return this.http.post(this.baseUrl + '/findAll', data, {observe: 'response'}).pipe(
             map((res: any) => {
                 this.setUpdatedHeader(res);
                 return res.body;
@@ -49,7 +49,7 @@ export class GenericService<T> {
     }
 
     public getSearchField(): Observable<T> {
-        return this.http.get(this.baseUrl + '/searchFields', { observe: 'response'}).pipe(
+        return this.http.get(this.baseUrl + '/searchFields', {observe: 'response'}).pipe(
             map((res: any) => {
                 this.setUpdatedHeader(res);
                 return res.body;
@@ -59,7 +59,7 @@ export class GenericService<T> {
     }
 
     public update(id: number, data: T): Observable<T> {
-        return this.http.put(this.baseUrl + '/' + id, data, { observe: 'response'}).pipe(
+        return this.http.put(this.baseUrl + '/' + id, data, {observe: 'response'}).pipe(
             map((res: any) => {
                 this.setUpdatedHeader(res);
                 return res.body;
@@ -69,7 +69,7 @@ export class GenericService<T> {
     }
 
     public search(query: SelectSearchRequest) {
-        return this.http.post(this.baseUrl + '/search', query, { observe: 'response'}).pipe(
+        return this.http.post(this.baseUrl + '/search', query, {observe: 'response'}).pipe(
             map((res: any) => {
                 this.setUpdatedHeader(res);
                 return res.body;
@@ -79,7 +79,7 @@ export class GenericService<T> {
     }
 
     public delete(id: number): Observable<T> {
-        return this.http.delete(this.baseUrl + 'delete/' + id, { observe: 'response'}).pipe(
+        return this.http.delete(this.baseUrl + 'delete/' + id, {observe: 'response'}).pipe(
             map((res: any) => {
                 this.setUpdatedHeader(res);
                 return res.body;
@@ -92,14 +92,12 @@ export class GenericService<T> {
         let headers = new HttpHeaders();
         headers = headers.set('Content-Type', 'application/json');
         headers = headers.set('Accept', 'application/json');
-        // var cookie = this.getCookie('XSRF-TOKEN');
-        // if (cookie) {
-        //     headers = headers.set('X-XSRF-TOKEN', cookie);
-        // }
         return headers;
     }
+
     setUpdatedHeader(res) {
         localStorage.setItem('token', JSON.stringify(res.headers.get('Authorization')));
+        localStorage.setItem('expires', res.headers.get('Expires'));
     }
 
     public display(value: boolean) {
@@ -120,7 +118,9 @@ export class GenericService<T> {
     protected handleError(error: any) {
         if (error.status == 401) {
             this.router.navigateByUrl('/auth/login').then(r => this.display(false));
-        }else{
+        } else if (error.status == 403) {
+            this.router.navigateByUrl('/accessDenied').then(r => this.display(false));
+        } else {
 
             console.log('err=>', error);
             return throwError(error);

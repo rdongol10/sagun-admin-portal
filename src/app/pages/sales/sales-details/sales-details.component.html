@@ -1,0 +1,121 @@
+<div class="main-card card">
+    <div class="modal-header">
+        <h4 class="modal-title"><b>Details</b></h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss()"></button>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="position-relative">
+                    <label class="form-label label-heading">Delivered to : </label>
+                    &nbsp;<label class="form-label"> {{salesModel.deliveredTo}}</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="position-relative">
+                    <label class="form-label label-heading">Order Status : </label>
+                    &nbsp;<label class="form-label"> {{salesModel.orderStatus | orderStatus}}</label>
+                </div>
+            </div>
+            <div class="col-md-2" *ngIf="salesModel.deliveredBy">
+                <div class="position-relative">
+                    <label class="form-label label-heading">Delivered By : </label>
+                    &nbsp;<label class="form-label"> {{salesModel.deliveredBy}}</label>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-2">
+                <label class="form-label label-heading"> Product </label>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label label-heading"> Lot </label>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label label-heading">Cost price</label>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label label-heading"> Quantity</label>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label label-heading"> Mark Price </label>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label label-heading">Total</label>
+            </div>
+        </div>
+        <div class="row " *ngFor="let salesDetail of salesModel.salesDetails">
+            <div class="col-md-2">
+                <label class="form-label"> {{salesDetail.productName}} </label>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label"> {{salesDetail.lotName}} </label>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">{{salesDetail.costPrice}}</label>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label"> {{salesDetail.quantity}}</label>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label"> {{salesDetail.markPrice}} </label>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">{{salesDetail.totalCostPrice}}</label>
+            </div>
+        </div>
+        <hr>
+        <div class="row ">
+            <div class="col-md-8"></div>
+            <div class="col-md-2"><label class="form-label label-heading">Total</label></div>
+            <div class="col-md-2">{{salesModel.costPrice}}</div>
+        </div>
+        <div class="row ">
+            <div class="col-md-8"></div>
+            <div class="col-md-2"><label class="form-label label-heading">Additional Charges</label></div>
+            <div class="col-md-2">{{salesModel.additionalCharges}}</div>
+        </div>
+        <div class="row ">
+            <div class="col-md-8"></div>
+            <div class="col-md-2"><label class="form-label label-heading">Additional Charges</label></div>
+            <div class="col-md-2">{{salesModel.totalCostPrice}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-8"></div>
+            <div class="col-md-2"><label class="form-label label-heading">Selling Price</label></div>
+            <div class="col-md-2">{{salesModel.sellingPrice}}</div>
+        </div>
+        <div class="row ">
+            <div class="col-md-8"></div>
+            <div class="col-md-2"><label class="form-label label-heading">Discount</label></div>
+            <div class="col-md-2">{{salesModel.discount}}</div>
+        </div>
+        <div class="row ">
+            <div class="col-md-8"></div>
+            <div class="col-md-2"><label class="form-label label-heading">Net Selling Price</label></div>
+            <div class="col-md-2">{{salesModel.netSellingPrice}}</div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-8"></div>
+            <div class="col-md-2"><label class="form-label label-heading">Payment Status</label></div>
+            <div class="col-md-2">{{salesModel.paymentStatus | paymentStatus}}</div>
+        </div>
+        <div class="row " *ngIf="salesModel.paymentStatus==paymentStatusEnum.Partial_Payment">
+            <div class="col-md-8"></div>
+            <div class="col-md-2"><label class="form-label label-heading">Paid Amount</label></div>
+            <div class="col-md-2">{{salesModel.paidAmount }}</div>
+        </div>
+        <div class="row " *ngIf="salesModel.paymentStatus==paymentStatusEnum.Partial_Payment">
+            <div class="col-md-8"></div>
+            <div class="col-md-2"><label class="form-label label-heading">Remaining Amount</label></div>
+            <div class="col-md-2">{{salesModel.remainingAmount}}</div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="activeModal.dismiss()">Close</button>
+    </div>
+</div>
+

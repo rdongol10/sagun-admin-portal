@@ -5,12 +5,42 @@
                 <div class="col-md-3">
                     <div class="position-relative mb-3">
                         <label for="name" class="form-label">Product Name</label>
-                        <input name="name" [(ngModel)]="model.name" id="name" placeholder="Image Name"
+                        <input name="name" [(ngModel)]="model.name" id="name" placeholder="Product Name"
                                type="text" class="form-control"
                                #name="ngModel" required [ngClass]="{ 'is-invalid': form.submitted && name.invalid }"
                         >
                         <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
                             <div *ngIf="name.errors?.required">Product Name is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="position-relative mb-3">
+                        <label for="productCode" class="form-label">Product Code</label>
+                        <input name="productCode" [(ngModel)]="model.productCode" id="productCode" placeholder="Product Code"
+                               type="text" class="form-control"
+                               #productCode="ngModel" required [ngClass]="{ 'is-invalid': form.submitted && productCode.invalid }"
+                        >
+                        <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
+                            <div *ngIf="productCode.errors?.required">Product Code is required</div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="position-relative mb-3">
+                        <label for="productCode" class="form-label">Latest price</label>
+                        <input name="latestPrice" [(ngModel)]="model.latestPrice" id="latestPrice" placeholder="Latest price"
+                               type="text" class="form-control"
+                               #latestPrice="ngModel" required [ngClass]="{ 'is-invalid': form.submitted && productCode.invalid }"
+                               appMinMaxValidator
+                               min="1"
+                        >
+                        <div *ngIf="form.submitted && form.invalid" class="invalid-feedback">
+                            <div *ngIf="latestPrice.errors?.required">Latest price is required</div>
+                            <div *ngIf="latestPrice.errors?.min">Latest price can not be less than 1</div>
+
 
                         </div>
                     </div>
