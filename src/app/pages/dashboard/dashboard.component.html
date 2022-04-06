@@ -1,1 +1,50 @@
-<p>dashboard works!</p>
+
+<div class="">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-center">Summary of Data</div>
+                <div class="card-body">
+                    <canvas baseChart width="400" height="200"
+                            [datasets]="lineChartData"
+                            [labels]="lineChartLabels"
+                            [options]="lineChartOptions"
+                            [colors]="lineChartColors"
+                            [legend]="lineChartLegend"
+                            [chartType]="lineChartType"
+                            [plugins]="lineChartPlugins">
+                    </canvas>
+                </div>
+
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-md-12 text-center text-info">
+                            Opening Balance : {{startClosingBalanceAmount}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center text-info">
+                            Closing Balance : {{endClosingBalanceAmount}}
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-12 text-center">
+                            <div *ngIf="overallGrowth < 0" class="d-inline text-danger">
+                                <i class="fa fa-arrow-down "></i>
+                                <span style="padding-left: 0.25em">{{overallGrowth}}</span>
+                            </div>
+                            <div class="col-md-12 text-center">
+                                <div *ngIf="overallGrowth > 0" class="d-inline text-success">
+                                    <i class="fa fa-arrow-up "></i>
+                                    <span style="padding-left: 0.25em">{{overallGrowth}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
