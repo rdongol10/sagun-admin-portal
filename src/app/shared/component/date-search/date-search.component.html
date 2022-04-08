@@ -7,7 +7,6 @@
                     <input class="form-control"
                            autocomplete="off"
                            placeholder=""
-                           required
                            ngbDatepicker
                            #fromDates="ngbDatepicker"
                            [value]="formatter.format(fromDate)" name="fromDate"
@@ -27,7 +26,6 @@
                     <input class="form-control"
                            autocomplete="off"
                            placeholder=""
-                           required
                            ngbDatepicker
                            #toDates="ngbDatepicker"
                            [value]="formatter.format(toDate)" name="toDate"
@@ -37,7 +35,11 @@
                     />
                     <button class="btn btn-outline-secondary calendar" (click)="toDates.toggle()"
                             type="button"></button>
+                    <div>
+                        <div *ngIf="fromDateAfterToDate" class="errorMessage"> To Date can not be before From date</div>
+                    </div>
                 </div>
+
             </div>
         </div>
 
@@ -53,3 +55,5 @@
         </div>
     </div>
 </form>
+
+

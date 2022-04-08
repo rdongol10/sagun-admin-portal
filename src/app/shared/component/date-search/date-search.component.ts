@@ -13,6 +13,7 @@ export class DateSearchComponent implements OnInit {
     @Input()
     toDate;
     searchIcon = faSearch;
+    fromDateAfterToDate = false;
 
     @Output()
     emitDates: EventEmitter<any> = new EventEmitter<any>();
@@ -25,14 +26,26 @@ export class DateSearchComponent implements OnInit {
 
     onFromDateSelection(date: NgbDate) {
         this.fromDate = date;
+        this.fromDateAfterToDate = this.isFromDateAfterToDate();
     }
 
     onToDateSelection(date: NgbDate) {
         this.toDate = date;
+        this.fromDateAfterToDate = this.isFromDateAfterToDate();
+    }
+
+    isFromDateAfterToDate() {
+        return this.fromDate.after(this.toDate);
     }
 
     search() {
-        this.emitDates.emit({fromDate: this.fromDate, toDate: this.toDate});
+        console.log(this.fromDate.after(this.toDate));
+        if (this.isFromDateAfterToDate()) {
+            this.fromDateAfterToDate = true;
+        } else {
+            this.fromDateAfterToDate = false;
+            this.emitDates.emit({fromDate: this.fromDate, toDate: this.toDate});
+        }
     }
 
 }
