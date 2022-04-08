@@ -1,17 +1,17 @@
 import {Component, OnInit} from '@angular/core';
+import {TransactionSearchRequestModel} from '../model/transaction-search-request-model';
+import {TransactionReportModel} from '../model/transaction-report-model';
 import {TransactionService} from '../service/transaction.service';
 import {ToastrService} from 'ngx-toastr';
-import {TransactionSearchRequestModel} from '../model/transaction-search-request-model';
 import {NgbDate} from '@ng-bootstrap/ng-bootstrap';
-import {TransactionReportModel} from '../model/transaction-report-model';
-
 
 @Component({
-    selector: 'app-paid-transaction',
-    templateUrl: './paid-transaction.component.html',
-    styleUrls: ['./paid-transaction.component.sass']
+    selector: 'app-all-transaction',
+    templateUrl: './all-transaction.component.html',
+    styleUrls: ['./all-transaction.component.sass']
 })
-export class PaidTransactionComponent implements OnInit {
+export class AllTransactionComponent implements OnInit {
+
     fromDate;
     toDate;
     searchModel: TransactionSearchRequestModel = new TransactionSearchRequestModel();
@@ -43,7 +43,7 @@ export class PaidTransactionComponent implements OnInit {
         this.service.display(true);
         this.searchModel.fromDate = this.service.formattedDate(this.fromDate);
         this.searchModel.toDate = this.service.formattedDate(this.toDate);
-        this.service.paidTransaction(this.searchModel)
+        this.service.allTransaction(this.searchModel)
             .subscribe((data: any) => {
                 this.transactionData = data.data;
                 this.growth = this.transactionData.endClosingBalance.amount - this.transactionData.startClosingBalance.amount;
@@ -86,4 +86,5 @@ export class PaidTransactionComponent implements OnInit {
         }
 
     }
+
 }

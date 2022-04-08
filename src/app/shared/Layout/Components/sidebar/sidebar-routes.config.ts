@@ -195,6 +195,11 @@ export const sideMenuList: SideMenuInterface[] = [
                 url: 'transaction/paidTransaction',
                 label: 'Paid transaction',
                 childMenu: [],
+            },
+            {
+                url: 'transaction/allTransaction',
+                label: 'All transaction',
+                childMenu: [],
             }
         ],
     }

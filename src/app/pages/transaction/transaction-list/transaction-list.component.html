@@ -1,0 +1,60 @@
+<div class="row">
+    <div class="col-md-12 text-center text-info">
+        Opening Balance : {{transactionData.startClosingBalance.amount}}
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 text-center text-info">
+        Closing Balance : {{transactionData.endClosingBalance.amount}}
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 text-center income">
+        <h3 style="margin-bottom: 0 !important;">
+            Current Balance : {{transactionData.currentBalance}}
+        </h3>
+    </div>
+    <div class="col-md-12 text-center">
+        <div *ngIf="overallGrowth < 0" class="d-inline text-danger">
+            <i class="fa fa-arrow-down "></i>
+            <span style="padding-left: 0.25em">{{overallGrowth}}</span>
+        </div>
+        <div class="col-md-12 text-center">
+            <div *ngIf="overallGrowth > 0" class="d-inline text-success">
+                <i class="fa fa-arrow-up "></i>
+                <span style="padding-left: 0.25em">{{overallGrowth}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+<div class="table-responsive mx-4">
+    <lib-generic-table
+            [dataList]="transactionData.data"
+            [headers]="[
+                {title: 'Creation Date', width: '', sort: '', colValue : ''},
+                {title: 'Transaction Type', width: '', sort: '', colValue : ''},
+                {title: 'Transaction Detail', width: '', sort: '', colValue : ''},
+                {title: 'Amount', width: '', sort: '', colValue : ''},
+                ]"
+            [totalCount]="transactionData.totalCount"
+            [pageNumber]="pageNumber"
+            [pageSize]="pageSize"
+            (paginationChange)="pageSizeChange($event)"
+    >
+        <tr *ngFor="let data of transactionData.data"
+            [class]="data.transactionType=='Sales' || data.transactionType=='Income'?'income':'expenses'">
+            <td class="text-center">{{data.creationDate}} </td>
+            <td class="text-center">{{data.transactionType}} </td>
+            <td class="text-center">
+                {{data.details}}
+                <span class="transactionDetails" *ngIf="data.summary">
+                            <div *ngFor="let summary of data.summary.split(',')">
+                                   {{summary}}
+                            </div>
+                        </span>
+            </td>
+            <td class="text-center">{{data.amount}} </td>
+        </tr>
+    </lib-generic-table>
+</div>
