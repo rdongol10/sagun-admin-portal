@@ -28,6 +28,16 @@ export class TransactionService extends GenericService<TransactionModel> {
         );
     }
 
+    public allTransaction(data: TransactionSearchRequestModel): Observable<TransactionReportModel> {
+        return this.http.post(this.baseUrl + '/allTransaction/', data, {observe: 'response'}).pipe(
+            map((res: any) => {
+                this.setUpdatedHeader(res);
+                return res.body;
+            }),
+            catchError((error) => this.handleError(error))
+        );
+    }
+
     public last30DaysTransaction(): Observable<any> {
         return this.http.get(this.baseUrl + '/last30Days', {observe: 'response'}).pipe(
             map((res: any) => {

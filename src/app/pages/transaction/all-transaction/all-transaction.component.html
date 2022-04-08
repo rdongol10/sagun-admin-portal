@@ -1,0 +1,17 @@
+<div class="main-card mb-3 card">
+    <div class="card-body">
+        <app-date-search [fromDate]="this.fromDate" [toDate]="this.toDate"
+                         (emitDates)="searchTransaction($event)"></app-date-search>
+        <hr>
+
+        <app-transaction-list
+                [transactionData]="transactionData"
+                [growth]="growth"
+                [overallGrowth]="overallGrowth"
+                [pageSize]="searchModel.pageSize"
+                [pageNumber]="searchModel.pageNumber"
+                (paginationChange)="changeIndex($event)"
+        >
+        </app-transaction-list>
+    </div>
+</div>
