@@ -1,7 +1,7 @@
 import {ClosingBalanceModel} from './closing-balance-model';
 import {TransactionModel} from './transaction-model';
 
-export class PaidTransactionReportModel {
+export class TransactionReportModel {
     startClosingBalance: ClosingBalanceModel = new ClosingBalanceModel();
     endClosingBalance: ClosingBalanceModel = new ClosingBalanceModel();
     currentBalance: number;

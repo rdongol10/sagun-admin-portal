@@ -6,7 +6,7 @@ import {Router} from '@angular/router';
 import {configApiUrl} from '../../../app-config';
 import {TransactionSearchRequestModel} from '../model/transaction-search-request-model';
 import {Observable} from 'rxjs';
-import {PaidTransactionReportModel} from '../model/paid-transaction-report-model';
+import {TransactionReportModel} from '../model/transaction-report-model';
 import {catchError, map} from 'rxjs/operators';
 
 @Injectable({
@@ -18,7 +18,7 @@ export class TransactionService extends GenericService<TransactionModel> {
         super(http, configApiUrl.TRANSACTION_API, router);
     }
 
-    public paidTransaction(data: TransactionSearchRequestModel): Observable<PaidTransactionReportModel> {
+    public paidTransaction(data: TransactionSearchRequestModel): Observable<TransactionReportModel> {
         return this.http.post(this.baseUrl + '/paidTransaction/', data, {observe: 'response'}).pipe(
             map((res: any) => {
                 this.setUpdatedHeader(res);

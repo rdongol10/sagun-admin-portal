@@ -2,9 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {TransactionService} from '../service/transaction.service';
 import {ToastrService} from 'ngx-toastr';
 import {TransactionSearchRequestModel} from '../model/transaction-search-request-model';
-import {NgbDate, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
-import {faSearch} from '@fortawesome/free-solid-svg-icons';
-import {PaidTransactionReportModel} from '../model/paid-transaction-report-model';
+import {NgbDate} from '@ng-bootstrap/ng-bootstrap';
+import {TransactionReportModel} from '../model/transaction-report-model';
 
 
 @Component({
@@ -16,13 +15,11 @@ export class PaidTransactionComponent implements OnInit {
     fromDate;
     toDate;
     searchModel: TransactionSearchRequestModel = new TransactionSearchRequestModel();
-    searchIcon = faSearch;
-    transactionData: PaidTransactionReportModel = new PaidTransactionReportModel();
+    transactionData: TransactionReportModel = new TransactionReportModel();
     growth = 0;
     overallGrowth = 0;
 
-    constructor(private service: TransactionService, private notify: ToastrService,
-                public formatter: NgbDateParserFormatter) {
+    constructor(private service: TransactionService, private notify: ToastrService) {
         const currentDate = new Date();
         const lastWeekDate = new Date(currentDate.getTime() - (7 * 24 * 60 * 60 * 1000));
         this.fromDate = new NgbDate(lastWeekDate.getFullYear(), lastWeekDate.getMonth() + 1, lastWeekDate.getDate());
