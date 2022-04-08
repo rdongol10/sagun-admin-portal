@@ -25,6 +25,7 @@ import {OrderStatusPipe} from './pipe/order-status.pipe';
 import {PaymentStatusPipe} from './pipe/payment-status.pipe';
 import {MinMaxValidatorDirective} from './Directive/validator/min-max-validator.directive';
 import {ShoppingDetailsComponent} from './component/shopping-details/shopping-details.component';
+import { DateSearchComponent } from './component/date-search/date-search.component';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import {ShoppingDetailsComponent} from './component/shopping-details/shopping-de
         PaymentStatusPipe,
         MinMaxValidatorDirective,
         ShoppingDetailsComponent,
+        DateSearchComponent,
     ],
     imports: [
         CommonModule,
@@ -88,7 +90,7 @@ import {ShoppingDetailsComponent} from './component/shopping-details/shopping-de
         OrderStatusPipe,
         PaymentStatusPipe,
         MinMaxValidatorDirective,
-        ShoppingDetailsComponent
+        ShoppingDetailsComponent, DateSearchComponent
     ]
 })
 export class SharedModule {

@@ -33,7 +33,9 @@ export class PaidTransactionComponent implements OnInit {
         this.getList(true);
     }
 
-    searchTransaction() {
+    searchTransaction(event) {
+        this.fromDate = event.fromDate;
+        this.toDate = event.toDate;
         this.getList(true);
     }
 

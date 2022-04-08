@@ -1,0 +1,55 @@
+<form #form="ngForm">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="position-relative mb-3">
+                <label for="fromDate" class="form-label">From Date</label>
+                <div class="input-group">
+                    <input class="form-control"
+                           autocomplete="off"
+                           placeholder=""
+                           required
+                           ngbDatepicker
+                           #fromDates="ngbDatepicker"
+                           [value]="formatter.format(fromDate)" name="fromDate"
+                           id="fromDate"
+                           (dateSelect)="onFromDateSelection($event)"
+                           readonly
+                    />
+                    <button class="btn btn-outline-secondary calendar" (click)="fromDates.toggle()"
+                            type="button"></button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="position-relative mb-3">
+                <label for="toDate" class="form-label">To Date</label>
+                <div class="input-group">
+                    <input class="form-control"
+                           autocomplete="off"
+                           placeholder=""
+                           required
+                           ngbDatepicker
+                           #toDates="ngbDatepicker"
+                           [value]="formatter.format(toDate)" name="toDate"
+                           id="toDate"
+                           (dateSelect)="onToDateSelection($event)"
+                           readonly
+                    />
+                    <button class="btn btn-outline-secondary calendar" (click)="toDates.toggle()"
+                            type="button"></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="position-relative mb-3">
+                <br>
+                <button class=" btn-transition btn btn-primary circleButton mx-1"
+                        (click)="search()"
+                        ngbTooltip="search">
+                    <fa-icon [icon]="searchIcon"></fa-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
