@@ -7,4 +7,5 @@ export class ExpensesModel {
     remaining: number;
     paidBy: string;
     creationDate: string;
+    expenseDate: string;
 }

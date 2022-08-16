@@ -17,5 +17,5 @@ export class SalesModel {
     paidAmount: number;
     remainingAmount: number;
     bookedDate: string;
-
+    salesDate: string;
 }

@@ -16,4 +16,5 @@ export class PurchaseModel {
     remaining: number;
     createdBy: string;
     creationDate: string;
+    purchaseDate: string;
 }
