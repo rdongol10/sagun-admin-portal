@@ -263,6 +263,5 @@ export class SalesNewComponent implements OnInit {
 
     onDateSelection(date: NgbDate) {
         this.model.salesDate = this.service.formattedDate(date);
-        console.log(this.model);
     }
 }

@@ -5,6 +5,7 @@ import {ToastrService} from 'ngx-toastr';
 import {ExpensesService} from '../service/expenses.service';
 import {SelectableValue} from '../../../@core/class/selectable-value';
 import {PAYMENT_STATUS, PaymentStatusEnum} from '../../../app-config';
+import {NgbDate} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-expenses-new',
@@ -87,4 +88,7 @@ export class ExpensesNewComponent implements OnInit {
 
     }
 
+    onDateSelection(date: NgbDate) {
+        this.model.expenseDate = this.service.formattedDate(date);
+    }
 }
