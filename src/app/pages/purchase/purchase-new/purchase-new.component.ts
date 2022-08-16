@@ -11,6 +11,7 @@ import {SelectSearchRequest} from '../../../@core/class/select-search-request';
 import {LotSelectableValue} from '../../lots/model/lot-selectable-value';
 import {PAYMENT_STATUS, PaymentStatusEnum} from '../../../app-config';
 import {VendorService} from '../../vendor/service/vendor.service';
+import {NgbDate} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-purchase-new',
@@ -29,7 +30,8 @@ export class PurchaseNewComponent implements OnInit {
 
     constructor(private vendorService: VendorService, private service: PurchaseService,
                 private lotService: LotService, private productService: ProductService,
-                private router: Router, private notify: ToastrService, private route: ActivatedRoute) {
+                private router: Router, private notify: ToastrService, private route: ActivatedRoute,
+    ) {
     }
 
     ngOnInit(): void {
@@ -228,4 +230,8 @@ export class PurchaseNewComponent implements OnInit {
         }
     }
 
+    onDateSelection(date: NgbDate) {
+        this.model.purchaseDate = this.service.formattedDate(date);
+        console.log(this.model);
+    }
 }
