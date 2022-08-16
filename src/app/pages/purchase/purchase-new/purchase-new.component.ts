@@ -232,6 +232,5 @@ export class PurchaseNewComponent implements OnInit {
 
     onDateSelection(date: NgbDate) {
         this.model.purchaseDate = this.service.formattedDate(date);
-        console.log(this.model);
     }
 }

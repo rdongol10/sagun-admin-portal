@@ -10,6 +10,7 @@ import {LotSelectableValue} from '../../lots/model/lot-selectable-value';
 import {SelectableValue} from '../../../@core/class/selectable-value';
 import {UserService} from '../../users/service/user.service';
 import {ORDER_STATUS, OrderStatusEnum, PAYMENT_STATUS, PaymentStatusEnum} from '../../../app-config';
+import {NgbDate} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-sales-new',
@@ -258,5 +259,10 @@ export class SalesNewComponent implements OnInit {
 
     customTB(index, item) {
         return `${index}-${item.uniqueId}`;
+    }
+
+    onDateSelection(date: NgbDate) {
+        this.model.salesDate = this.service.formattedDate(date);
+        console.log(this.model);
     }
 }
